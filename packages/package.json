@@ -1,0 +1,13 @@
+{
+  "name": "@xby020/naive-curd-table",
+  "version": "1.0.0",
+  "description": "Naive UI 's CURD table Component.",
+  "type": "module",
+  "main": "index.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "xby020",
+  "license": "MIT"
+}
