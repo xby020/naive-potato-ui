@@ -8,16 +8,18 @@
   "type": "module",
   "scripts": {
     "dev": "vite --config ./examples/vite.config.ts",
-    "build": "vue-tsc && vite build",
-    "preview": "vite preview"
+    "build": "vite build --config ./packages/vite.config.ts",
+    "preview": "vite preview --config ./examples/vite.config.ts"
   },
   "dependencies": {
     "vue": "^3.3.4"
   },
   "devDependencies": {
+    "@types/node": "^20.6.3",
     "@vitejs/plugin-vue": "^4.2.3",
     "naive-ui": "^2.34.4",
     "typescript": "^5.0.2",
+    "unplugin-auto-import": "^0.16.6",
     "unplugin-vue-components": "^0.25.2",
     "vite": "^4.4.5",
     "vite-plugin-dts": "^3.5.3",

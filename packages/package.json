@@ -1,13 +1,17 @@
 {
   "name": "@xby020/naive-curd-table",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "Naive UI 's CURD table Component.",
   "type": "module",
-  "main": "index.ts",
+  "main": "../dist/es/index.js",
+  "module": "../dist/es/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "xby020",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^20.6.3"
+  }
 }

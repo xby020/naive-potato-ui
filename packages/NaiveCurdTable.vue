@@ -246,11 +246,7 @@
   </div>
 </template>
 
-<script setup lang="ts">
-import {
-  Header,
-  SugonDataTableColumn
-} from '@/components/SugonDataTable/header';
+<script setup lang="ts" generic="T">
 import {
   DataTableBaseColumn,
   DataTableColumn,
@@ -258,13 +254,13 @@ import {
   FormRules,
   NButton,
   NPopconfirm,
-  NSpace
+  NSpace,
 } from 'naive-ui';
+import { computed, h, onMounted, provide, reactive, ref, watch } from 'vue';
 import TableForm from './components/TableForm.vue';
 import TableInfo from './components/TableInfo.vue';
-import { VNode } from 'vue';
-import { isVNode } from 'vue';
-import { NaiveCurdTableProps } from '@xby020/naive-curd-table';
+
+import type { NaiveCurdTableProps } from './types/naiveCurdTableProps';
 
 interface Props extends NaiveCurdTableProps {}
 
@@ -318,7 +314,7 @@ const queryParams = computed(() => {
   const params = {
     page: pagination.page,
     page_size: pagination.pageSize,
-    ...queryForm.value
+    ...queryForm.value,
   };
   return params;
 });
@@ -331,7 +327,7 @@ const pagination = reactive({
   count: 0,
   prefix() {
     return `共 ${pagination.count} 条`;
-  }
+  },
 });
 const loading = ref(false);
 
@@ -352,7 +348,7 @@ const actionColumn = reactive<DataTableBaseColumn>({
       {
         type: 'horizontal',
         justify: 'end',
-        align: 'center'
+        align: 'center',
       },
       {
         default: () => {
@@ -377,9 +373,9 @@ const actionColumn = reactive<DataTableBaseColumn>({
                     size: 'small',
                     onClick: () => {
                       handleEdit(uuid);
-                    }
+                    },
                   },
-                  { default: () => '编辑' }
+                  { default: () => '编辑' },
                 ),
             rowDetailDisable
               ? null
@@ -390,9 +386,9 @@ const actionColumn = reactive<DataTableBaseColumn>({
                     size: 'small',
                     onClick: () => {
                       handleDetail(uuid);
-                    }
+                    },
                   },
-                  { default: () => '详情' }
+                  { default: () => '详情' },
                 ),
             rowDeletDisable
               ? null
@@ -402,7 +398,7 @@ const actionColumn = reactive<DataTableBaseColumn>({
                     placement: 'bottom',
                     onPositiveClick: () => {
                       handleDelete(uuid);
-                    }
+                    },
                   },
                   {
                     trigger: () => {
@@ -410,22 +406,22 @@ const actionColumn = reactive<DataTableBaseColumn>({
                         NButton,
                         {
                           type: 'warning',
-                          size: 'small'
+                          size: 'small',
                         },
-                        { default: () => '删除' }
+                        { default: () => '删除' },
                       );
                     },
                     default: () => {
                       return '确定要删除该类型吗？';
-                    }
-                  }
+                    },
+                  },
                 ),
-            ...suffixAction
+            ...suffixAction,
           ];
-        }
-      }
+        },
+      },
     );
-  }
+  },
 });
 
 const columns = computed<DataTableColumn[]>(() => {
@@ -439,7 +435,7 @@ const columns = computed<DataTableColumn[]>(() => {
       return {
         title: title,
         key: key,
-        ...header.column
+        ...header.column,
       } as DataTableColumn;
     });
 
@@ -450,7 +446,7 @@ const columns = computed<DataTableColumn[]>(() => {
   if (props.rowKey) {
     columns.unshift({
       type: 'selection',
-      width: 50
+      width: 50,
     });
   }
 
@@ -519,21 +515,21 @@ const drawerShow = ref(false);
 const drawerModes = ref([
   {
     label: '新增',
-    value: 'add'
+    value: 'add',
   },
   {
     label: '编辑',
-    value: 'edit'
+    value: 'edit',
   },
   {
     label: '详情',
-    value: 'detail'
-  }
+    value: 'detail',
+  },
 ]);
 const drawerMode = ref('');
 const drawerTitle = computed(() => {
   const mode = drawerModes.value.find(
-    (mode) => mode.value === drawerMode.value
+    (mode) => mode.value === drawerMode.value,
   );
   return mode ? mode.label : '';
 });
@@ -568,7 +564,7 @@ watch(
       }
     });
   },
-  { immediate: true }
+  { immediate: true },
 );
 
 async function handleCreate() {
@@ -764,7 +760,7 @@ function handleCheck(rowKeys: DataTableRowKey[]) {
 defineExpose({
   refreshTable,
   checkedRows,
-  handleAdd
+  handleAdd,
 });
 </script>
 

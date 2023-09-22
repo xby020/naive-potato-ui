@@ -150,3 +150,18 @@ export type NaiveCurdTableProps = {
    */
   actionWidth?: number;
 };
+
+export type NaiveCurdTableInputType =
+  | 'text'
+  | 'textArea'
+  | 'number'
+  | 'select'
+  | 'multSelect'
+  | 'switch'
+  | 'ratioGroup'
+  | 'date'
+  | 'time'
+  | 'datetime'
+  | 'upload'
+  | 'richText'
+  | 'custom';
