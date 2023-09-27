@@ -7,24 +7,24 @@ import {
 import { VNode } from 'vue';
 import { ListType } from 'naive-ui/es/upload/src/interface';
 
-interface NaiveCurdTableColumn<T> extends DataTableBaseColumn<T> {
+export interface NaiveCurdTableColumn<T> extends DataTableBaseColumn<T> {
   /**
    * @description 表格列标题，没有则从全局获取
    *
    * @type {string}
    * @memberof SugonDataTableColumn
    */
-  title?: string;
+  title: string;
   /**
    * @description 表格列的字段key，没有则从全局获取
    *
    * @type {string}
    * @memberof SugonDataTableColumn
    */
-  key?: string;
+  key: string;
 }
 
-export type Header<T> = {
+export type NaiveCurdTableHeader<T> = {
   title: string;
   key: string;
   /**
@@ -145,3 +145,5 @@ export type Header<T> = {
   span?: number;
   deprecated?: (model: T) => boolean;
 };
+
+export type NaiveCurdTableHeaders<T> = NaiveCurdTableHeader<T>[];

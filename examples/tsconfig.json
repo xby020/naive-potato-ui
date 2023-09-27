@@ -1,14 +1,23 @@
 {
-  "extends": "../tsconfig.json",
-  "include": [
-    "src/**/*.ts",
-    "src/**/*.d.ts",
-    "src/**/*.tsx",
-    "src/**/*.vue"
-  ],
-  "references": [
-    {
-      "path": "./tsconfig.node.json"
+  "extends": "../tsconfig.base.json",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "lib": [
+      "ESNext",
+      "DOM",
+      "DOM.Iterable"
+    ],
+    "paths": {
+      "@/*": [
+        "src/*"
+      ],
+      "@packages/*": [
+        "../packages/*"
+      ]
     }
+  },
+  "include": [
+    "../packages/*/src",
+    "src"
   ]
 }

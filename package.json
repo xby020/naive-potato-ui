@@ -1,18 +1,12 @@
 {
-  "name": "naive-curd-table",
+  "name": "naive-potato-ui",
+  "version": "0.0.1",
+  "main": "",
   "private": true,
-  "workspaces": [
-    "packages/*"
-  ],
-  "version": "0.0.0",
-  "type": "module",
   "scripts": {
-    "dev": "vite --config ./examples/vite.config.ts",
-    "build": "vite build --config ./packages/vite.config.ts",
+    "dev": "pnpm --filter @naive-potato-ui/examples dev",
+    "build:ui": "pnpm --filter './packages/**' run build",
     "preview": "vite preview --config ./examples/vite.config.ts"
-  },
-  "dependencies": {
-    "vue": "^3.3.4"
   },
   "devDependencies": {
     "@types/node": "^20.6.3",
@@ -26,5 +20,8 @@
     "vite-plugin-windicss": "^1.9.1",
     "vue-tsc": "^1.8.5",
     "windicss": "^3.5.6"
+  },
+  "dependencies": {
+    "vue": "^3.3.4"
   }
 }

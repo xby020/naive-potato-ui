@@ -1,0 +1,14 @@
+{
+  "name": "@naive-potato-ui/examples",
+  "version": "1.0.0",
+  "private": true,
+  "description": "",
+  "scripts": {
+    "dev": "vite dev"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@naive-potato-ui/ui": "workspace:^"
+  }
+}
