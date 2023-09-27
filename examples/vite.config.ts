@@ -27,6 +27,15 @@ export default defineConfig({
       ],
     }),
   ],
+  resolve: {
+    alias: [
+      {
+        find: /^@naive-potato-ui\/(.+)$/,
+        replacement: join(__dirname, '..', 'packages', '$1', 'src'),
+      },
+    ],
+  },
+
   server: {
     host: true,
     port: 14514,

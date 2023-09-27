@@ -19,11 +19,11 @@
     "test": "echo test"
   },
   "main": "./dist/naive-curd-table.umd.js",
-  "module": "./dist/naive-curd-table.mjs",
+  "module": "./dist/naive-curd-table.umd.js",
   "exports": {
     ".": {
       "require": "./dist/naive-curd-table.umd.js",
-      "module": "./dist/naive-curd-table.mjs"
+      "module": "./dist/naive-curd-table.umd.js"
     }
   },
   "files": [

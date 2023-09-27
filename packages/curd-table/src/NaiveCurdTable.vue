@@ -1,7 +1,7 @@
 <template>
   <div class="w-full h-full flex flex-col gap-2">
     <div class="w-full h-24 bg-lime-200">
-      <n-button>233</n-button>
+      <n-button>2334</n-button>
     </div>
   </div>
 </template>

@@ -11,8 +11,8 @@
       "@/*": [
         "src/*"
       ],
-      "@packages/*": [
-        "../packages/*"
+      "@naive-potato-ui/*": [
+        "../packages/*/src"
       ]
     }
   },

@@ -19,11 +19,11 @@
     "test": "echo test"
   },
   "main": "./dist/naive-potato-ui.umd.js",
-  "module": "./dist/naive-potato-ui.mjs",
+  "module": "./dist/naive-potato-ui.umd.js",
   "exports": {
     ".": {
       "require": "./dist/naive-potato-ui.umd.js",
-      "module": "./dist/naive-potato-ui.mjs"
+      "module": "./dist/naive-potato-ui.umd.js"
     }
   },
   "files": [
