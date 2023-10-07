@@ -11,7 +11,8 @@
     ]
   },
   "include": [
-    "**/*.config.*"
+    "**/*.config.*",
+    "script"
   ],
   "exclude": [
     "**/dist",

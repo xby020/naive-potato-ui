@@ -10,7 +10,12 @@ import { join } from 'node:path';
 export default defineConfig({
   plugins: [
     vue(),
-    WindiCSS(),
+    WindiCSS({
+      scan: {
+        dirs: ['src', '../packages'],
+        fileExtensions: ['vue', 'js', 'ts'],
+      },
+    }),
     Components({
       dts: 'src/types/components.d.ts',
       dirs: ['src/components'],
