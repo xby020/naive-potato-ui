@@ -1,5 +1,5 @@
 {
-  "name": "@naive-potato-ui/curd-table",
+  "name": "@naive-potato-ui/async-select",
   "version": "0.0.1",
   "description": "A Naive UI component library for Vue 3.",
   "keywords": [
@@ -18,12 +18,12 @@
     "build": "vite build",
     "test": "echo test"
   },
-  "main": "./dist/naive-curd-table.umd.js",
-  "module": "./dist/naive-curd-table.umd.js",
+  "main": "./dist/naive-async-select.umd.js",
+  "module": "./dist/naive-async-select.umd.js",
   "exports": {
     ".": {
-      "require": "./dist/naive-curd-table.umd.js",
-      "module": "./dist/naive-curd-table.umd.js"
+      "require": "./dist/naive-async-select.umd.js",
+      "module": "./dist/naive-async-select.umd.js"
     }
   },
   "files": [
@@ -34,7 +34,8 @@
     "naive-ui": ">=2.34.0",
     "vue": ">=3.0.0"
   },
-  "dependencies": {
-    "@naive-potato-ui/async-select": "workspace:^"
+  "devDependencies": {
+    "@types/lodash": "^4.14.199",
+    "lodash": "^4.17.21"
   }
 }
