@@ -103,6 +103,59 @@
       :query="option?.config.query"
       :multiple="option?.config.multiple || false"
     ></n-async-select>
+
+    <!-- radio -->
+    <n-radio-group
+      v-if="type === 'asyncSelect'"
+      v-model:value="formValue"
+      :name="label"
+      :disabled="isDisabled()"
+    >
+      <n-radio
+        v-for="(item, index) in option?.config.options"
+        :key="index"
+        :value="item[option?.config.valueField || 'value']"
+      >
+        {{ item[option?.config.labelField || 'label'] }}
+      </n-radio>
+    </n-radio-group>
+
+    <!-- 'date' | 'datetime' -->
+    <n-date-picker
+      v-if="['date', 'datetime'].includes(type) && !option?.config?.range"
+      v-model:formatted-value="formValue"
+      :value-format="option?.config.format"
+      :type="type === 'date' ? 'date' : 'datetime'"
+    />
+    <n-date-picker
+      v-if="['date', 'datetime'].includes(type) && option?.config?.range"
+      v-model:formatted-value="dateRangeValue"
+      :value-format="option?.config.format"
+      :type="type === 'date' ? 'date' : 'datetime'"
+    />
+
+    <!-- time -->
+    <n-time-picker
+      v-if="type === 'time'"
+      v-model:formatted-value="formValue"
+      :value-format="option?.config.format"
+    />
+
+    <!-- upload -->
+    <n-custom-upload
+      v-if="type === 'upload'"
+      v-model:value="formValue"
+      :label="option?.config.label"
+      :accept="option?.config.accept"
+      :info="info"
+      :action="option?.config.action"
+      :headers="option?.config.headers"
+      :extra-data="option?.config.extraData"
+      :disabled="isDisabled()"
+      :type="option?.config.type"
+      :max="option?.config.max"
+      :multiple="option?.config.multiple"
+    ></n-custom-upload>
   </div>
 </template>
 
@@ -111,9 +164,18 @@ import type {
   NCurdTableHeaderRenderOptions,
   NCurdTableHeaderType,
 } from '@dts/nCurdTable';
-import { NInput, NInputNumber, NSelect } from 'naive-ui';
+import {
+  NInput,
+  NInputNumber,
+  NSelect,
+  NRadioGroup,
+  NRadio,
+  NDatePicker,
+  NTimePicker,
+} from 'naive-ui';
 import { computed } from 'vue';
 import NAsyncSelect from '@naive-potato-ui/async-select';
+import NCustomUpload from '@naive-potato-ui/custom-upload';
 
 interface Props {
   label: string;
@@ -144,6 +206,20 @@ function isDisabled() {
     ? props.option.disabled(props.value, props.info)
     : false;
 }
+
+// Date Range
+const dateRangeValue = computed({
+  get() {
+    return [
+      formValue.value[props.option?.config?.startField || 'start'],
+      formValue.value[props.option?.config?.endField || 'start'],
+    ] as [string, string];
+  },
+  set(v: [string, string]) {
+    formValue.value[props.option?.config?.startField || 'start'] = v[0];
+    formValue.value[props.option?.config?.endField || 'start'] = v[1];
+  },
+});
 </script>
 
 <style scoped></style>

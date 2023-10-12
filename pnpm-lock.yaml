@@ -94,6 +94,18 @@ importers:
       '@naive-potato-ui/async-select':
         specifier: workspace:^
         version: link:../async-select
+      '@naive-potato-ui/custom-upload':
+        specifier: workspace:^
+        version: link:../custom-upload
+      naive-ui:
+        specifier: '>=2.34.0'
+        version: 2.34.4(vue@3.3.4)
+      vue:
+        specifier: '>=3.0.0'
+        version: 3.3.4
+
+  packages/custom-upload:
+    dependencies:
       naive-ui:
         specifier: '>=2.34.0'
         version: 2.34.4(vue@3.3.4)

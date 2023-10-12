@@ -1,5 +1,5 @@
 {
-  "name": "@naive-potato-ui/curd-table",
+  "name": "@naive-potato-ui/custom-upload",
   "version": "0.0.1",
   "description": "A Naive UI component library for Vue 3.",
   "keywords": [
@@ -18,12 +18,12 @@
     "build": "vite build",
     "test": "echo test"
   },
-  "main": "./dist/naive-curd-table.umd.js",
-  "module": "./dist/naive-curd-table.umd.js",
+  "main": "./dist/naive-custom-upload.umd.js",
+  "module": "./dist/naive-custom-upload.umd.js",
   "exports": {
     ".": {
-      "require": "./dist/naive-curd-table.umd.js",
-      "module": "./dist/naive-curd-table.umd.js"
+      "require": "./dist/naive-custom-upload.umd.js",
+      "module": "./dist/naive-custom-upload.umd.js"
     }
   },
   "files": [
@@ -33,9 +33,5 @@
   "peerDependencies": {
     "naive-ui": ">=2.34.0",
     "vue": ">=3.0.0"
-  },
-  "dependencies": {
-    "@naive-potato-ui/async-select": "workspace:^",
-    "@naive-potato-ui/custom-upload": "workspace:^"
   }
 }

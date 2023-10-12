@@ -15,10 +15,9 @@ export type NCurdTableHeaderType =
   | 'asyncSelect'
   | 'radio'
   | 'date'
-  | 'time'
   | 'datetime'
+  | 'time'
   | 'upload'
-  | 'upload-img'
   | 'richtext'
   | 'custom';
 
@@ -151,13 +150,168 @@ type NCurdTableHeaderAsyncSelectRenderConfig<TForm, TInfo> = {
 };
 
 /**
+ * @description 类型为 'radio'
+ */
+type NCurdTableHeaderRadioRenderConfig<TForm, TInfo> = {
+  type: 'radio';
+  config: {
+    /**
+     * @description radio的选项
+     *
+     * @type {(Array<SelectOption | SelectGroupOption>)}
+     */
+    options: Array<SelectOption | SelectGroupOption>;
+    /**
+     * @description radio的显示字段
+     * @default "label"
+     *
+     * @type {string}
+     */
+    labelField?: string;
+    /**
+     * @description radio的值字段
+     * @default "value"
+     *
+     * @type {string}
+     */
+    valueField?: string;
+  };
+};
+
+/**
+ * @description 类型为 'date'  | 'datetime'
+ */
+type NCurdTableHeaderDateRenderConfig<TForm, TInfo> = {
+  type: 'date' | 'datetime';
+  config: {
+    /**
+     * @description 日期格式(见[🔗date-fns format 文档](https://date-fns.org/v2.23.0/docs/format))
+     *
+     * @type {string}
+     */
+    format: string;
+    /**
+     * @description 日期是否是范围选择
+     * @default false
+     *
+     * @type {boolean}
+     */
+    range?: boolean;
+    /**
+     * @description 日期范围选择时，开始日期字段
+     *
+     * @type {string}
+     */
+    startField?: string;
+    /**
+     * @description 日期范围选择时，结束日期字段
+     *
+     * @type {string}
+     */
+    endField?: string;
+  };
+};
+
+/**
+ * @description 类型为 'time'
+ */
+type NCurdTableHeaderTimeRenderConfig<TForm, TInfo> = {
+  type: 'time';
+  config: {
+    /**
+     * @description 时间格式(见[🔗date-fns format 文档](https://date-fns.org/v2.23.0/docs/format))
+     *
+     * @type {string}
+     */
+    format: string;
+    /**
+     * @description 时间是否是范围选择
+     * @default false
+     *
+     * @type {boolean}
+     */
+  };
+};
+
+type NCurdTableHeaderUploadRenderConfig<TForm, TInfo> = {
+  type: 'upload';
+  config: {
+    /**
+     * @description 上传文件按钮的文本
+     *
+     * @type {string}
+     */
+    label?: string;
+    /**
+     * @description 额外的form信息
+     *
+     * @type {Record<string, any>}
+     */
+    info?: Record<string, any>;
+    /**
+     * @description 接受的文件类型，参考 [accept](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/file#accept)
+     *
+     * @type {string}
+     */
+    accept?: string;
+    /**
+     * @description 请求提交的地址
+     *
+     * @type {string}
+     */
+    action?: string;
+    /**
+     * @description HTTP 请求需要附加的 Headers
+     *
+     * @type {Record<string, string>}
+     */
+    headers?: Record<string, string>;
+    /**
+     * @description 提交表单需要附加的数据
+     *
+     * @type {Record<string, string>}
+     */
+    extraData?: Record<string, string>;
+    /**
+     * @description 是否禁用
+     * @default false
+     *
+     * @type {boolean}
+     */
+    disabled?: boolean;
+    /**
+     * @description 文件列表的内建样式，text、image 和 image-card
+     *
+     * @type {('text' | 'image' | 'image-card')}
+     */
+    type?: 'text' | 'image' | 'image-card';
+    /**
+     * @description 限制上传文件数量
+     *
+     * @type {number}
+     */
+    max?: number;
+    /**
+     * @description 是否支持多个文件
+     *
+     * @type {boolean}
+     */
+    multiple?: boolean;
+  };
+};
+
+/**
  * @description Curd 表格字段渲染配置
  */
 export type NCurdTableHeaderRenderOptions<TForm, TInfo> =
   NCurdTableHeaderBaseRenderConfig<TForm, TInfo> &
     (
       | NCurdTableHeaderTextRenderConfig<TForm, TInfo>
-      | NCurdTalbeHeaderSelectRenderConfig<TForm, TInfo>
+      | NCurdTableHeaderSelectRenderConfig<TForm, TInfo>
+      | NCurdTableHeaderAsyncSelectRenderConfig<TForm, TInfo>
+      | NCurdTableHeaderDateRenderConfig<TForm, TInfo>
+      | NCurdTableHeaderTimeRenderConfig<TForm, TInfo>
+      | NCurdTableHeaderUploadRenderConfig<TForm, TInfo>
     );
 
 /**
