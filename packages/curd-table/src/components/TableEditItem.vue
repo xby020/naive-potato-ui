@@ -72,8 +72,8 @@
       </template>
       <template #suffix>
         <component
-          v-if="option?.config.prefix"
-          :is="option.config.prefix()"
+          v-if="option?.config.suffix"
+          :is="option.config.suffix()"
         ></component>
       </template>
     </n-input-number>
@@ -156,6 +156,14 @@
       :max="option?.config.max"
       :multiple="option?.config.multiple"
     ></n-custom-upload>
+
+    <!-- custom -->
+    <component
+      v-if="type === 'custom'"
+      v-model:value="formValue"
+      :is="option?.render ? option?.render(form, info) : ''"
+      :config="option?.config"
+    ></component>
   </div>
 </template>
 
@@ -180,7 +188,8 @@ import NCustomUpload from '@naive-potato-ui/custom-upload';
 interface Props {
   label: string;
   type: NCurdTableHeaderType;
-  value: any;
+  form: Record<string, any>;
+  field: string;
   info?: Record<string, any>;
   option?: NCurdTableHeaderRenderOptions<any, any>;
 }
@@ -188,22 +197,24 @@ interface Props {
 const props = defineProps<Props>();
 
 const emits = defineEmits<{
-  'update:value': [value: any];
+  'update:form': [value: Record<string, any>];
 }>();
 
 const formValue = computed({
   get() {
-    return props.value;
+    return props.form[props.field];
   },
   set(value) {
-    emits('update:value', value);
+    const val = { ...props.form };
+    val[props.field] = value;
+    emits('update:form', val);
   },
 });
 
 // Disabled
 function isDisabled() {
   return props.option?.disabled
-    ? props.option.disabled(props.value, props.info)
+    ? props.option.disabled(formValue, props.info)
     : false;
 }
 

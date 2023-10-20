@@ -18,7 +18,6 @@ export type NCurdTableHeaderType =
   | 'datetime'
   | 'time'
   | 'upload'
-  | 'richtext'
   | 'custom';
 
 /**

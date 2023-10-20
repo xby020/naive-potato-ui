@@ -1,0 +1,144 @@
+<template>
+  <div class="w-full h-full">
+    <!-- text | textarea |password | number -->
+    <div
+      class="flex gap-1"
+      v-if="['text', 'textarea', 'password', 'number'].includes(type)"
+    >
+      <component
+        v-if="option?.config.prefix"
+        :is="option.config.prefix()"
+      ></component>
+      <n-text>{{ infoValue }}</n-text>
+      <component
+        v-if="option?.config.suffix"
+        :is="option.config.suffix()"
+      ></component>
+    </div>
+
+    <!-- select -->
+    <n-text v-if="type === 'select'"> {{ selectLabel }} </n-text>
+
+    <!-- multSelect -->
+    <div class="flex gap-1" v-if="type === 'multSelect'">
+      <n-tag v-for="(tag, tagIndex) in selectLabel" :key="tagIndex">
+        {{ tag }}
+      </n-tag>
+    </div>
+
+    <!-- asyncSelect -->
+    <n-text v-if="type === 'asyncSelect'">{{ asycnSelectLable }}</n-text>
+
+    <!-- radio -->
+    <n-text v-if="type === 'radio'"> </n-text>
+
+    <!-- 'date' | 'datetime' -->
+    <n-text v-if="['date', 'datetime'].includes(type) && option?.config?.range">
+      {{ `${dateRangeValue[0]} ~ ${dateRangeValue[1]}` }}
+    </n-text>
+    <n-text
+      v-if="['date', 'datetime'].includes(type) && !option?.config?.range"
+    >
+      {{ infoValue }}
+    </n-text>
+
+    <!-- time -->
+    <n-text v-if="type === 'time'">
+      {{ infoValue }}
+    </n-text>
+
+    <!-- upload -->
+    <div v-if="type === 'upload' && ['image', 'image-card'].includes(type)">
+      <n-image
+        :width="100"
+        v-if="!Array.isArray(infoValue)"
+        :src="infoValue.url"
+      />
+      <n-image-group v-else>
+        <n-image
+          v-for="(item, index) in infoValue"
+          :key="index"
+          :src="item.url"
+        />
+      </n-image-group>
+    </div>
+
+    <!-- custom -->
+    <component
+      v-if="type === 'custom'"
+      v-model:value="infoValue"
+      :is="option?.render ? option?.render(info) : ''"
+      :config="option?.config"
+    ></component>
+  </div>
+</template>
+
+<script setup lang="ts">
+import type {
+  NCurdTableHeaderRenderOptions,
+  NCurdTableHeaderType,
+} from '@dts/nCurdTable';
+import { NText, NTag, NImageGroup, NImage } from 'naive-ui';
+import { computed, onMounted, ref } from 'vue';
+
+interface Props {
+  label: string;
+  type: NCurdTableHeaderType;
+  info: Record<string, any>;
+  field: string;
+  option?: NCurdTableHeaderRenderOptions<any, any>;
+}
+
+const props = defineProps<Props>();
+
+const infoValue = computed(() => {
+  return props.info[props.field];
+});
+
+// Disabled
+// function isDisabled() {
+//   return props.option?.disabled
+//     ? props.option.disabled(infoValue, props.info)
+//     : false;
+// }
+
+// Date Range
+const dateRangeValue = computed(() => {
+  return [
+    infoValue.value[props.option?.config?.startField || 'start'],
+    infoValue.value[props.option?.config?.endField || 'start'],
+  ] as [string, string];
+});
+
+// async select info
+const asycnSelectLable = ref('');
+onMounted(async () => {
+  const res = await props.option?.config.query({
+    [props.option?.config.queryField || 'name']: infoValue.value,
+  });
+  asycnSelectLable.value = res.find((item: Record<string, any>) => {
+    return item[props.option?.config.valueField || 'value'] === infoValue.value;
+  })[props.option?.config.labelField || 'label'];
+});
+
+// select label
+const selectLabel = computed<string | string[]>(() => {
+  const option = props.option?.config.options;
+  const valueField = props.option?.config.valueField || 'value';
+  const labelField = props.option?.config.labelField || 'label';
+  const value = infoValue.value;
+  if (Array.isArray(value)) {
+    return value.map((item: any) => {
+      return option.find((optionItem: any) => {
+        return optionItem[valueField] === item;
+      })[labelField];
+    });
+  } else {
+    return option.find((optionItem: any) => {
+      return optionItem[valueField] === value;
+    })[labelField];
+  }
+});
+</script>
+
+<style scoped></style>

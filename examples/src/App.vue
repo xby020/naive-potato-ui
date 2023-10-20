@@ -1,7 +1,11 @@
 <template>
   <div class="w-screen h-screen bg-dark-400 flex justify-center items-center">
     <div class="w-1366px h-768px rounded-lg p-4 bg-light-100">
-      <naive-curd-table :headers="headers"></naive-curd-table>
+      <naive-curd-table
+        :headers="headers"
+        :query="handleQuery"
+        v-model:choosen="choosen"
+      ></naive-curd-table>
     </div>
   </div>
 </template>
@@ -24,6 +28,9 @@ const headers = ref([
     title: '年龄',
     key: 'age',
     type: 'number',
+    infoRender(row) {
+      return row.age + '岁';
+    },
     column: true,
     query: true,
     create: true,
@@ -59,6 +66,48 @@ const headers = ref([
     info: true,
   },
 ]);
+
+interface Employee {
+  name: string;
+  age: number;
+  department: string;
+  phone: string;
+}
+async function handleQuery(params: any): Promise<Record<string, any>> {
+  const departments = ['技术部', '市场部', '财务部', '行政部'];
+
+  const employees: Employee[] = [];
+
+  for (let i = 0; i < 10; i++) {
+    const name = '员工' + (i + 1);
+
+    const age = Math.floor(Math.random() * 15) + 22;
+
+    const department =
+      departments[Math.floor(Math.random() * departments.length)];
+
+    const phone =
+      '138' + Math.floor(Math.random() * 10000000 + 10000000).toString();
+
+    employees.push({
+      name,
+      age,
+      department,
+      phone,
+    });
+  }
+
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve({
+        data: employees,
+        count: 100,
+      });
+    }, 2000);
+  });
+}
+
+const choosen = ref('');
 </script>
 
 <style scoped></style>

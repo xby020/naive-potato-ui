@@ -24,7 +24,8 @@
           <table-edit-item
             :label="query.title"
             :type="getQueryType(query)"
-            v-model:value="queryForm[query.key]"
+            v-model:form="queryForm"
+            :field="query.key"
             :option="
               query.query && typeof query.query === 'object'
                 ? query.query
@@ -44,10 +45,10 @@
         <slot name="prefix-action"></slot>
 
         <!-- reset -->
-        <n-button type="default">重置</n-button>
+        <n-button type="default" @click="resetQuery">重置</n-button>
 
         <!-- query -->
-        <n-button type="info">查询</n-button>
+        <n-button type="info" @click="queryData">查询</n-button>
 
         <!-- create -->
         <n-button type="success">新增</n-button>
@@ -56,18 +57,48 @@
     </div>
 
     <!-- Table -->
-    <n-data-table class="w-full flex-auto"></n-data-table>
+    <n-data-table
+      remote
+      class="w-full flex-auto"
+      ref="tableRef"
+      :loading="tableLoading"
+      :columns="finalHeader"
+      :pagination="pagination"
+      :data="tableValue"
+      flex-height
+      @update-page="handleTablePaginate"
+    ></n-data-table>
   </div>
 </template>
 
-<script setup lang="ts">
-import { NDataTable, NFormItem } from 'naive-ui';
+<script setup lang="ts" generic="TInfo extends Record<string,any>">
+import {
+  DataTableColumn,
+  DataTableColumns,
+  NButton,
+  NDataTable,
+  NFormItem,
+  PaginationInfo,
+} from 'naive-ui';
 import type { NCurdTableHeader } from '@dts/nCurdTable';
-import { computed, ref } from 'vue';
+import { Ref, VNode, computed, h, onMounted, ref } from 'vue';
 import TableEditItem from './components/TableEditItem.vue';
+import { getConfigWithBoolean } from './components/NaiveCurdTableTools';
 
 interface Props {
   headers: NCurdTableHeader[];
+  query: (queryParams: Record<string, any>) => Promise<Record<string, any>>;
+  countField?: string;
+  dataField?: string;
+  extraQuery?: Record<string, any>;
+  serialNumber?: boolean;
+  checkable?: boolean;
+  checkDisabled?: (row: TInfo) => boolean;
+  checked?: string[] | number[];
+  prefixAction?: (row: TInfo) => VNode;
+  suffixAction?: (row: TInfo) => VNode;
+  actionWidth?: number;
+  choosen: string | number;
 }
 
 const props = defineProps<Props>();
@@ -105,7 +136,7 @@ function getQueryDefault(header: NCurdTableHeader) {
   }
 }
 
-// form
+// query form
 const queryForm = ref(
   queryList.value.reduce((form, header) => {
     form[header.key] = getQueryDefault(header);
@@ -113,8 +144,162 @@ const queryForm = ref(
   }, {} as Record<string, any>),
 );
 
+/**
+ * @description 重置queryForm
+ */
+function resetQueryForm() {
+  queryForm.value = queryList.value.reduce((form, header) => {
+    form[header.key] = getQueryDefault(header);
+    return form;
+  }, {} as Record<string, any>);
+}
+
+async function resetQuery() {
+  resetQueryForm();
+  pagination.value.page = 1;
+  await queryData();
+}
+
 // query show more
 const queryShowMore = ref(false);
+
+/* Table */
+const tableRef = ref();
+const pagination = ref({
+  page: 1,
+  pageSize: 10,
+  itemCount: 0,
+  prefix: (info: PaginationInfo) => {
+    return `共 ${info.pageCount} 页`;
+  },
+});
+
+const tableValue = ref<TInfo[]>([]) as Ref<TInfo[]>;
+const tableLoading = ref(false);
+
+// table header
+
+// 传入的header
+const propsHeader = computed((): DataTableColumns<TInfo> => {
+  return props.headers.map((header) => {
+    return {
+      title: getConfigWithBoolean(header, 'column', 'title') as string,
+      key: getConfigWithBoolean(header, 'column', 'key') as string,
+      render: getConfigWithBoolean(header, 'column', 'render', 'infoRender'),
+    };
+  });
+});
+
+// 序号header
+const indexHeader: DataTableColumn<TInfo> = {
+  title: '序号',
+  key: 'index',
+  render: (info: TInfo, index: number) => {
+    return index + 1;
+  },
+};
+
+// 选择header
+const selectHeader: DataTableColumn<TInfo> = {
+  type: 'selection',
+  disabled(row: TInfo) {
+    return props.checkDisabled ? props.checkDisabled(row) : false;
+  },
+};
+
+// 操作header
+const emits = defineEmits<{
+  'update:choosen': [choosen: string | number];
+}>();
+// 当前操作的条目的id
+const choosen = computed({
+  get() {
+    return props.choosen;
+  },
+  set(val) {
+    emits('update:choosen', val);
+  },
+});
+const actionHeader = computed((): DataTableColumn<TInfo> => {
+  return {
+    title: '操作',
+    key: 'action',
+    align: 'center',
+    width: props.actionWidth || 300,
+    render(row) {
+      return h(
+        'div',
+        { class: 'flex gap-2 flex-nowarp justify-center items-center' },
+        {
+          default: () => [
+            props.prefixAction ? props.prefixAction(row) : null,
+            h(NButton, { type: 'primary', size: 'small' }, () => '编辑'),
+            h(NButton, { type: 'info', size: 'small' }, () => '详情'),
+            h(NButton, { type: 'warning', size: 'small' }, () => '删除'),
+            props.suffixAction ? props.suffixAction(row) : null,
+          ],
+        },
+      );
+    },
+  };
+});
+
+const finalHeader = computed(() => {
+  return [
+    ...(props.serialNumber ? [indexHeader] : []),
+    ...(props.checkable ? [selectHeader] : []),
+    ...propsHeader.value,
+    actionHeader.value,
+  ];
+});
+
+// table pagination
+async function handleTablePaginate(page: number) {
+  pagination.value.page = page;
+  await queryData();
+}
+
+/* Query */
+const countField = computed(() => {
+  return props.countField || 'count';
+});
+
+const dataField = computed(() => {
+  return props.dataField || 'data';
+});
+
+/**
+ * @description: 查询数据方法
+ */
+async function queryData() {
+  try {
+    tableLoading.value = true;
+
+    // 组建queryParams
+    const queryParams = {
+      page: pagination.value.page,
+      pageSize: pagination.value.pageSize,
+      ...queryForm.value,
+      ...props.extraQuery,
+    };
+
+    // 请求数据
+    const res = await props.query(queryParams);
+
+    // 设置tableValue
+    tableValue.value = res[dataField.value];
+    // 设置pagination
+    pagination.value.itemCount = res[countField.value];
+  } catch (error) {
+    console.error(error);
+  } finally {
+    tableLoading.value = false;
+  }
+}
+
+onMounted(async () => {
+  await queryData();
+});
 </script>
 
 <style scoped></style>
