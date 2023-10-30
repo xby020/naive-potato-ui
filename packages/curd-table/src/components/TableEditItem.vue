@@ -188,8 +188,9 @@ import NCustomUpload from '@naive-potato-ui/custom-upload';
 interface Props {
   label: string;
   type: NCurdTableHeaderType;
-  form: Record<string, any>;
+  form?: Record<string, any>;
   field: string;
+  value: any;
   info?: Record<string, any>;
   option?: NCurdTableHeaderRenderOptions<any, any>;
 }
@@ -198,16 +199,15 @@ const props = defineProps<Props>();
 
 const emits = defineEmits<{
   'update:form': [value: Record<string, any>];
+  'update:value': [value: any];
 }>();
 
 const formValue = computed({
   get() {
-    return props.form[props.field];
+    return props.value;
   },
   set(value) {
-    const val = { ...props.form };
-    val[props.field] = value;
-    emits('update:form', val);
+    emits('update:value', value);
   },
 });
 

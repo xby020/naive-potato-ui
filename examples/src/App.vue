@@ -1,113 +1,14 @@
 <template>
   <div class="w-screen h-screen bg-dark-400 flex justify-center items-center">
-    <div class="w-1366px h-768px rounded-lg p-4 bg-light-100">
-      <naive-curd-table
-        :headers="headers"
-        :query="handleQuery"
-        v-model:choosen="choosen"
-      ></naive-curd-table>
-    </div>
+    <n-message-provider>
+      <content />
+    </n-message-provider>
   </div>
 </template>
 
 <script setup lang="ts">
-import { NaiveCurdTable } from '@naive-potato-ui/ui';
-
-const headers = ref([
-  {
-    title: '姓名',
-    key: 'name',
-    type: 'text',
-    column: true,
-    query: true,
-    create: true,
-    edit: true,
-    info: true,
-  },
-  {
-    title: '年龄',
-    key: 'age',
-    type: 'number',
-    infoRender(row) {
-      return row.age + '岁';
-    },
-    column: true,
-    query: true,
-    create: true,
-    edit: true,
-    info: true,
-  },
-  {
-    title: '部门',
-    key: 'department',
-    type: 'multSelect',
-    column: true,
-    query: {
-      config: {
-        options: [
-          { label: '研发部', value: '研发部' },
-          { label: '产品部', value: '产品部' },
-          { label: '运营部', value: '运营部' },
-        ],
-      },
-    },
-    create: true,
-    edit: true,
-    info: true,
-  },
-  {
-    title: '手机号',
-    key: 'phone',
-    type: 'text',
-    column: true,
-    query: true,
-    create: true,
-    edit: true,
-    info: true,
-  },
-]);
-
-interface Employee {
-  name: string;
-  age: number;
-  department: string;
-  phone: string;
-}
-async function handleQuery(params: any): Promise<Record<string, any>> {
-  const departments = ['技术部', '市场部', '财务部', '行政部'];
-
-  const employees: Employee[] = [];
-
-  for (let i = 0; i < 10; i++) {
-    const name = '员工' + (i + 1);
-
-    const age = Math.floor(Math.random() * 15) + 22;
-
-    const department =
-      departments[Math.floor(Math.random() * departments.length)];
-
-    const phone =
-      '138' + Math.floor(Math.random() * 10000000 + 10000000).toString();
-
-    employees.push({
-      name,
-      age,
-      department,
-      phone,
-    });
-  }
-
-  return new Promise((resolve, reject) => {
-    setTimeout(() => {
-      resolve({
-        data: employees,
-        count: 100,
-      });
-    }, 2000);
-  });
-}
-
-const choosen = ref('');
+import { NMessageProvider } from 'naive-ui';
+import Content from './components/Content.vue';
 </script>
 
 <style scoped></style>

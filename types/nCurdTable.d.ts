@@ -1,4 +1,10 @@
-import { DataTableColumn, SelectGroupOption, SelectOption } from 'naive-ui';
+import {
+  DataTableColumn,
+  FormItemRule,
+  FormRules,
+  SelectGroupOption,
+  SelectOption,
+} from 'naive-ui';
 
 export type NCurdTableProps = {};
 
@@ -20,10 +26,20 @@ export type NCurdTableHeaderType =
   | 'upload'
   | 'custom';
 
+export type NCurdTableFormRules = {
+  [itemValidatePath: string]: FormItemRule | Array<FormItemRule> | FormRules;
+};
+
 /**
  * @description Curd 表格字段通用渲染配置
  */
 export type NCurdTableHeaderBaseRenderConfig<TForm, TInfo> = {
+  /**
+   * @description 字段标题
+   *
+   * @type {string}
+   */
+  title?: string;
   /**
    * @description 是否展示该字段(即使不展示，该字段也会在query,create,edit表单中存在)
    * @default true
@@ -65,6 +81,8 @@ export type NCurdTableHeaderBaseRenderConfig<TForm, TInfo> = {
    * @type {any}
    */
   default?: any;
+  required?: boolean;
+  rule: NCurdTableFormRules;
 };
 
 /**
@@ -367,6 +385,7 @@ export type NCurdTableHeader<
   infoRender?: (info: TInfo) => VNode | string | number;
   formRender?: (form: TForm) => VNode | string | number;
   default?: any;
+  defaultConfig?: NCurdTableHeaderRenderOptions<TForm, TInfo>;
   column?: NCurdTableHeaderColumn<TForm, TInfo> | boolean;
   query?: NCurdTableHeaderQuery<TForm, TInfo> | boolean;
   create?: NCurdTableHeaderCreate<TForm, TInfo> | boolean;

@@ -24,11 +24,17 @@ export function getConfigWithBoolean(
         ? header[headerKey]
         : header[key as keyof NCurdTableHeader];
     } else {
-      return false;
+      return null;
     }
   } else if (typeof target === 'object') {
-    return target[key];
+    if (target[key]) {
+      return target[key];
+    } else {
+      return headerKey
+        ? header[headerKey]
+        : header[key as keyof NCurdTableHeader];
+    }
   } else {
-    return false;
+    return null;
   }
 }
