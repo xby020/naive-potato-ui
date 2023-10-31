@@ -113,30 +113,44 @@ const dateRangeValue = computed(() => {
 // async select info
 const asycnSelectLable = ref('');
 onMounted(async () => {
-  const res = await props.option?.config.query({
-    [props.option?.config.queryField || 'name']: infoValue.value,
-  });
-  asycnSelectLable.value = res.find((item: Record<string, any>) => {
-    return item[props.option?.config.valueField || 'value'] === infoValue.value;
-  })[props.option?.config.labelField || 'label'];
+  if (props.type === 'asyncSelect') {
+    const res = await props.option?.config.query({
+      [props.option?.config.queryField || 'name']: infoValue.value,
+    });
+    asycnSelectLable.value = res.find((item: Record<string, any>) => {
+      return (
+        item[props.option?.config.valueField || 'value'] === infoValue.value
+      );
+    })[props.option?.config.labelField || 'label'];
+  }
 });
 
 // select label
 const selectLabel = computed<string | string[]>(() => {
-  const option = props.option?.config.options;
-  const valueField = props.option?.config.valueField || 'value';
-  const labelField = props.option?.config.labelField || 'label';
-  const value = infoValue.value;
-  if (Array.isArray(value)) {
-    return value.map((item: any) => {
+  if (['asyncSelect', 'select', 'multSelect'].includes(props.type)) {
+    const option = props.option?.config.options;
+    const valueField = props.option?.config.valueField || 'value';
+    const labelField = props.option?.config.labelField || 'label';
+    const value = infoValue.value;
+    if (Array.isArray(value)) {
+      return value.map((item: any) => {
+        const opt = option.find((optionItem: any) => {
+          return optionItem[valueField] === item;
+        });
+        if (opt) {
+          return opt[labelField];
+        } else {
+          console.error('No option found in', option, 'for', item);
+          return '';
+        }
+      });
+    } else {
       return option.find((optionItem: any) => {
-        return optionItem[valueField] === item;
+        return optionItem[valueField] === value;
       })[labelField];
-    });
+    }
   } else {
-    return option.find((optionItem: any) => {
-      return optionItem[valueField] === value;
-    })[labelField];
+    return '';
   }
 });
 </script>

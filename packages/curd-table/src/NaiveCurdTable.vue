@@ -56,7 +56,12 @@
         <n-button type="info" @click="queryData">查询</n-button>
 
         <!-- create -->
-        <n-button type="success" @click="handleAdd">新增</n-button>
+        <n-button
+          type="success"
+          v-if="create !== undefined && !hideCreate"
+          @click="handleAdd"
+          >新增</n-button
+        >
         <slot name="suffix-action"></slot>
       </div>
     </div>
@@ -126,9 +131,9 @@
         </template>
 
         <!-- content -->
-        <div class="w-full h-full">
+        <n-spin class="w-full h-full" :show="drawerContentLoading">
           <!-- Create -->
-          <div class="w-full h-full">
+          <div class="w-full h-full" v-if="drawerMode === 'create'">
             <!-- If Tab -->
             <n-tabs
               v-if="drawerTab"
@@ -160,10 +165,72 @@
               ></table-edit>
             </n-scrollbar>
           </div>
-          <!-- TODO:Edit -->
-
-          <!-- TODO:Info -->
-        </div>
+          <!-- Edit -->
+          <div class="w-full h-full" v-if="drawerMode === 'edit'">
+            <!-- If Tab -->
+            <n-tabs
+              v-if="drawerTab"
+              class="w-full h-full"
+              pane-class="h-full overflow-hidden"
+            >
+              <n-tab-pane tab="基本信息" name="info">
+                <n-scrollbar class="w-full h-full">
+                  <table-edit
+                    ref="editFormRef"
+                    mode="edit"
+                    v-model:form="editForm"
+                    :info="info"
+                    :headers="headers"
+                    :rules="editFormRules"
+                  ></table-edit>
+                </n-scrollbar>
+              </n-tab-pane>
+              <slot name="extraDrawerTab"></slot>
+            </n-tabs>
+            <!-- Else Default Info -->
+            <n-scrollbar v-else class="w-full h-full">
+              <table-edit
+                ref="editFormRef"
+                mode="edit"
+                v-model:form="editForm"
+                :info="info"
+                :headers="headers"
+                :cols="cols"
+                :rules="editFormRules"
+              ></table-edit>
+            </n-scrollbar>
+          </div>
+          <!-- Info -->
+          <div class="w-full h-full" v-if="drawerMode === 'info'">
+            <!-- If Tab -->
+            <n-tabs
+              v-if="drawerTab"
+              class="w-full h-full"
+              pane-class="h-full overflow-hidden"
+            >
+              <n-tab-pane tab="基本信息" name="info">
+                <n-scrollbar class="w-full h-full">
+                  <table-info
+                    v-if="info && !drawerContentLoading"
+                    :info="info"
+                    :headers="headers"
+                    :cols="cols"
+                  ></table-info>
+                </n-scrollbar>
+              </n-tab-pane>
+              <slot name="extraDrawerTab"></slot>
+            </n-tabs>
+            <!-- Else Default Info -->
+            <n-scrollbar v-else class="w-full h-full">
+              <table-info
+                v-if="info && !drawerContentLoading"
+                :info="info"
+                :headers="headers"
+                :cols="cols"
+              ></table-info>
+            </n-scrollbar>
+          </div>
+        </n-spin>
       </n-drawer-content>
     </n-drawer>
   </div>
@@ -190,13 +257,15 @@ import { Ref, VNode, computed, h, onMounted, ref, watch } from 'vue';
 import TableEditItem from './components/TableEditItem.vue';
 import { getConfigWithBoolean } from './components/NaiveCurdTableTools';
 import TableEdit from './components/TableEdit.vue';
+import TableInfo from './components/TableInfo.vue';
 
 interface Props {
   headers: NCurdTableHeader[];
   query: (queryParams: Record<string, any>) => Promise<Record<string, any>>;
-  message?: Record<string, Function>;
+  message?: Record<string, any>;
   countField?: string;
   dataField?: string;
+  idField?: string;
   extraQuery?: Record<string, any>;
   serialNumber?: boolean;
   checkable?: boolean;
@@ -208,7 +277,17 @@ interface Props {
   actionWidth?: number;
   choosen: string | number;
   cols?: number;
-  create: (data: Record<string, any>) => Promise<void>;
+  create?: (data: Record<string, any>) => Promise<unknown>;
+  queryDetail: (data: Record<string, any>) => Promise<TInfo>;
+  edit?: (data: Record<string, any>) => Promise<unknown>;
+  delete?: (data: Record<string, any>) => Promise<unknown>;
+  hideCreate?: boolean;
+  hideColumnEdit?: boolean;
+  editable?: (row: TInfo) => boolean;
+  hideColumnInfo?: boolean;
+  infoable?: (row: TInfo) => boolean;
+  hideColumnDelete?: boolean;
+  deleteable?: (row: TInfo) => boolean;
 }
 
 const props = defineProps<Props>();
@@ -336,6 +415,38 @@ const choosen = computed({
   },
 });
 
+function canEdit(row: TInfo) {
+  if (props.hideColumnEdit) {
+    return false;
+  } else {
+    if (props.edit) {
+      return props.editable ? props.editable(row) : true;
+    } else {
+      return false;
+    }
+  }
+}
+
+function canInfo(row: TInfo) {
+  if (props.hideColumnInfo) {
+    return false;
+  } else {
+    return props.infoable ? props.infoable(row) : true;
+  }
+}
+
+function canDelete(row: TInfo) {
+  if (props.hideColumnDelete) {
+    return false;
+  } else {
+    if (props.delete) {
+      return props.deleteable ? props.deleteable(row) : true;
+    } else {
+      return false;
+    }
+  }
+}
+
 const actionHeader = computed((): DataTableColumn<TInfo> => {
   return {
     title: '操作',
@@ -349,23 +460,58 @@ const actionHeader = computed((): DataTableColumn<TInfo> => {
         {
           default: () => [
             props.prefixAction ? props.prefixAction(row) : null,
-            h(NButton, { type: 'primary', size: 'small' }, () => '编辑'),
-            h(NButton, { type: 'info', size: 'small' }, () => '详情'),
-            h(
-              NPopconfirm,
-              {
-                positiveText: '确定',
-                negativeText: '取消',
-                onPositiveClick() {
-                  console.log('delete');
-                },
-              },
-              {
-                default: () => '确定删除吗？',
-                trigger: () =>
-                  h(NButton, { type: 'warning', size: 'small' }, () => '删除'),
-              },
-            ),
+            canEdit(row)
+              ? h(
+                  NButton,
+                  {
+                    type: 'primary',
+                    size: 'small',
+                    onClick: () => {
+                      choosen.value = row.uuid;
+                      handleEdit(row.uuid);
+                    },
+                  },
+                  () => '编辑',
+                )
+              : null,
+            canInfo(row)
+              ? h(
+                  NButton,
+                  {
+                    type: 'info',
+                    size: 'small',
+                    onClick: () => {
+                      handleInfo(row.uuid);
+                    },
+                  },
+                  () => '详情',
+                )
+              : null,
+            canDelete(row)
+              ? h(
+                  NPopconfirm,
+                  {
+                    positiveText: '确定',
+                    negativeText: '取消',
+                    onPositiveClick() {
+                      deleteData(row.uuid);
+                    },
+                  },
+                  {
+                    default: () => '确定删除吗？',
+                    trigger: () =>
+                      h(
+                        NButton,
+                        {
+                          type: 'warning',
+                          size: 'small',
+                          loading: deleteDataLoading.value,
+                        },
+                        () => '删除',
+                      ),
+                  },
+                )
+              : null,
             props.suffixAction ? props.suffixAction(row) : null,
           ],
         },
@@ -396,6 +542,10 @@ const countField = computed(() => {
 
 const dataField = computed(() => {
   return props.dataField || 'data';
+});
+
+const idField = computed(() => {
+  return props.idField || 'uuid';
 });
 
 /**
@@ -472,9 +622,12 @@ async function handleDrawerConfirm() {
   if (drawerMode.value === 'create') {
     await createData();
   } else {
-    // await editData();
   }
+  await editData(choosen.value, editForm.value);
 }
+
+// drawer content loading
+const drawerContentLoading = ref(false);
 
 // drawer off
 async function handleDrawerOff() {
@@ -484,15 +637,20 @@ async function handleDrawerOff() {
 }
 
 // Add
-const defaultCreateForm = computed(() => {
+const defaultCreateForm = () => {
   return props.headers.reduce((form, header) => {
     const key = getConfigWithBoolean(header, 'create', 'key');
     const defaultVal = getConfigWithBoolean(header, 'create', 'default');
     form[key] = defaultVal;
     return form;
   }, {} as Record<string, any>);
-});
-const createForm = ref(defaultCreateForm.value);
+};
+const createForm = ref(defaultCreateForm());
+
+function resetCreateForm() {
+  createForm.value = defaultCreateForm();
+}
+
 const createFormRef = ref();
 const createFormRules = computed((): NCurdTableFormRules => {
   return props.headers.reduce((rules, header) => {
@@ -551,23 +709,172 @@ function handleAdd() {
 const createDataLoading = ref(false);
 async function createData() {
   try {
+    drawerContentLoading.value = true;
     // validator
     await createFormRef.value.validate();
 
     // create Data
     createDataLoading.value = true;
-    await props.create(createForm.value);
+    props.create && (await props.create(createForm.value));
 
     props.message && props.message.success(`新增成功`);
     createDataLoading.value = false;
     await handleDrawerOff();
+    resetCreateForm();
   } catch (err) {
     props.message && props.message.error(`表单输入有误，请检查表单`);
+  } finally {
+    drawerContentLoading.value = false;
   }
 }
 
 // Edit
 const editDataLoading = ref(false);
+const info = ref();
+
+const defaultEditForm = computed(() => {
+  if (info.value) {
+    const form = props.headers.reduce((form, header) => {
+      const key = getConfigWithBoolean(header, 'edit', 'key');
+      const defaultVal = getConfigWithBoolean(header, 'edit', 'default');
+      const infoVal = info.value[key];
+
+      form[key] = infoVal || defaultVal;
+      return form;
+    }, {} as Record<string, any>);
+    return form;
+  } else {
+    return defaultCreateForm();
+  }
+});
+
+const editForm = ref(defaultEditForm.value);
+const editFormRef = ref();
+const editFormRules = computed((): NCurdTableFormRules => {
+  return props.headers.reduce((rules, header) => {
+    if (header.edit && typeof header.edit === 'object' && header.edit.rule) {
+      rules[header.key] = header.edit.rule;
+    } else if (
+      header.edit &&
+      typeof header.edit === 'object' &&
+      header.edit.required
+    ) {
+      // 当没有rule时，根据required生成rule
+      const type = header.edit.type || header.type;
+      if (type === 'number') {
+        // number
+        rules[header.key] = [
+          {
+            type: 'number',
+            trigger: 'blur',
+            required: true,
+            message: `请输入${header.edit.title || header.title}`,
+          },
+        ];
+      } else if (type === 'multSelect' || header.edit.config?.multiple) {
+        // array
+        rules[header.key] = [
+          {
+            type: 'array',
+            trigger: 'blur',
+            required: true,
+            message: `请选择${header.edit.title || header.title}`,
+          },
+        ];
+      } else {
+        // default text
+        rules[header.key] = [
+          {
+            trigger: 'blur',
+            required: true,
+            message: `请输入${header.edit.title || header.title}`,
+          },
+        ];
+      }
+    }
+    return rules;
+  }, {} as NCurdTableFormRules);
+});
+
+async function handleEdit(uuid: string | number) {
+  drawerMode.value = 'edit';
+  drawerShow.value = true;
+  try {
+    drawerContentLoading.value = true;
+    const res = await props.queryDetail({
+      [idField.value]: uuid,
+    });
+    info.value = res;
+
+    editForm.value = defaultEditForm.value;
+  } finally {
+    drawerContentLoading.value = false;
+  }
+}
+
+function resetEditForm() {
+  editForm.value = defaultEditForm.value;
+}
+
+async function editData(uuid: string | number, data: Record<string, any>) {
+  try {
+    drawerContentLoading.value = true;
+    // validator
+    await editFormRef.value.validate();
+
+    // edit Data
+    editDataLoading.value = true;
+    props.edit &&
+      (await props.edit({
+        [idField.value]: uuid,
+        ...data,
+      }));
+
+    props.message && props.message.success(`编辑成功`);
+    editDataLoading.value = false;
+    await handleDrawerOff();
+    resetEditForm();
+  } catch (err) {
+    props.message && props.message.error(`表单输入有误，请检查表单`);
+  } finally {
+    drawerContentLoading.value = false;
+  }
+}
+
+// Info
+async function handleInfo(uuid: string | number) {
+  drawerMode.value = 'info';
+  drawerShow.value = true;
+  try {
+    drawerContentLoading.value = true;
+    const res = await props.queryDetail({
+      [idField.value]: uuid,
+    });
+    info.value = res;
+  } finally {
+    drawerContentLoading.value = false;
+  }
+}
+
+// Delete
+const deleteDataLoading = ref(false);
+async function deleteData(uuid: string) {
+  try {
+    deleteDataLoading.value = true;
+    if (props.delete) {
+      await props.delete({
+        [idField.value]: uuid,
+      });
+      props.message && props.message.success(`删除成功`);
+    } else {
+      props.message && props.message.error(`删除失败，没有传入delete方法`);
+    }
+  } catch (err) {
+    props.message && props.message.error(`删除失败`);
+  } finally {
+    deleteDataLoading.value = false;
+  }
+}
 </script>
 
 <style scoped>

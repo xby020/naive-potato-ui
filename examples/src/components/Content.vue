@@ -2,11 +2,14 @@
   <div class="w-1366px h-768px rounded-lg bg-light-100">
     <naive-curd-table
       :headers="headers"
-      :query="handleQuery"
       v-model:choosen="choosen"
+      :query="handleQuery"
+      :query-detail="handleQueryDetail"
+      :create="handleCreate"
+      :edit="handleEdit"
+      :delete="handleDelete"
       :cols="2"
       :message="message"
-      :create="handleCreate"
     ></naive-curd-table>
   </div>
 </template>
@@ -59,9 +62,22 @@ const headers = ref([
     defaultConfig: {
       config: {
         options: [
-          { label: '研发部', value: '研发部' },
-          { label: '产品部', value: '产品部' },
-          { label: '运营部', value: '运营部' },
+          {
+            label: '技术部',
+            value: '技术部',
+          },
+          {
+            label: '市场部',
+            value: '市场部',
+          },
+          {
+            label: '财务部',
+            value: '财务部',
+          },
+          {
+            label: '行政部',
+            value: '行政部',
+          },
         ],
       },
     },
@@ -89,6 +105,7 @@ const headers = ref([
 ]);
 
 interface Employee {
+  uuid: string;
   name: string;
   age: number;
   department: string;
@@ -100,6 +117,8 @@ async function handleQuery(params: any): Promise<Record<string, any>> {
   const employees: Employee[] = [];
 
   for (let i = 0; i < 10; i++) {
+    const uid = 'uuid' + Math.floor(Math.random() * 1000000000);
+
     const name = '员工' + (i + 1);
 
     const age = Math.floor(Math.random() * 15) + 22;
@@ -111,6 +130,7 @@ async function handleQuery(params: any): Promise<Record<string, any>> {
       '138' + Math.floor(Math.random() * 10000000 + 10000000).toString();
 
     employees.push({
+      uuid: uid.toString(),
       name,
       age,
       department,
@@ -124,17 +144,79 @@ async function handleQuery(params: any): Promise<Record<string, any>> {
         data: employees,
         count: 100,
       });
-    }, 2000);
+    }, 1000);
   });
 }
 
-async function handleCreate() {
+async function handleQueryDetail(
+  params: Record<string, any>,
+): Promise<Record<string, any>> {
+  const departments = ['技术部', '市场部', '财务部', '行政部'];
+
+  const uid = Math.floor(Math.random() * 15) + 22;
+  const name = '员工' + (Math.random() * 15 + 1);
+
+  const age = Math.floor(Math.random() * 15) + 22;
+
+  const department =
+    departments[Math.floor(Math.random() * departments.length)];
+
+  const phone =
+    '138' + Math.floor(Math.random() * 10000000 + 10000000).toString();
+
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve({
+        uuid: uid,
+        name,
+        age,
+        department: [department],
+        phone,
+      });
+    }, 1000);
+  });
+}
+
+async function handleCreate(data: any) {
+  console.log(`创建`, data);
   return new Promise((resolve, reject) => {
     setTimeout(() => {
       resolve({
         data: {
           code: 200,
           message: '创建成功',
+          data: {},
+        },
+        count: 100,
+      });
+    }, 1000);
+  });
+}
+
+async function handleEdit(data: any) {
+  console.log(`编辑`, data);
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve({
+        data: {
+          code: 200,
+          message: '创建成功',
+          data: {},
+        },
+        count: 100,
+      });
+    }, 1000);
+  });
+}
+
+async function handleDelete(data: any) {
+  console.log(`删除`, data);
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve({
+        data: {
+          code: 200,
+          message: '删除成功',
           data: {},
         },
         count: 100,
