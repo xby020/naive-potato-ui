@@ -10,13 +10,24 @@
       :delete="handleDelete"
       :cols="2"
       :message="message"
-    ></naive-curd-table>
+      :prefix-action="prefixAction"
+      :suffix-action="suffixAction"
+      :action-width="400"
+      serial-number
+    >
+      <template #prefixAction>
+        <n-button type="error" quaternary>Prefix</n-button>
+      </template>
+      <template #suffixAction>
+        <n-button type="info" quaternary>Suffix</n-button>
+      </template>
+    </naive-curd-table>
   </div>
 </template>
 
 <script setup lang="ts">
 import { NaiveCurdTable } from '@naive-potato-ui/ui';
-import { useMessage } from 'naive-ui';
+import { NButton, useMessage } from 'naive-ui';
 
 const message = useMessage();
 
@@ -226,6 +237,29 @@ async function handleDelete(data: any) {
 }
 
 const choosen = ref('');
+
+// Prefix and suffix action btn
+const prefixAction = (row: any) => {
+  return h(
+    NButton,
+    { type: 'primary', size: 'small', secondary: true },
+    { default: () => 'Prefix' },
+  );
+};
+const suffixAction = (row: any) => {
+  return h('div', { class: 'flex items-center gap-2' }, [
+    h(
+      NButton,
+      { type: 'warning', size: 'small', secondary: true },
+      { default: () => 'Suffix1' },
+    ),
+    h(
+      NButton,
+      { type: 'info', size: 'small', secondary: true },
+      { default: () => 'Suffix2' },
+    ),
+  ]);
+};
 </script>
 
 <style scoped></style>

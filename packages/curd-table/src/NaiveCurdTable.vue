@@ -47,7 +47,7 @@
 
       <!-- Action -->
       <div class="flex justify-center items-center gap-2 flex-nowrap">
-        <slot name="prefix-action"></slot>
+        <slot name="prefixAction"></slot>
 
         <!-- reset -->
         <n-button type="default" @click="resetQuery">重置</n-button>
@@ -62,7 +62,7 @@
           @click="handleAdd"
           >新增</n-button
         >
-        <slot name="suffix-action"></slot>
+        <slot name="suffixAction"></slot>
       </div>
     </div>
 
@@ -102,6 +102,7 @@
             <n-text class="font-bold text-2xl">{{ drawerTitle }}</n-text>
 
             <div class="flex items-center gap-2">
+              <slot name="extraDrawerAction"></slot>
               <!-- Confirm -->
               <n-button
                 type="success"
@@ -151,7 +152,11 @@
                   ></table-edit>
                 </n-scrollbar>
               </n-tab-pane>
-              <slot name="extraDrawerTab"></slot>
+              <slot
+                name="extraCreateTab"
+                :form="createForm"
+                :info="info"
+              ></slot>
             </n-tabs>
             <!-- Else Default Info -->
             <n-scrollbar v-else class="w-full h-full">
@@ -163,6 +168,11 @@
                 :cols="cols"
                 :rules="createFormRules"
               ></table-edit>
+              <slot
+                name="extraCreateForm"
+                :form="createForm"
+                :info="info"
+              ></slot>
             </n-scrollbar>
           </div>
           <!-- Edit -->
@@ -185,7 +195,7 @@
                   ></table-edit>
                 </n-scrollbar>
               </n-tab-pane>
-              <slot name="extraDrawerTab"></slot>
+              <slot name="extraEditTab" :form="editForm" :info="info"></slot>
             </n-tabs>
             <!-- Else Default Info -->
             <n-scrollbar v-else class="w-full h-full">
@@ -198,6 +208,7 @@
                 :cols="cols"
                 :rules="editFormRules"
               ></table-edit>
+              <slot name="extraEditForm" :form="editForm" :info="info"></slot>
             </n-scrollbar>
           </div>
           <!-- Info -->
@@ -218,7 +229,7 @@
                   ></table-info>
                 </n-scrollbar>
               </n-tab-pane>
-              <slot name="extraDrawerTab"></slot>
+              <slot name="extraInfoTab" :info="info"></slot>
             </n-tabs>
             <!-- Else Default Info -->
             <n-scrollbar v-else class="w-full h-full">
@@ -228,6 +239,7 @@
                 :headers="headers"
                 :cols="cols"
               ></table-info>
+              <slot name="extraInfoForm" :info="info"></slot>
             </n-scrollbar>
           </div>
         </n-spin>
@@ -388,8 +400,23 @@ const propsHeader = computed((): DataTableColumns<TInfo> => {
 const indexHeader: DataTableColumn<TInfo> = {
   title: '序号',
   key: 'index',
+  width: 80,
+  align: 'center',
   render: (info: TInfo, index: number) => {
-    return index + 1;
+    return h(
+      'div',
+      {
+        class: 'w-full h-8 flex justify-center items-center',
+      },
+      h(
+        'div',
+        {
+          class:
+            'w-7 h-7 font-semibold text-sky-300 border-2 border-sky-300/50 rounded-full flex justify-center items-center',
+        },
+        `${index + 1}`,
+      ),
+    );
   },
 };
 
@@ -505,7 +532,7 @@ const actionHeader = computed((): DataTableColumn<TInfo> => {
                         {
                           type: 'warning',
                           size: 'small',
-                          loading: deleteDataLoading.value,
+                          loading: deleteDataLoading.value[row.uuid],
                         },
                         () => '删除',
                       ),
@@ -857,22 +884,23 @@ async function handleInfo(uuid: string | number) {
 }
 
 // Delete
-const deleteDataLoading = ref(false);
+const deleteDataLoading = ref<Record<string, boolean>>({});
 async function deleteData(uuid: string) {
   try {
-    deleteDataLoading.value = true;
+    deleteDataLoading.value[uuid] = true;
     if (props.delete) {
       await props.delete({
         [idField.value]: uuid,
       });
       props.message && props.message.success(`删除成功`);
+      await queryData();
     } else {
       props.message && props.message.error(`删除失败，没有传入delete方法`);
     }
   } catch (err) {
     props.message && props.message.error(`删除失败`);
   } finally {
-    deleteDataLoading.value = false;
+    deleteDataLoading.value[uuid] = false;
   }
 }
 </script>
