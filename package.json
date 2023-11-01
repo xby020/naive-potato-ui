@@ -12,6 +12,7 @@
     "build:ui": "pnpm run type:src && pnpm --filter ./packages/** run build && pnpm run mv-type"
   },
   "devDependencies": {
+    "@changesets/cli": "^2.26.2",
     "@inquirer/prompts": "^3.2.0",
     "@types/lodash": "^4.14.200",
     "@types/node": "^20.8.10",
