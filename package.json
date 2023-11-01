@@ -5,8 +5,11 @@
   "private": true,
   "scripts": {
     "dev": "pnpm --filter @naive-potato-ui/examples dev",
-    "build:ui": "pnpm --filter './packages/**' run build",
-    "preview": "vite preview --config ./examples/vite.config.ts"
+    "clean:type": "rimraf ./dist",
+    "type:node": "tsc -p tsconfig.node.json --noEmit --composite false",
+    "type:src": "pnpm run clean:type && vue-tsc -p tsconfig.src.json --composite false --declaration --emitDeclarationOnly",
+    "mv-type": "tsx ./scripts/dts-mv.ts",
+    "build:ui": "pnpm run type:src && pnpm --filter ./packages/** run build && pnpm run mv-type"
   },
   "devDependencies": {
     "@inquirer/prompts": "^3.1.2",
@@ -19,6 +22,7 @@
     "log-symbols": "^5.1.0",
     "naive-ui": "^2.34.4",
     "ora": "^7.0.1",
+    "rimraf": "^5.0.5",
     "tsx": "^3.13.0",
     "typescript": "^5.0.2",
     "unplugin-auto-import": "^0.16.6",

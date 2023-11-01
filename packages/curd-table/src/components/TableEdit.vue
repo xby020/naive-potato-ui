@@ -52,10 +52,6 @@ const props = withDefaults(defineProps<Props>(), {
   widthStyle: '50%',
 });
 
-const emits = defineEmits<{
-  'update:form': [Record<string, any>];
-}>();
-
 // From
 const tableFormRef = ref();
 const tableHeaders = computed(() => {

@@ -20,10 +20,12 @@
   },
   "main": "./dist/naive-potato-ui.umd.js",
   "module": "./dist/naive-potato-ui.umd.js",
+  "types": "./dist/index.d.ts",
   "exports": {
     ".": {
       "require": "./dist/naive-potato-ui.umd.js",
-      "module": "./dist/naive-potato-ui.umd.js"
+      "module": "./dist/naive-potato-ui.umd.js",
+      "types": "./dist/index.d.ts"
     }
   },
   "files": [

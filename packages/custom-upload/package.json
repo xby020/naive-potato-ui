@@ -20,10 +20,12 @@
   },
   "main": "./dist/naive-custom-upload.umd.js",
   "module": "./dist/naive-custom-upload.umd.js",
+  "types": "./dist/index.d.ts",
   "exports": {
     ".": {
       "require": "./dist/naive-custom-upload.umd.js",
-      "module": "./dist/naive-custom-upload.umd.js"
+      "module": "./dist/naive-custom-upload.umd.js",
+      "types": "./dist/index.d.ts"
     }
   },
   "files": [

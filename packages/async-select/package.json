@@ -20,10 +20,12 @@
   },
   "main": "./dist/naive-async-select.umd.js",
   "module": "./dist/naive-async-select.umd.js",
+  "types": "./dist/index.d.ts",
   "exports": {
     ".": {
       "require": "./dist/naive-async-select.umd.js",
-      "module": "./dist/naive-async-select.umd.js"
+      "module": "./dist/naive-async-select.umd.js",
+      "types": "./dist/index.d.ts"
     }
   },
   "files": [

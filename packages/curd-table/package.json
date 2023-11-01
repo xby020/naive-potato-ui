@@ -20,10 +20,12 @@
   },
   "main": "./dist/naive-curd-table.umd.js",
   "module": "./dist/naive-curd-table.umd.js",
+  "types": "./dist/index.d.ts",
   "exports": {
     ".": {
       "require": "./dist/naive-curd-table.umd.js",
-      "module": "./dist/naive-curd-table.umd.js"
+      "module": "./dist/naive-curd-table.umd.js",
+      "types": "./dist/index.d.ts"
     }
   },
   "files": [
