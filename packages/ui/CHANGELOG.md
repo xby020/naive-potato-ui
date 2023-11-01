@@ -1,5 +1,11 @@
 # @naive-potato-ui/ui
 
+## 1.0.1
+
+### Patch Changes
+
+- [`5b512f7`](https://github.com/xby020/naive-potato-ui/commit/5b512f76cf29538aeda6228b5922d6924fecdd00) - Change types alias to absolute path
+
 ## 1.0.0
 
 ### Major Changes
