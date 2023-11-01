@@ -3,7 +3,7 @@
   "changelog": [
     "@changesets/changelog-github",
     {
-      "repo": "git+https://github.com/xby020/naive-potato-ui.git"
+      "repo": "xby020/naive-potato-ui"
     }
   ],
   "commit": false,
