@@ -12,6 +12,7 @@
     "build:ui": "pnpm run type:src && pnpm --filter ./packages/** run build && pnpm run mv-type"
   },
   "devDependencies": {
+    "@changesets/changelog-github": "^0.4.8",
     "@changesets/cli": "^2.26.2",
     "@inquirer/prompts": "^3.2.0",
     "@types/lodash": "^4.14.200",
