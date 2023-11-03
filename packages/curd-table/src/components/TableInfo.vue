@@ -23,7 +23,10 @@
 </template>
 
 <script setup lang="ts">
-import { NCurdTableHeader, NCurdTableHeaderType } from '@dts/nCurdTable';
+import {
+  NCurdTableHeader,
+  NCurdTableHeaderType,
+} from '../../../../types/nCurdTable';
 import { NDescriptions, NDescriptionsItem } from 'naive-ui';
 import { computed } from 'vue';
 import { getConfigWithBoolean } from './NaiveCurdTableTools';

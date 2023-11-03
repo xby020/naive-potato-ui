@@ -31,7 +31,10 @@
 </template>
 
 <script setup lang="ts">
-import { NCurdTableHeader, NCurdTableHeaderType } from '@dts/nCurdTable';
+import {
+  NCurdTableHeader,
+  NCurdTableHeaderType,
+} from '../../../../types/nCurdTable';
 import { NForm, NGrid, NFormItemGi } from 'naive-ui';
 import TableEditItem from './TableEditItem.vue';
 import { computed, ref } from 'vue';

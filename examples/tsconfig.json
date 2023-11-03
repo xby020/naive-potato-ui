@@ -10,9 +10,6 @@
     "paths": {
       "@/*": [
         "src/*"
-      ],
-      "@naive-potato-ui/*": [
-        "../packages/*/src"
       ]
     }
   },

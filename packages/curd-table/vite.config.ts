@@ -10,11 +10,6 @@ export default defineConfig({
       include: ['src/**/*.{vue,ts}'],
     }),
   ],
-  resolve: {
-    alias: {
-      '@dts': '../../types',
-    },
-  },
   build: {
     minify: false,
     lib: {

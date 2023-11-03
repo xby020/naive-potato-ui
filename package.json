@@ -7,9 +7,9 @@
     "dev": "pnpm --filter @naive-potato-ui/examples dev",
     "clean:type": "rimraf ./dist",
     "type:node": "tsc -p tsconfig.node.json --noEmit --composite false",
-    "type:src": "pnpm run clean:type && vue-tsc -p tsconfig.src.json --composite false --declaration --emitDeclarationOnly && resolve-tspaths -p tsconfig.src.json",
+    "type:src": "pnpm run clean:type && vue-tsc -p tsconfig.src.json --composite false --declaration --emitDeclarationOnly && tsc-alias -p tsconfig.src.json",
     "mv-type": "tsx ./scripts/dts-mv.ts",
-    "build:ui": "pnpm run type:src && pnpm --filter ./packages/** run build && pnpm run mv-type",
+    "build:ui": "pnpm run type:src && pnpm --filter \"./packages/**\" run build && pnpm run mv-type",
     "publish:ui": "pnpm publish -r --access public --registry https://registry.npmjs.org"
   },
   "devDependencies": {
@@ -25,8 +25,8 @@
     "log-symbols": "^5.1.0",
     "naive-ui": "^2.35.0",
     "ora": "^7.0.1",
-    "resolve-tspaths": "^0.8.17",
     "rimraf": "^5.0.5",
+    "tsc-alias": "^1.8.8",
     "tsx": "^3.14.0",
     "typescript": "^5.2.2",
     "unplugin-auto-import": "^0.16.7",

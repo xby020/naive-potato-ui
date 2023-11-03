@@ -1,4 +1,4 @@
-import { NCurdTableHeader } from '@dts/nCurdTable';
+import { NCurdTableHeader } from '../../../../types/nCurdTable';
 
 /**
  * @description 获取可选配置

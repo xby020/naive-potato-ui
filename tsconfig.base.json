@@ -27,9 +27,6 @@
     "paths": {
       "@naive-potato-ui/*": [
         "packages/*/src"
-      ],
-      "@dts/*": [
-        "types/*"
       ]
     }
   }
