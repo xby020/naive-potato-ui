@@ -1,5 +1,11 @@
 # @naive-potato-ui/curd-table
 
+## 1.0.3
+
+### Patch Changes
+
+- Import missing NSpin conmponent.
+
 ## 1.0.2
 
 ### Patch Changes
