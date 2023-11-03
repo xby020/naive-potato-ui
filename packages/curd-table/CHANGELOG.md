@@ -1,5 +1,15 @@
 # @naive-potato-ui/curd-table
 
+## 1.0.1
+
+### Patch Changes
+
+- Fixed alias path when build packages.
+
+- Updated dependencies []:
+  - @naive-potato-ui/async-select@1.0.1
+  - @naive-potato-ui/custom-upload@1.0.1
+
 ## 1.0.0
 
 ### Major Changes

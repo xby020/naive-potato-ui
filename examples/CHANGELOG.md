@@ -1,5 +1,14 @@
 # @naive-potato-ui/examples
 
+## 1.0.3
+
+### Patch Changes
+
+- Fixed alias path when build packages.
+
+- Updated dependencies []:
+  - @naive-potato-ui/ui@1.0.2
+
 ## 1.0.2
 
 ### Patch Changes
