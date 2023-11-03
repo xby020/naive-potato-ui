@@ -1,5 +1,11 @@
 # @naive-potato-ui/custom-upload
 
+## 1.0.2
+
+### Patch Changes
+
+- Change all alias to absolute path.
+
 ## 1.0.1
 
 ### Patch Changes

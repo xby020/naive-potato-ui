@@ -1,5 +1,14 @@
 # @naive-potato-ui/examples
 
+## 1.0.4
+
+### Patch Changes
+
+- Change all alias to absolute path.
+
+- Updated dependencies []:
+  - @naive-potato-ui/ui@1.0.3
+
 ## 1.0.3
 
 ### Patch Changes
