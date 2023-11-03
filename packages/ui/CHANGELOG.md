@@ -1,5 +1,11 @@
 # @naive-potato-ui/ui
 
+## 1.0.5
+
+### Patch Changes
+
+- Forgot build lol.
+
 ## 1.0.4
 
 ### Patch Changes
