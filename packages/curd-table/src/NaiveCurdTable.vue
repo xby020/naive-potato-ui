@@ -289,10 +289,10 @@ interface Props {
   actionWidth?: number;
   choosen: string | number;
   cols?: number;
-  create?: (data: Record<string, any>) => Promise<unknown>;
+  create?: (data: Record<string, any>) => Promise<any>;
   queryDetail: (data: Record<string, any>) => Promise<TInfo>;
-  edit?: (data: Record<string, any>) => Promise<unknown>;
-  delete?: (data: Record<string, any>) => Promise<unknown>;
+  edit?: (data: Record<string, any>) => Promise<any>;
+  delete?: (data: Record<string, any>) => Promise<any>;
   hideCreate?: boolean;
   hideColumnEdit?: boolean;
   editable?: (row: TInfo) => boolean;
