@@ -5,6 +5,7 @@ import {
   kebabToCamelCase,
 } from '../utils/replacePkg';
 import { PackageJson } from 'type-fest';
+import { getExternal } from './external';
 
 export function getViteBuild(
   pkgJson: PackageJson = {},
@@ -23,10 +24,14 @@ export function getViteBuild(
 
   const camelCaseName = kebabToCamelCase(kebabName);
 
+  const external = getExternal(pkgJson, options);
+
+  console.log(external);
+
   return {
     minify: false,
     lib: {
-      entry: './src/index.ts',
+      entry: 'src/index.ts',
       name: camelCaseName,
       fileName: (format: string) => {
         return `${kebabName}.${format}.js`;
@@ -34,7 +39,7 @@ export function getViteBuild(
       formats: ['es', 'umd'],
     },
     rollupOptions: {
-      external: [/@naive-potato-ui.*/, /^node:.*/, 'vue', 'naive-ui'],
+      external: external,
     },
   };
 }

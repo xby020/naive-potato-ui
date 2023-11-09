@@ -21,7 +21,7 @@ export function getVitePlugins(
   ];
 
   // vue plugins
-  const vuePlugins = options?.vue === false ? [] : [vue(), WindiCSS()];
+  const vuePlugins = options?.vue ? [vue(), WindiCSS()] : [];
 
   // dts plugins
   const dtsPlugins = options?.dts ? [pluginMoveDts(options)] : [];

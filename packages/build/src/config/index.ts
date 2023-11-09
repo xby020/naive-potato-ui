@@ -24,7 +24,8 @@ export async function generateViteConfig(
     ...viteConfig,
   };
 
-  console.log('FINAL VITE CONFIG', JSON.stringify(finalViteConfig));
+  console.log('FINAL BUILD CONFIG');
+  console.log(JSON.stringify(build));
 
   return mergeConfig(finalViteConfig, viteConfig || {});
 }
