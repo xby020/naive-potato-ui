@@ -1,5 +1,14 @@
 # @naive-potato-ui/examples
 
+## 1.0.8
+
+### Patch Changes
+
+- change package.json 's types path
+
+- Updated dependencies []:
+  - @naive-potato-ui/ui@1.0.7
+
 ## 1.0.7
 
 ### Patch Changes

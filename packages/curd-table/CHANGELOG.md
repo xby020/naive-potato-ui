@@ -1,5 +1,15 @@
 # @naive-potato-ui/curd-table
 
+## 1.0.5
+
+### Patch Changes
+
+- change package.json 's types path
+
+- Updated dependencies []:
+  - @naive-potato-ui/async-select@1.0.4
+  - @naive-potato-ui/custom-upload@1.0.4
+
 ## 1.0.4
 
 ### Patch Changes

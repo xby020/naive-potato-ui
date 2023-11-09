@@ -1,5 +1,14 @@
 # @naive-potato-ui/ui
 
+## 1.0.7
+
+### Patch Changes
+
+- change package.json 's types path
+
+- Updated dependencies []:
+  - @naive-potato-ui/curd-table@1.0.5
+
 ## 1.0.6
 
 ### Patch Changes

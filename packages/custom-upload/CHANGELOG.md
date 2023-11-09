@@ -1,5 +1,11 @@
 # @naive-potato-ui/custom-upload
 
+## 1.0.4
+
+### Patch Changes
+
+- change package.json 's types path
+
 ## 1.0.3
 
 ### Patch Changes
