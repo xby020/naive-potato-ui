@@ -1,5 +1,14 @@
 # @naive-potato-ui/ui
 
+## 1.0.6
+
+### Patch Changes
+
+- Add new child package for build.
+
+- Updated dependencies []:
+  - @naive-potato-ui/curd-table@1.0.4
+
 ## 1.0.5
 
 ### Patch Changes

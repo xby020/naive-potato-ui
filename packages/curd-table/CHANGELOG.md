@@ -1,5 +1,15 @@
 # @naive-potato-ui/curd-table
 
+## 1.0.4
+
+### Patch Changes
+
+- Add new child package for build.
+
+- Updated dependencies []:
+  - @naive-potato-ui/async-select@1.0.3
+  - @naive-potato-ui/custom-upload@1.0.3
+
 ## 1.0.3
 
 ### Patch Changes

@@ -1,5 +1,14 @@
 # @naive-potato-ui/examples
 
+## 1.0.7
+
+### Patch Changes
+
+- Add new child package for build.
+
+- Updated dependencies []:
+  - @naive-potato-ui/ui@1.0.6
+
 ## 1.0.6
 
 ### Patch Changes

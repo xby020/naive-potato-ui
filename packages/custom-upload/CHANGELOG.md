@@ -1,5 +1,11 @@
 # @naive-potato-ui/custom-upload
 
+## 1.0.3
+
+### Patch Changes
+
+- Add new child package for build.
+
 ## 1.0.2
 
 ### Patch Changes
