@@ -171,7 +171,7 @@
 import type {
   NCurdTableHeaderRenderOptions,
   NCurdTableHeaderType,
-} from '../../../../types/nCurdTable';
+} from '../types/curdTable';
 import {
   NInput,
   NInputNumber,

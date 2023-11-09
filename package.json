@@ -7,18 +7,18 @@
     "dev": "pnpm --filter @naive-potato-ui/examples dev",
     "clean:type": "rimraf ./dist",
     "type:node": "tsc -p tsconfig.node.json --noEmit --composite false",
-    "type:src": "pnpm run clean:type && vue-tsc -p tsconfig.src.json --composite false --declaration --emitDeclarationOnly && tsc-alias -p tsconfig.src.json",
+    "type:src": "pnpm run clean:type && vue-tsc -p tsconfig.src.json --composite false --declaration --emitDeclarationOnly",
     "mv-type": "tsx ./scripts/dts-mv.ts",
-    "build:ui": "pnpm run type:src && pnpm --filter \"./packages/**\" run build && pnpm run mv-type",
+    "build:ui": "pnpm run type:src && pnpm --filter \"./packages/**\" run build",
     "publish:ui": "pnpm publish -r --access public --registry https://registry.npmjs.org"
   },
   "devDependencies": {
     "@changesets/changelog-github": "^0.4.8",
     "@changesets/cli": "^2.26.2",
-    "@inquirer/prompts": "^3.2.0",
-    "@types/lodash": "^4.14.200",
-    "@types/node": "^20.8.10",
-    "@vitejs/plugin-vue": "^4.4.0",
+    "@inquirer/prompts": "^3.3.0",
+    "@types/lodash": "^4.14.201",
+    "@types/node": "^20.9.0",
+    "@vitejs/plugin-vue": "^4.4.1",
     "chalk": "^5.3.0",
     "commander": "^11.1.0",
     "lodash": "^4.17.21",
@@ -26,8 +26,9 @@
     "naive-ui": "^2.35.0",
     "ora": "^7.0.1",
     "rimraf": "^5.0.5",
-    "tsc-alias": "^1.8.8",
+    "rollup-plugin-dts": "^6.1.0",
     "tsx": "^3.14.0",
+    "type-fest": "^4.7.0",
     "typescript": "^5.2.2",
     "unplugin-auto-import": "^0.16.7",
     "unplugin-vue-components": "^0.25.2",
@@ -37,6 +38,6 @@
     "windicss": "^3.5.6"
   },
   "dependencies": {
-    "vue": "^3.3.7"
+    "vue": "^3.3.8"
   }
 }

@@ -1,7 +1,6 @@
-import NaiveCurdTable from './NaiveCurdTable.vue';
-import NTableEditItem from './components/TableEditItem.vue';
-import NTableINfoItem from './components/TableInfoItem.vue';
-
 import 'virtual:windi.css';
 
-export { NaiveCurdTable, NTableEditItem, NTableINfoItem };
+export { default as NCurdTable } from './NaiveCurdTable.vue';
+export { default as NTableEditItem } from './components/TableEditItem.vue';
+export { default as NTableINfoItem } from './components/TableInfoItem.vue';
+export type { NCurdTableHeader } from './types/curdTable';

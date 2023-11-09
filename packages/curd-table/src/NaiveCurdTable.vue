@@ -265,10 +265,7 @@ import {
   NScrollbar,
   NSpin,
 } from 'naive-ui';
-import type {
-  NCurdTableFormRules,
-  NCurdTableHeader,
-} from '../../../types/nCurdTable';
+import type { NCurdTableFormRules, NCurdTableHeader } from './types/curdTable';
 import { Ref, VNode, computed, h, onMounted, ref, watch } from 'vue';
 import TableEditItem from './components/TableEditItem.vue';
 import { getConfigWithBoolean } from './components/NaiveCurdTableTools';

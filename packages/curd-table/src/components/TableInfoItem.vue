@@ -77,7 +77,7 @@
 import type {
   NCurdTableHeaderRenderOptions,
   NCurdTableHeaderType,
-} from '../../../../types/nCurdTable';
+} from '../types/curdTable';
 import { NText, NTag, NImageGroup, NImage } from 'naive-ui';
 import { computed, onMounted, ref } from 'vue';
 
