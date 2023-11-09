@@ -89,7 +89,7 @@ export function pluginReplacePackageJson(
       exportsObj['.']['import'] = esPath;
 
       // 获取 dts 路径
-      const dtsPath = `./dist/index.d.ts`;
+      const dtsPath = `./dist/src/index.d.ts`;
       basePkgJson.types = dtsPath;
       exportsObj['.']['types'] = dtsPath;
 
