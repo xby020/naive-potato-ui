@@ -6,6 +6,7 @@ import { pluginReplacePackageJson } from '../utils/replacePkg';
 import { PackageJson } from 'type-fest';
 import { pluginMoveDts } from '../utils/moveDts';
 import { GenerateViteConfigOptions } from './options';
+import { libInjectCss } from 'vite-plugin-lib-inject-css';
 
 export function getVitePlugins(
   pkgJson?: PackageJson,
@@ -21,7 +22,7 @@ export function getVitePlugins(
   ];
 
   // vue plugins
-  const vuePlugins = options?.vue ? [vue(), WindiCSS()] : [];
+  const vuePlugins = options?.vue ? [vue(), WindiCSS(), libInjectCss()] : [];
 
   // dts plugins
   const dtsPlugins = options?.dts ? [pluginMoveDts(options)] : [];

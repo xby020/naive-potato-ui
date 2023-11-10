@@ -11,6 +11,7 @@ export function getBasePkgOptions(pkg: PackageJson) {
       type: 'git',
       url: 'git+https://github.com/xby020/naive-potato-ui.git',
     },
+    sideEffects: ['**/*.css'],
   };
 
   return {

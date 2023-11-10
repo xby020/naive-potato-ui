@@ -50,7 +50,7 @@ export function pluginMoveDts(
       const target = absCwd('dist', relEntryPath);
 
       const sourceTypes = absCwd('src/types');
-      const targetTypes = absCwd('dist/types');
+      const targetTypes = absCwd('dist/src/types');
 
       console.log(sourceTypes, targetTypes);
 

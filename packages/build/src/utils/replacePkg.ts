@@ -93,6 +93,13 @@ export function pluginReplacePackageJson(
       basePkgJson.types = dtsPath;
       exportsObj['.']['types'] = dtsPath;
 
+      // 获取 style 路径
+      const stylePath = `./dist/style.css`;
+      basePkgJson.style = stylePath;
+      if (options.vue) {
+        exportsObj['./style'] = stylePath;
+      }
+
       // 组装 package.json
       const finalPkgJson = {
         ...basePkgJson,

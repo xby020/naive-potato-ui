@@ -1,6 +1,6 @@
 <template>
   <div class="w-1366px h-768px rounded-lg bg-light-100">
-    <naive-curd-table
+    <n-curd-table
       :headers="headers"
       v-model:choosen="choosen"
       :query="handleQuery"
@@ -21,12 +21,12 @@
       <template #suffixAction>
         <n-button type="info" quaternary>Suffix</n-button>
       </template>
-    </naive-curd-table>
+    </n-curd-table>
   </div>
 </template>
 
 <script setup lang="ts">
-import { NaiveCurdTable } from '@naive-potato-ui/ui';
+import { NCurdTable, NCurdTableHeader } from '@naive-potato-ui/ui';
 import { NButton, useMessage } from 'naive-ui';
 
 const message = useMessage();
@@ -35,7 +35,19 @@ onMounted(() => {
   message.info('Start');
 });
 
-const headers = ref([
+const headers = ref<NCurdTableHeader[]>([
+  {
+    title: '姓名',
+    key: 'name',
+    type: 'text',
+    query: true,
+    create: true,
+    edit: true,
+    info: true,
+  },
+]);
+
+const headers1 = ref([
   {
     title: '姓名',
     key: 'name',
