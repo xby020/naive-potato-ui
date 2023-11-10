@@ -1,5 +1,14 @@
 # @naive-potato-ui/ui
 
+## 1.0.8
+
+### Patch Changes
+
+- [`3563e7b`](https://github.com/xby020/naive-potato-ui/commit/3563e7b546d96bf6838c3a17b075b3d30a4e4a06) - add style file to final output
+
+- Updated dependencies [[`3563e7b`](https://github.com/xby020/naive-potato-ui/commit/3563e7b546d96bf6838c3a17b075b3d30a4e4a06)]:
+  - @naive-potato-ui/curd-table@1.0.6
+
 ## 1.0.7
 
 ### Patch Changes
