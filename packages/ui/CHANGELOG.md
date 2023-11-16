@@ -1,5 +1,11 @@
 # @naive-potato-ui/ui
 
+## 1.0.9
+
+### Patch Changes
+
+- add other child packages.
+
 ## 1.0.8
 
 ### Patch Changes

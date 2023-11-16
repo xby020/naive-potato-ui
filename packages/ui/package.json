@@ -16,7 +16,7 @@
     "**/*.css"
   ],
   "name": "@naive-potato-ui/ui",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "scripts": {
     "build": "vite build",
     "test": "echo test"
@@ -37,12 +37,13 @@
     "README.md"
   ],
   "peerDependencies": {
-    "vue": ">=3.0.0",
-    "naive-ui": ">=2.34.0"
+    "naive-ui": ">=2.34.0",
+    "vue": ">=3.0.0"
   },
   "dependencies": {
-    "@naive-potato-ui/curd-table": "workspace:^"
+    "@naive-potato-ui/async-select": "workspace:^",
+    "@naive-potato-ui/curd-table": "workspace:^",
+    "@naive-potato-ui/custom-upload": "workspace:^"
   },
-  "devDependencies": {},
   "style": "./dist/style.css"
 }
