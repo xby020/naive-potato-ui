@@ -1,5 +1,14 @@
 # @naive-potato-ui/examples
 
+## 1.0.14
+
+### Patch Changes
+
+- change rule type.
+
+- Updated dependencies []:
+  - @naive-potato-ui/ui@1.0.13
+
 ## 1.0.13
 
 ### Patch Changes

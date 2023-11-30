@@ -56,7 +56,16 @@ const headers = ref([
     query: true,
     create: {
       show: true,
-      required: true,
+      type: 'text',
+      default: '人社局',
+      config: {
+        disabled: () => true,
+      },
+      rule: {
+        trigger: 'blur',
+        required: true,
+        message: '请确定账号是否绑定部门',
+      },
     },
     edit: true,
     info: true,

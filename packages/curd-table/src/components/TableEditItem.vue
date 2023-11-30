@@ -10,14 +10,14 @@
     >
       <template #prefix>
         <component
-          v-if="option?.config.prefix"
+          v-if="option?.config?.prefix"
           :is="option.config.prefix()"
         ></component>
       </template>
       <template #suffix>
         <component
-          v-if="option?.config.prefix"
-          :is="option.config.prefix()"
+          v-if="option?.config?.suffix"
+          :is="option.config.suffix()"
         ></component>
       </template>
     </n-input>
@@ -43,13 +43,13 @@
     >
       <template #prefix>
         <component
-          v-if="option?.config.prefix"
+          v-if="option?.config?.prefix"
           :is="option.config.prefix()"
         ></component>
       </template>
       <template #suffix>
         <component
-          v-if="option?.config.prefix"
+          v-if="option?.config?.prefix"
           :is="option.config.prefix()"
         ></component>
       </template>
@@ -60,19 +60,19 @@
       v-if="type === 'number'"
       v-model:value="formValue"
       :placeholder="`请输入${label}`"
-      :show-button="option?.config.showButton || false"
+      :show-button="option?.config?.showButton || false"
       clearable
       :disabled="isDisabled()"
     >
       <template #prefix>
         <component
-          v-if="option?.config.prefix"
+          v-if="option?.config?.prefix"
           :is="option.config.prefix()"
         ></component>
       </template>
       <template #suffix>
         <component
-          v-if="option?.config.suffix"
+          v-if="option?.config?.suffix"
           :is="option.config.suffix()"
         ></component>
       </template>
@@ -85,9 +85,9 @@
       :placeholder="`请选择${label}`"
       clearable
       :disabled="isDisabled()"
-      :options="option?.config.options"
-      :label-field="option?.config.labelField || 'label'"
-      :value-field="option?.config.valueField || 'value'"
+      :options="option?.config?.options"
+      :label-field="option?.config?.labelField || 'label'"
+      :value-field="option?.config?.valueField || 'value'"
       :multiple="type === 'multSelect'"
     />
 
@@ -97,11 +97,11 @@
       v-model:value="formValue"
       :placeholder="`请选择${label}或输入查询`"
       :disabled="isDisabled()"
-      :label-field="option?.config.labelField || 'label'"
-      :value-field="option?.config.valueField || 'value'"
-      :query-field="option?.config.queryField"
-      :query="option?.config.query"
-      :multiple="option?.config.multiple || false"
+      :label-field="option?.config?.labelField || 'label'"
+      :value-field="option?.config?.valueField || 'value'"
+      :query-field="option?.config?.queryField"
+      :query="option?.config?.query"
+      :multiple="option?.config?.multiple || false"
     ></n-async-select>
 
     <!-- radio -->
@@ -112,11 +112,11 @@
       :disabled="isDisabled()"
     >
       <n-radio
-        v-for="(item, index) in option?.config.options"
+        v-for="(item, index) in option?.config?.options"
         :key="index"
-        :value="item[option?.config.valueField || 'value']"
+        :value="item[option?.config?.valueField || 'value']"
       >
-        {{ item[option?.config.labelField || 'label'] }}
+        {{ item[option?.config?.labelField || 'label'] }}
       </n-radio>
     </n-radio-group>
 
@@ -124,13 +124,13 @@
     <n-date-picker
       v-if="['date', 'datetime'].includes(type) && !option?.config?.range"
       v-model:formatted-value="formValue"
-      :value-format="option?.config.format"
+      :value-format="option?.config?.format"
       :type="type === 'date' ? 'date' : 'datetime'"
     />
     <n-date-picker
       v-if="['date', 'datetime'].includes(type) && option?.config?.range"
       v-model:formatted-value="dateRangeValue"
-      :value-format="option?.config.format"
+      :value-format="option?.config?.format"
       :type="type === 'date' ? 'daterange' : 'datetimerange'"
     />
 
@@ -138,23 +138,23 @@
     <n-time-picker
       v-if="type === 'time'"
       v-model:formatted-value="formValue"
-      :value-format="option?.config.format"
+      :value-format="option?.config?.format"
     />
 
     <!-- upload -->
     <n-custom-upload
       v-if="type === 'upload'"
       v-model:value="formValue"
-      :label="option?.config.label"
-      :accept="option?.config.accept"
+      :label="option?.config?.label"
+      :accept="option?.config?.accept"
       :info="info"
-      :action="option?.config.action"
-      :headers="option?.config.headers"
-      :extra-data="option?.config.extraData"
+      :action="option?.config?.action"
+      :headers="option?.config?.headers"
+      :extra-data="option?.config?.extraData"
       :disabled="isDisabled()"
-      :type="option?.config.type"
-      :max="option?.config.max"
-      :multiple="option?.config.multiple"
+      :type="option?.config?.type"
+      :max="option?.config?.max"
+      :multiple="option?.config?.multiple"
     ></n-custom-upload>
 
     <!-- custom -->
@@ -210,8 +210,8 @@ const formValue = computed({
 
 // Disabled
 function isDisabled() {
-  return props.option?.disabled
-    ? props.option.disabled(formValue, props.info)
+  return props.option?.config?.disabled
+    ? props.option?.config?.disabled(formValue, props.info)
     : false;
 }
 

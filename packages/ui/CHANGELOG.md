@@ -1,5 +1,14 @@
 # @naive-potato-ui/ui
 
+## 1.0.13
+
+### Patch Changes
+
+- change rule type.
+
+- Updated dependencies []:
+  - @naive-potato-ui/curd-table@1.0.10
+
 ## 1.0.12
 
 ### Patch Changes

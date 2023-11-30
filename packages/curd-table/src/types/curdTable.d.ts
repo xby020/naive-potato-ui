@@ -82,7 +82,7 @@ export type NCurdTableHeaderBaseRenderConfig<TForm, TInfo> = {
    */
   default?: any;
   required?: boolean;
-  rule?: NCurdTableFormRules;
+  rule?: FormItemRule | Array<FormItemRule>;
 };
 
 /**
@@ -135,7 +135,9 @@ type NCurdTableHeaderAsyncSelectRenderConfig<TForm, TInfo> = {
      * @description select选项异步查询函数
      *
      */
-    query: (params: string) => Promise<Array<SelectOption | SelectGroupOption>>;
+    query: (
+      params: Record<string, any>,
+    ) => Promise<Array<SelectOption | SelectGroupOption>>;
     /**
      * @description select选项异步查询函数的参数字段
      *

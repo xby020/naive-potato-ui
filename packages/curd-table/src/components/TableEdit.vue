@@ -35,7 +35,10 @@ import { NCurdTableHeader, NCurdTableHeaderType } from '../types/curdTable';
 import { NForm, NGrid, NFormItemGi } from 'naive-ui';
 import TableEditItem from './TableEditItem.vue';
 import { computed, ref } from 'vue';
-import { getConfigWithBoolean } from './NaiveCurdTableTools';
+import {
+  getConfigWithBoolean,
+  getOptionWithBoolean,
+} from './NaiveCurdTableTools';
 
 interface Props {
   form: Record<string, any>;
@@ -78,11 +81,7 @@ function getField(header: NCurdTableHeader) {
   return getConfigWithBoolean(header, props.mode, 'key') as string;
 }
 function getOption(header: NCurdTableHeader) {
-  const config = getConfigWithBoolean(
-    header,
-    props.mode,
-    'defaultConfig',
-  ) as any;
+  const config = getOptionWithBoolean(header, props.mode);
   return config;
 }
 

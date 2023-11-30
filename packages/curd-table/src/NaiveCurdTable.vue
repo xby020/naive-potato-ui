@@ -149,6 +149,7 @@
                     mode="create"
                     v-model:form="createForm"
                     :headers="headers"
+                    :cols="cols"
                     :rules="createFormRules"
                   ></table-edit>
                 </n-scrollbar>
