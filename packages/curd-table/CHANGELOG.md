@@ -1,5 +1,11 @@
 # @naive-potato-ui/curd-table
 
+## 1.0.8
+
+### Patch Changes
+
+- Rule in config now is selectable
+
 ## 1.0.7
 
 ### Patch Changes

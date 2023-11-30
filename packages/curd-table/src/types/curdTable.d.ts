@@ -82,7 +82,7 @@ export type NCurdTableHeaderBaseRenderConfig<TForm, TInfo> = {
    */
   default?: any;
   required?: boolean;
-  rule: NCurdTableFormRules;
+  rule?: NCurdTableFormRules;
 };
 
 /**
