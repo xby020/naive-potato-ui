@@ -90,7 +90,7 @@ export type NCurdTableHeaderBaseRenderConfig<TForm, TInfo> = {
  */
 type NCurdTableHeaderTextRenderConfig<TForm, TInfo> = {
   type: 'text' | 'textarea' | 'password' | 'number';
-  config: {
+  config?: {
     prefix?: () => VNode;
     suffix?: () => VNode;
   };
