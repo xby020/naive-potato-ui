@@ -1,5 +1,14 @@
 # @naive-potato-ui/examples
 
+## 1.0.11
+
+### Patch Changes
+
+- queryDetail now can be undefined.
+
+- Updated dependencies []:
+  - @naive-potato-ui/ui@1.0.10
+
 ## 1.0.10
 
 ### Patch Changes

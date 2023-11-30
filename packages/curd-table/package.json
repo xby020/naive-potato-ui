@@ -1,1 +1,48 @@
-{"description":"A Naive UI component library for Vue 3.","keywords":["vue","vue3","naive-ui"],"author":"xby020","license":"MIT","homepage":"https://www.xby020.cn","repository":{"type":"git","url":"git+https://github.com/xby020/naive-potato-ui.git"},"sideEffects":["**/*.css"],"name":"@naive-potato-ui/curd-table","version":"1.0.6","scripts":{"build":"vite build","test":"echo test"},"main":"./dist/np-curd-table.umd.js","module":"./dist/np-curd-table.es.js","types":"./dist/src/index.d.ts","exports":{".":{"require":"./dist/np-curd-table.umd.js","module":"./dist/np-curd-table.umd.js","import":"./dist/np-curd-table.es.js","types":"./dist/src/index.d.ts"}},"files":["dist","README.md"],"peerDependencies":{"naive-ui":">=2.34.0","vue":">=3.0.0"},"dependencies":{"@naive-potato-ui/async-select":"workspace:^","@naive-potato-ui/custom-upload":"workspace:^"},"style":"./dist/style.css"}
+{
+  "description": "A Naive UI component library for Vue 3.",
+  "keywords": [
+    "vue",
+    "vue3",
+    "naive-ui"
+  ],
+  "author": "xby020",
+  "license": "MIT",
+  "homepage": "https://www.xby020.cn",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/xby020/naive-potato-ui.git"
+  },
+  "sideEffects": [
+    "**/*.css"
+  ],
+  "name": "@naive-potato-ui/curd-table",
+  "version": "1.0.7",
+  "scripts": {
+    "build": "vite build",
+    "test": "echo test"
+  },
+  "main": "./dist/np-curd-table.umd.js",
+  "module": "./dist/np-curd-table.es.js",
+  "types": "./dist/src/index.d.ts",
+  "exports": {
+    ".": {
+      "require": "./dist/np-curd-table.umd.js",
+      "module": "./dist/np-curd-table.umd.js",
+      "import": "./dist/np-curd-table.es.js",
+      "types": "./dist/src/index.d.ts"
+    }
+  },
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "peerDependencies": {
+    "naive-ui": ">=2.34.0",
+    "vue": ">=3.0.0"
+  },
+  "dependencies": {
+    "@naive-potato-ui/async-select": "workspace:^",
+    "@naive-potato-ui/custom-upload": "workspace:^"
+  },
+  "style": "./dist/style.css"
+}

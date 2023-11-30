@@ -1,5 +1,11 @@
 # @naive-potato-ui/curd-table
 
+## 1.0.7
+
+### Patch Changes
+
+- queryDetail now can be undefined.
+
 ## 1.0.6
 
 ### Patch Changes

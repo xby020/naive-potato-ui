@@ -291,7 +291,7 @@ interface Props {
   choosen: string | number;
   cols?: number;
   create?: (data: Record<string, any>) => Promise<any>;
-  queryDetail: (data: Record<string, any>) => Promise<TInfo>;
+  queryDetail?: (data: Record<string, any>) => Promise<TInfo>;
   edit?: (data: Record<string, any>) => Promise<any>;
   delete?: (data: Record<string, any>) => Promise<any>;
   hideCreate?: boolean;
@@ -301,6 +301,7 @@ interface Props {
   infoable?: (row: TInfo) => boolean;
   hideColumnDelete?: boolean;
   deleteable?: (row: TInfo) => boolean;
+  hideAction?: boolean;
 }
 
 const props = defineProps<Props>();
@@ -549,12 +550,17 @@ const actionHeader = computed((): DataTableColumn<TInfo> => {
 });
 
 const finalHeader = computed(() => {
-  return [
+  const final = [
     ...(props.serialNumber ? [indexHeader] : []),
     ...(props.checkable ? [selectHeader] : []),
     ...propsHeader.value,
-    actionHeader.value,
   ];
+
+  if (!props.hideAction) {
+    final.push(actionHeader.value);
+  }
+
+  return final;
 });
 
 // table pagination
@@ -829,9 +835,11 @@ async function handleEdit(uuid: string | number) {
   drawerShow.value = true;
   try {
     drawerContentLoading.value = true;
-    const res = await props.queryDetail({
-      [idField.value]: uuid,
-    });
+    const res = props.queryDetail
+      ? await props.queryDetail({
+          [idField.value]: uuid,
+        })
+      : {};
     info.value = res;
 
     editForm.value = defaultEditForm.value;
@@ -875,9 +883,11 @@ async function handleInfo(uuid: string | number) {
   drawerShow.value = true;
   try {
     drawerContentLoading.value = true;
-    const res = await props.queryDetail({
-      [idField.value]: uuid,
-    });
+    const res = props.queryDetail
+      ? await props.queryDetail({
+          [idField.value]: uuid,
+        })
+      : {};
     info.value = res;
   } finally {
     drawerContentLoading.value = false;
