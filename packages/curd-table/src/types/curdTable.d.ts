@@ -137,7 +137,7 @@ type NCurdTableHeaderAsyncSelectRenderConfig<TForm, TInfo> = {
      */
     query: (
       params: Record<string, any>,
-    ) => Promise<Array<SelectOption | SelectGroupOption>>;
+    ) => Promise<Array<Record<string, any>[]>>;
     /**
      * @description select选项异步查询函数的参数字段
      *
