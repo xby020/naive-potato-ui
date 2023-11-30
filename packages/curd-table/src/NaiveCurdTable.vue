@@ -771,6 +771,7 @@ async function createData() {
     props.message && props.message.error(`表单输入有误，请检查表单`);
   } finally {
     drawerContentLoading.value = false;
+    createDataLoading.value = false;
   }
 }
 
@@ -886,6 +887,7 @@ async function editData(uuid: string | number, data: Record<string, any>) {
     props.message && props.message.error(`表单输入有误，请检查表单`);
   } finally {
     drawerContentLoading.value = false;
+    editDataLoading.value = false;
   }
 }
 

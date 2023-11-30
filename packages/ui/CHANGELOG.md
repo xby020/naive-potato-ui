@@ -1,5 +1,14 @@
 # @naive-potato-ui/ui
 
+## 1.0.14
+
+### Patch Changes
+
+- config is selectable
+
+- Updated dependencies []:
+  - @naive-potato-ui/curd-table@1.0.11
+
 ## 1.0.13
 
 ### Patch Changes

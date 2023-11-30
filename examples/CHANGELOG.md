@@ -1,5 +1,14 @@
 # @naive-potato-ui/examples
 
+## 1.0.15
+
+### Patch Changes
+
+- config is selectable
+
+- Updated dependencies []:
+  - @naive-potato-ui/ui@1.0.14
+
 ## 1.0.14
 
 ### Patch Changes

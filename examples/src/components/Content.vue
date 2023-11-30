@@ -6,7 +6,7 @@
       :query="handleQuery"
       :query-detail="handleQueryDetail"
       :create="handleCreate"
-      :edit="handleEdit"
+      :edit="handleEditError"
       :delete="handleDelete"
       :cols="2"
       :message="message"
@@ -54,7 +54,7 @@ const headers = ref([
     type: 'text',
     column: true,
     query: true,
-    create: {
+    defaultConfig: {
       show: true,
       type: 'text',
       default: '人社局',
@@ -67,6 +67,7 @@ const headers = ref([
         message: '请确定账号是否绑定部门',
       },
     },
+    create: true,
     edit: true,
     info: true,
   },
@@ -244,6 +245,22 @@ async function handleEdit(data: any) {
         data: {
           code: 200,
           message: '创建成功',
+          data: {},
+        },
+        count: 100,
+      });
+    }, 1000);
+  });
+}
+
+async function handleEditError(data: any) {
+  console.log(`编辑`, data);
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      reject({
+        data: {
+          code: 400,
+          message: '创建失败，测试失败消息',
           data: {},
         },
         count: 100,

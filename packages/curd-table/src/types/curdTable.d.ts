@@ -101,7 +101,7 @@ type NCurdTableHeaderTextRenderConfig<TForm, TInfo> = {
  */
 type NCurdTableHeaderSelectRenderConfig<TForm, TInfo> = {
   type: 'select' | 'multSelect';
-  config: {
+  config?: {
     /**
      * @description select的选项
      *
@@ -130,7 +130,7 @@ type NCurdTableHeaderSelectRenderConfig<TForm, TInfo> = {
  */
 type NCurdTableHeaderAsyncSelectRenderConfig<TForm, TInfo> = {
   type: 'asyncSelect';
-  config: {
+  config?: {
     /**
      * @description select选项异步查询函数
      *
@@ -173,7 +173,7 @@ type NCurdTableHeaderAsyncSelectRenderConfig<TForm, TInfo> = {
  */
 type NCurdTableHeaderRadioRenderConfig<TForm, TInfo> = {
   type: 'radio';
-  config: {
+  config?: {
     /**
      * @description radio的选项
      *
@@ -202,7 +202,7 @@ type NCurdTableHeaderRadioRenderConfig<TForm, TInfo> = {
  */
 type NCurdTableHeaderDateRenderConfig<TForm, TInfo> = {
   type: 'date' | 'datetime';
-  config: {
+  config?: {
     /**
      * @description 日期格式(见[🔗date-fns format 文档](https://date-fns.org/v2.23.0/docs/format))
      *
@@ -236,7 +236,7 @@ type NCurdTableHeaderDateRenderConfig<TForm, TInfo> = {
  */
 type NCurdTableHeaderTimeRenderConfig<TForm, TInfo> = {
   type: 'time';
-  config: {
+  config?: {
     /**
      * @description 时间格式(见[🔗date-fns format 文档](https://date-fns.org/v2.23.0/docs/format))
      *
@@ -254,7 +254,7 @@ type NCurdTableHeaderTimeRenderConfig<TForm, TInfo> = {
 
 type NCurdTableHeaderUploadRenderConfig<TForm, TInfo> = {
   type: 'upload';
-  config: {
+  config?: {
     /**
      * @description 上传文件按钮的文本
      *

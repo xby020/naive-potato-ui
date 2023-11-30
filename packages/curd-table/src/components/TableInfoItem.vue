@@ -6,12 +6,12 @@
       v-if="['text', 'textarea', 'password', 'number'].includes(type)"
     >
       <component
-        v-if="option?.config.prefix"
+        v-if="option?.config?.prefix"
         :is="option.config.prefix()"
       ></component>
       <n-text>{{ infoValue }}</n-text>
       <component
-        v-if="option?.config.suffix"
+        v-if="option?.config?.suffix"
         :is="option.config.suffix()"
       ></component>
     </div>
@@ -114,23 +114,23 @@ const dateRangeValue = computed(() => {
 const asycnSelectLable = ref('');
 onMounted(async () => {
   if (props.type === 'asyncSelect') {
-    const res = await props.option?.config.query({
-      [props.option?.config.queryField || 'name']: infoValue.value,
+    const res = await props.option?.config?.query({
+      [props.option?.config?.queryField || 'name']: infoValue.value,
     });
     asycnSelectLable.value = res.find((item: Record<string, any>) => {
       return (
-        item[props.option?.config.valueField || 'value'] === infoValue.value
+        item[props.option?.config?.valueField || 'value'] === infoValue.value
       );
-    })[props.option?.config.labelField || 'label'];
+    })[props.option?.config?.labelField || 'label'];
   }
 });
 
 // select label
 const selectLabel = computed<string | string[]>(() => {
   if (['asyncSelect', 'select', 'multSelect'].includes(props.type)) {
-    const option = props.option?.config.options;
-    const valueField = props.option?.config.valueField || 'value';
-    const labelField = props.option?.config.labelField || 'label';
+    const option = props.option?.config?.options;
+    const valueField = props.option?.config?.valueField || 'value';
+    const labelField = props.option?.config?.labelField || 'label';
     const value = infoValue.value;
     if (Array.isArray(value)) {
       return value.map((item: any) => {
