@@ -38,3 +38,29 @@ export function getConfigWithBoolean(
     return null;
   }
 }
+
+export function getOptionWithBoolean(
+  header: NCurdTableHeader,
+  type: keyof NCurdTableHeader,
+) {
+  const target = header[type] as Record<string, any> | boolean;
+  const defaultConfig = header.defaultConfig;
+
+  if (typeof target === 'boolean') {
+    if (target) {
+      // type为true, 说明是默认配置，返回根目录配置
+      if (defaultConfig) {
+        return defaultConfig;
+      } else {
+        return undefined;
+      }
+    } else {
+      console.warn(`NCurdTable: ${type}配置为false`);
+      return undefined;
+    }
+  } else if (typeof target === 'object') {
+    return target;
+  } else {
+    return undefined;
+  }
+}

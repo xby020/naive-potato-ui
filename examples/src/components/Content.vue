@@ -69,7 +69,16 @@ const headers = ref([
       return row.age + '岁';
     },
     column: true,
-    query: true,
+    query: {
+      show: true,
+      type: 'date',
+      config: {
+        format: 'yyyy-MM-dd',
+        range: true,
+        startField: 'start_date',
+        endField: 'end_date',
+      },
+    },
     create: {
       show: true,
       required: true,
@@ -135,6 +144,8 @@ interface Employee {
   phone: string;
 }
 async function handleQuery(params: any): Promise<Record<string, any>> {
+  console.log(params);
+
   const departments = ['技术部', '市场部', '财务部', '行政部'];
 
   const employees: Employee[] = [];

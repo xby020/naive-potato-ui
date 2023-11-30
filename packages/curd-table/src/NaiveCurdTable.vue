@@ -28,6 +28,7 @@
           <table-edit-item
             :label="query.title"
             :type="getQueryType(query)"
+            :form="queryForm"
             v-model:value="queryForm[query.key]"
             :field="query.key"
             :option="getQueryOption(query)"
@@ -268,7 +269,10 @@ import {
 import type { NCurdTableFormRules, NCurdTableHeader } from './types/curdTable';
 import { Ref, VNode, computed, h, onMounted, ref, watch } from 'vue';
 import TableEditItem from './components/TableEditItem.vue';
-import { getConfigWithBoolean } from './components/NaiveCurdTableTools';
+import {
+  getConfigWithBoolean,
+  getOptionWithBoolean,
+} from './components/NaiveCurdTableTools';
 import TableEdit from './components/TableEdit.vue';
 import TableInfo from './components/TableInfo.vue';
 
@@ -348,7 +352,7 @@ const queryForm = ref(
 );
 
 function getQueryOption(header: NCurdTableHeader) {
-  const config = getConfigWithBoolean(header, 'query', 'defaultConfig');
+  const config = getOptionWithBoolean(header, 'query');
   return config;
 }
 
@@ -590,12 +594,19 @@ async function queryData() {
     tableLoading.value = true;
 
     // 组建queryParams
-    const queryParams = {
+    const queryParams: Record<string, any> = {
       page: pagination.value.page,
       pageSize: pagination.value.pageSize,
       ...queryForm.value,
       ...props.extraQuery,
     };
+
+    // 去掉 queryParams 中为 null 的值
+    Object.keys(queryParams).forEach((key) => {
+      if (queryParams[key] === null) {
+        delete queryParams[key];
+      }
+    });
 
     // 请求数据
     const res = await props.query(queryParams);

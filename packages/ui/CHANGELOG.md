@@ -1,5 +1,14 @@
 # @naive-potato-ui/ui
 
+## 1.0.12
+
+### Patch Changes
+
+- fix query
+
+- Updated dependencies []:
+  - @naive-potato-ui/curd-table@1.0.9
+
 ## 1.0.11
 
 ### Patch Changes

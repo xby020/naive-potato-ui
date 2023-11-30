@@ -131,7 +131,7 @@
       v-if="['date', 'datetime'].includes(type) && option?.config?.range"
       v-model:formatted-value="dateRangeValue"
       :value-format="option?.config.format"
-      :type="type === 'date' ? 'date' : 'datetime'"
+      :type="type === 'date' ? 'daterange' : 'datetimerange'"
     />
 
     <!-- time -->
@@ -168,10 +168,7 @@
 </template>
 
 <script setup lang="ts">
-import type {
-  NCurdTableHeaderRenderOptions,
-  NCurdTableHeaderType,
-} from '../types/curdTable';
+import type { NCurdTableHeaderType } from '../types/curdTable';
 import {
   NInput,
   NInputNumber,
@@ -192,7 +189,7 @@ interface Props {
   field: string;
   value: any;
   info?: Record<string, any>;
-  option?: NCurdTableHeaderRenderOptions<any, any>;
+  option?: Record<any, any>;
 }
 
 const props = defineProps<Props>();
@@ -219,16 +216,22 @@ function isDisabled() {
 }
 
 // Date Range
-const dateRangeValue = computed({
-  get() {
-    return [
-      formValue.value[props.option?.config?.startField || 'start'],
-      formValue.value[props.option?.config?.endField || 'start'],
-    ] as [string, string];
+const dateRangeValue = computed<[string, string] | null>({
+  get(): [string, string] | null {
+    const startField = props.option?.config?.startField || 'start';
+    const endField = props.option?.config?.endField || 'end';
+
+    if (props.form && props.form[startField] && props.form[endField]) {
+      return [props.form[startField], props.form[endField]] as [string, string];
+    } else {
+      return null;
+    }
   },
-  set(v: [string, string]) {
-    formValue.value[props.option?.config?.startField || 'start'] = v[0];
-    formValue.value[props.option?.config?.endField || 'start'] = v[1];
+  set(v: [string, string] | null) {
+    if (v !== null && props.form) {
+      props.form[props.option?.config?.startField || 'start'] = v[0];
+      props.form[props.option?.config?.endField || 'end'] = v[1];
+    }
   },
 });
 </script>
