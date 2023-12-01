@@ -382,7 +382,7 @@ export type NCurdTableHeader<
   TInfo = Record<string, any>,
 > = {
   title: string;
-  key: keyof TForm;
+  key: keyof TForm | string;
   type?: NCurdTableHeaderType;
   infoRender?: (info: TInfo) => VNode | string | number;
   formRender?: (form: TForm) => VNode | string | number;
