@@ -278,7 +278,7 @@ import TableEdit from './components/TableEdit.vue';
 import TableInfo from './components/TableInfo.vue';
 
 interface Props {
-  headers: NCurdTableHeader[];
+  headers: NCurdTableHeader<Record<string, any>>[];
   query: (queryParams: Record<string, any>) => Promise<Record<string, any>>;
   message?: Record<string, any>;
   countField?: string;

@@ -1,5 +1,11 @@
 # @naive-potato-ui/custom-upload
 
+## 1.0.8
+
+### Patch Changes
+
+- fixed header prop type
+
 ## 1.0.7
 
 ### Patch Changes

@@ -1,5 +1,12 @@
 # @naive-potato-ui/examples
 
+## 1.0.18
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @naive-potato-ui/ui@1.0.17
+
 ## 1.0.17
 
 ### Patch Changes

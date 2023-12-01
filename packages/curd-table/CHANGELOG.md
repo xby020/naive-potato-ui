@@ -1,5 +1,15 @@
 # @naive-potato-ui/curd-table
 
+## 1.0.14
+
+### Patch Changes
+
+- fixed header prop type
+
+- Updated dependencies []:
+  - @naive-potato-ui/custom-upload@1.0.8
+  - @naive-potato-ui/async-select@1.0.8
+
 ## 1.0.13
 
 ### Patch Changes
