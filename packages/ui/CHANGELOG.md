@@ -1,5 +1,16 @@
 # @naive-potato-ui/ui
 
+## 1.0.16
+
+### Patch Changes
+
+- change curdTable asyncSelect type
+
+- Updated dependencies []:
+  - @naive-potato-ui/custom-upload@1.0.7
+  - @naive-potato-ui/async-select@1.0.7
+  - @naive-potato-ui/curd-table@1.0.13
+
 ## 1.0.15
 
 ### Patch Changes
