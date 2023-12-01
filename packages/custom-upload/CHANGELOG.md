@@ -1,5 +1,11 @@
 # @naive-potato-ui/custom-upload
 
+## 1.0.6
+
+### Patch Changes
+
+- fix wrong export with async-select and custom-upload
+
 ## 1.0.5
 
 ### Patch Changes

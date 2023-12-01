@@ -1,5 +1,15 @@
 # @naive-potato-ui/curd-table
 
+## 1.0.12
+
+### Patch Changes
+
+- fix wrong export with async-select and custom-upload
+
+- Updated dependencies []:
+  - @naive-potato-ui/custom-upload@1.0.6
+  - @naive-potato-ui/async-select@1.0.6
+
 ## 1.0.11
 
 ### Patch Changes

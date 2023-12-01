@@ -92,7 +92,7 @@
     />
 
     <!-- asyncSelect -->
-    <n-async-select
+    <np-async-select
       v-if="type === 'asyncSelect'"
       v-model:value="formValue"
       :placeholder="`请选择${label}或输入查询`"
@@ -102,7 +102,7 @@
       :query-field="option?.config?.queryField"
       :query="option?.config?.query"
       :multiple="option?.config?.multiple || false"
-    ></n-async-select>
+    ></np-async-select>
 
     <!-- radio -->
     <n-radio-group
@@ -142,7 +142,7 @@
     />
 
     <!-- upload -->
-    <n-custom-upload
+    <np-custom-upload
       v-if="type === 'upload'"
       v-model:value="formValue"
       :label="option?.config?.label"
@@ -155,7 +155,7 @@
       :type="option?.config?.type"
       :max="option?.config?.max"
       :multiple="option?.config?.multiple"
-    ></n-custom-upload>
+    ></np-custom-upload>
 
     <!-- custom -->
     <component
@@ -179,8 +179,8 @@ import {
   NTimePicker,
 } from 'naive-ui';
 import { computed } from 'vue';
-import NAsyncSelect from '@naive-potato-ui/async-select';
-import NCustomUpload from '@naive-potato-ui/custom-upload';
+import { NpAsyncSelect } from '@naive-potato-ui/async-select';
+import { NpCustomUpload } from '@naive-potato-ui/custom-upload';
 
 interface Props {
   label: string;
