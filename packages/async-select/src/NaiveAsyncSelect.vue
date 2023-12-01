@@ -29,7 +29,7 @@ import { ref, computed, watch, reactive, onMounted } from 'vue';
 import { debounce } from 'lodash';
 
 interface Props {
-  value?: string;
+  value?: string | string[];
   query: (options: Record<string, any>) => Promise<any>;
   labelField?: string;
   valueField?: string;
