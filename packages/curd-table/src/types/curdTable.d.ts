@@ -135,7 +135,7 @@ type NCurdTableHeaderAsyncSelectRenderConfig<TForm, TInfo> = {
      * @description select选项异步查询函数
      *
      */
-    query: (params: Record<string, any>) => Promise<Array<Record<string, any>>>;
+    query: (params: Record<string, any>) => Promise<Record<string, any>>;
     /**
      * @description select选项异步查询函数的参数字段
      *

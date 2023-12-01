@@ -1,5 +1,11 @@
 # @naive-potato-ui/curd-table
 
+## 1.0.15
+
+### Patch Changes
+
+- fixed query prop type
+
 ## 1.0.14
 
 ### Patch Changes
