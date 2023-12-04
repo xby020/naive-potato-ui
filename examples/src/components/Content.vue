@@ -35,19 +35,15 @@ onMounted(() => {
   message.info('Start');
 });
 
-const headers1 = ref<NpCurdTableHeader[]>([
-  {
-    title: '姓名',
-    key: 'name',
-    type: 'text',
-    query: true,
-    create: true,
-    edit: true,
-    info: true,
-  },
-]);
+type ResInfo = {
+  uuid: string;
+  name: string;
+  age: number;
+  department: string[];
+  phone: string;
+};
 
-const headers = ref([
+const headers = ref<NpCurdTableHeader<ResInfo>[]>([
   {
     title: '姓名',
     key: 'name',
@@ -91,6 +87,7 @@ const headers = ref([
     },
     create: {
       show: true,
+      type: 'text',
       required: true,
     },
     edit: true,
@@ -102,6 +99,7 @@ const headers = ref([
     type: 'multSelect',
     column: true,
     defaultConfig: {
+      type: 'multSelect',
       config: {
         options: [
           {

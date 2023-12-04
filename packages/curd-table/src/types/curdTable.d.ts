@@ -89,7 +89,7 @@ export type NCurdTableHeaderBaseRenderConfig<TForm, TInfo> = {
  * @description 类型为 'text' | 'textarea' | 'password' | 'number'
  */
 type NCurdTableHeaderTextRenderConfig<TForm, TInfo> = {
-  type: 'text' | 'textarea' | 'password' | 'number';
+  type?: 'text' | 'textarea' | 'password' | 'number';
   config?: {
     prefix?: () => VNode;
     suffix?: () => VNode;
@@ -100,7 +100,7 @@ type NCurdTableHeaderTextRenderConfig<TForm, TInfo> = {
  * @description 类型为 'select' | 'multSelect'
  */
 type NCurdTableHeaderSelectRenderConfig<TForm, TInfo> = {
-  type: 'select' | 'multSelect';
+  type?: 'select' | 'multSelect';
   config?: {
     /**
      * @description select的选项
@@ -129,7 +129,7 @@ type NCurdTableHeaderSelectRenderConfig<TForm, TInfo> = {
  * @description 类型为 'asyncSelect'
  */
 type NCurdTableHeaderAsyncSelectRenderConfig<TForm, TInfo> = {
-  type: 'asyncSelect';
+  type?: 'asyncSelect';
   config?: {
     /**
      * @description select选项异步查询函数
@@ -170,7 +170,7 @@ type NCurdTableHeaderAsyncSelectRenderConfig<TForm, TInfo> = {
  * @description 类型为 'radio'
  */
 type NCurdTableHeaderRadioRenderConfig<TForm, TInfo> = {
-  type: 'radio';
+  type?: 'radio';
   config?: {
     /**
      * @description radio的选项
@@ -199,7 +199,7 @@ type NCurdTableHeaderRadioRenderConfig<TForm, TInfo> = {
  * @description 类型为 'date'  | 'datetime'
  */
 type NCurdTableHeaderDateRenderConfig<TForm, TInfo> = {
-  type: 'date' | 'datetime';
+  type?: 'date' | 'datetime';
   config?: {
     /**
      * @description 日期格式(见[🔗date-fns format 文档](https://date-fns.org/v2.23.0/docs/format))
@@ -233,7 +233,7 @@ type NCurdTableHeaderDateRenderConfig<TForm, TInfo> = {
  * @description 类型为 'time'
  */
 type NCurdTableHeaderTimeRenderConfig<TForm, TInfo> = {
-  type: 'time';
+  type?: 'time';
   config?: {
     /**
      * @description 时间格式(见[🔗date-fns format 文档](https://date-fns.org/v2.23.0/docs/format))
@@ -251,7 +251,7 @@ type NCurdTableHeaderTimeRenderConfig<TForm, TInfo> = {
 };
 
 type NCurdTableHeaderUploadRenderConfig<TForm, TInfo> = {
-  type: 'upload';
+  type?: 'upload';
   config?: {
     /**
      * @description 上传文件按钮的文本

@@ -267,7 +267,11 @@ import {
   NScrollbar,
   NSpin,
 } from 'naive-ui';
-import type { NCurdTableFormRules, NCurdTableHeader } from './types/curdTable';
+import type {
+  NCurdTableFormRules,
+  NCurdTableHeader,
+  NCurdTableHeaderType,
+} from './types/curdTable';
 import { Ref, VNode, computed, h, onMounted, ref, watch } from 'vue';
 import TableEditItem from './components/TableEditItem.vue';
 import {
@@ -290,8 +294,8 @@ interface Props {
   checkDisabled?: (row: TInfo) => boolean;
   checked?: string[] | number[];
   rowKey?: (row: TInfo) => string | number;
-  prefixAction?: (row: TInfo) => VNode;
-  suffixAction?: (row: TInfo) => VNode;
+  prefixAction?: (row: TInfo | Record<string, any>) => VNode;
+  suffixAction?: (row: TInfo | Record<string, any>) => VNode;
   actionWidth?: number;
   choosen: string | number;
   cols?: number;
@@ -316,7 +320,7 @@ const queryList = computed(() => {
   return props.headers.filter((header) => header.query);
 });
 
-function getQueryType(header: NCurdTableHeader) {
+function getQueryType(header: NCurdTableHeader): NCurdTableHeaderType {
   if (typeof header.query === 'boolean' && header.query) {
     // query设置为true，从header.type中获取
     if (header.type) {
@@ -326,8 +330,16 @@ function getQueryType(header: NCurdTableHeader) {
     }
   } else {
     // query设置为对象，从header.query.type中获取
-    if (header.query && (header.query.type || header.type)) {
-      return header.query.type || header.type;
+    if (typeof header.query === 'object') {
+      if (header.query.type) {
+        return header.query.type;
+      } else if (header.type) {
+        return header.type;
+      } else {
+        throw new Error(
+          'query设置为对象时，必须设置header.query.type或header.type',
+        );
+      }
     } else {
       throw new Error(
         'query设置为对象时，必须设置header.query.type或header.type',
