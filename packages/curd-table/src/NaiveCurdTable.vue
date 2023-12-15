@@ -29,7 +29,7 @@
             :label="query.title"
             :type="getQueryType(query)"
             :form="queryForm"
-            v-model:value="queryForm[query.key]"
+            v-model:value="queryForm[query.key as keyof typeof queryForm]"
             :field="query.key"
             :option="getQueryOption(query)"
           ></table-edit-item>
@@ -250,7 +250,7 @@
   </div>
 </template>
 
-<script setup lang="ts" generic="TInfo extends Record<string,any>">
+<script setup lang="ts" generic="TInfo extends Record<string,unknown>">
 import {
   DataTableColumn,
   DataTableColumns,
@@ -282,7 +282,7 @@ import TableEdit from './components/TableEdit.vue';
 import TableInfo from './components/TableInfo.vue';
 
 interface Props {
-  headers: NCurdTableHeader[];
+  headers: NCurdTableHeader<TInfo>[];
   query: (queryParams: Record<string, any>) => Promise<Record<string, any>>;
   message?: Record<string, any>;
   countField?: string;
@@ -294,6 +294,7 @@ interface Props {
   checkDisabled?: (row: TInfo) => boolean;
   checked?: string[] | number[];
   rowKey?: (row: TInfo) => string | number;
+  rowKeyField?: string;
   prefixAction?: (row: TInfo | Record<string, any>) => VNode;
   suffixAction?: (row: TInfo | Record<string, any>) => VNode;
   actionWidth?: number;
@@ -320,7 +321,7 @@ const queryList = computed(() => {
   return props.headers.filter((header) => header.query);
 });
 
-function getQueryType(header: NCurdTableHeader): NCurdTableHeaderType {
+function getQueryType(header: NCurdTableHeader<TInfo>): NCurdTableHeaderType {
   if (typeof header.query === 'boolean' && header.query) {
     // query设置为true，从header.type中获取
     if (header.type) {
@@ -348,7 +349,7 @@ function getQueryType(header: NCurdTableHeader): NCurdTableHeaderType {
   }
 }
 
-function getQueryDefault(header: NCurdTableHeader) {
+function getQueryDefault(header: NCurdTableHeader<TInfo>) {
   if (typeof header.query !== 'boolean' && header.query) {
     return header.query.default || null;
   } else {
@@ -359,12 +360,12 @@ function getQueryDefault(header: NCurdTableHeader) {
 // query form
 const queryForm = ref(
   queryList.value.reduce((form, header) => {
-    form[header.key] = getQueryDefault(header);
+    form[header.key as keyof typeof form] = getQueryDefault(header);
     return form;
   }, {} as Record<string, any>),
 );
 
-function getQueryOption(header: NCurdTableHeader) {
+function getQueryOption(header: NCurdTableHeader<TInfo>) {
   const config = getOptionWithBoolean(header, 'query');
   return config;
 }
@@ -374,7 +375,7 @@ function getQueryOption(header: NCurdTableHeader) {
  */
 function resetQueryForm() {
   queryForm.value = queryList.value.reduce((form, header) => {
-    form[header.key] = getQueryDefault(header);
+    form[header.key as keyof typeof form] = getQueryDefault(header);
     return form;
   }, {} as Record<string, any>);
 }
@@ -513,8 +514,22 @@ const actionHeader = computed((): DataTableColumn<TInfo> => {
                     type: 'primary',
                     size: 'small',
                     onClick: () => {
-                      choosen.value = row.uuid;
-                      handleEdit(row.uuid);
+                      if (
+                        row[props.rowKeyField || 'uuid'] &&
+                        (typeof row[props.rowKeyField || 'uuid'] === 'string' ||
+                          typeof row[props.rowKeyField || 'uuid'] === 'number')
+                      ) {
+                        choosen.value = row[props.rowKeyField || 'uuid'] as
+                          | string
+                          | number;
+                        handleEdit(
+                          row[props.rowKeyField || 'uuid'] as string | number,
+                        );
+                      } else {
+                        console.error(
+                          'rowKeyField in row is undefined or not a string/number, check your rowKeyField',
+                        );
+                      }
                     },
                   },
                   () => '编辑',
@@ -527,7 +542,22 @@ const actionHeader = computed((): DataTableColumn<TInfo> => {
                     type: 'info',
                     size: 'small',
                     onClick: () => {
-                      handleInfo(row.uuid);
+                      if (
+                        row[props.rowKeyField || 'uuid'] &&
+                        (typeof row[props.rowKeyField || 'uuid'] === 'string' ||
+                          typeof row[props.rowKeyField || 'uuid'] === 'number')
+                      ) {
+                        choosen.value = row[props.rowKeyField || 'uuid'] as
+                          | string
+                          | number;
+                        handleInfo(
+                          row[props.rowKeyField || 'uuid'] as string | number,
+                        );
+                      } else {
+                        console.error(
+                          'rowKeyField in row is undefined or not a string/number, check your rowKeyField',
+                        );
+                      }
                     },
                   },
                   () => '详情',
@@ -540,7 +570,22 @@ const actionHeader = computed((): DataTableColumn<TInfo> => {
                     positiveText: '确定',
                     negativeText: '取消',
                     onPositiveClick() {
-                      deleteData(row.uuid);
+                      if (
+                        row[props.rowKeyField || 'uuid'] &&
+                        (typeof row[props.rowKeyField || 'uuid'] === 'string' ||
+                          typeof row[props.rowKeyField || 'uuid'] === 'number')
+                      ) {
+                        choosen.value = row[props.rowKeyField || 'uuid'] as
+                          | string
+                          | number;
+                        deleteData(
+                          row[props.rowKeyField || 'uuid'] as string | number,
+                        );
+                      } else {
+                        console.error(
+                          'rowKeyField in row is undefined or not a string/number, check your rowKeyField',
+                        );
+                      }
                     },
                   },
                   {
@@ -551,7 +596,12 @@ const actionHeader = computed((): DataTableColumn<TInfo> => {
                         {
                           type: 'warning',
                           size: 'small',
-                          loading: deleteDataLoading.value[row.uuid],
+                          loading:
+                            deleteDataLoading.value[
+                              row[props.rowKeyField || 'uuid'] as
+                                | string
+                                | number
+                            ],
                         },
                         () => '删除',
                       ),
@@ -717,7 +767,7 @@ const createFormRules = computed((): NCurdTableFormRules => {
       typeof header.create === 'object' &&
       header.create.rule
     ) {
-      rules[header.key] = header.create.rule;
+      rules[header.key as keyof typeof rules] = header.create.rule;
     } else if (
       header.create &&
       typeof header.create === 'object' &&
@@ -727,7 +777,7 @@ const createFormRules = computed((): NCurdTableFormRules => {
       const type = header.create.type || header.type;
       if (type === 'number') {
         // number
-        rules[header.key] = [
+        rules[header.key as keyof typeof rules] = [
           {
             type: 'number',
             trigger: 'blur',
@@ -737,7 +787,7 @@ const createFormRules = computed((): NCurdTableFormRules => {
         ];
       } else if (type === 'multSelect' || header.create.config?.multiple) {
         // array
-        rules[header.key] = [
+        rules[header.key as keyof typeof rules] = [
           {
             type: 'array',
             trigger: 'blur',
@@ -747,7 +797,7 @@ const createFormRules = computed((): NCurdTableFormRules => {
         ];
       } else {
         // default text
-        rules[header.key] = [
+        rules[header.key as keyof typeof rules] = [
           {
             trigger: 'blur',
             required: true,
@@ -812,7 +862,7 @@ const editFormRef = ref();
 const editFormRules = computed((): NCurdTableFormRules => {
   return props.headers.reduce((rules, header) => {
     if (header.edit && typeof header.edit === 'object' && header.edit.rule) {
-      rules[header.key] = header.edit.rule;
+      rules[header.key as keyof typeof rules] = header.edit.rule;
     } else if (
       header.edit &&
       typeof header.edit === 'object' &&
@@ -822,7 +872,7 @@ const editFormRules = computed((): NCurdTableFormRules => {
       const type = header.edit.type || header.type;
       if (type === 'number') {
         // number
-        rules[header.key] = [
+        rules[header.key as keyof typeof rules] = [
           {
             type: 'number',
             trigger: 'blur',
@@ -832,7 +882,7 @@ const editFormRules = computed((): NCurdTableFormRules => {
         ];
       } else if (type === 'multSelect' || header.edit.config?.multiple) {
         // array
-        rules[header.key] = [
+        rules[header.key as keyof typeof rules] = [
           {
             type: 'array',
             trigger: 'blur',
@@ -842,7 +892,7 @@ const editFormRules = computed((): NCurdTableFormRules => {
         ];
       } else {
         // default text
-        rules[header.key] = [
+        rules[header.key as keyof typeof rules] = [
           {
             trigger: 'blur',
             required: true,
@@ -922,7 +972,7 @@ async function handleInfo(uuid: string | number) {
 
 // Delete
 const deleteDataLoading = ref<Record<string, boolean>>({});
-async function deleteData(uuid: string) {
+async function deleteData(uuid: string | number) {
   try {
     deleteDataLoading.value[uuid] = true;
     if (props.delete) {

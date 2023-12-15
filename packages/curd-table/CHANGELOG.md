@@ -1,5 +1,11 @@
 # @naive-potato-ui/curd-table
 
+## 1.0.17
+
+### Patch Changes
+
+- change headers type
+
 ## 1.0.16
 
 ### Patch Changes

@@ -11,7 +11,7 @@ import { NCurdTableHeader } from '../types/curdTable';
  * @return {*}
  */
 export function getConfigWithBoolean(
-  header: NCurdTableHeader,
+  header: NCurdTableHeader<any>,
   config: keyof NCurdTableHeader,
   key: keyof NCurdTableHeader | string,
   headerKey?: keyof NCurdTableHeader,
@@ -40,7 +40,7 @@ export function getConfigWithBoolean(
 }
 
 export function getOptionWithBoolean(
-  header: NCurdTableHeader,
+  header: NCurdTableHeader<any>,
   type: keyof NCurdTableHeader,
 ) {
   const target = header[type] as Record<string, any> | boolean;

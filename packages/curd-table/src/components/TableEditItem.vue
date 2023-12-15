@@ -186,7 +186,7 @@ interface Props {
   label: string;
   type: NCurdTableHeaderType;
   form?: Record<string, any>;
-  field: string;
+  field: string | number | symbol;
   value: any;
   info?: Record<string, any>;
   option?: Record<any, any>;

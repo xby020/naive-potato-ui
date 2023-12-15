@@ -30,7 +30,7 @@ import { getConfigWithBoolean } from './NaiveCurdTableTools';
 import TableInfoItem from './TableInfoItem.vue';
 
 interface Props {
-  headers: NCurdTableHeader[];
+  headers: NCurdTableHeader<any>[];
   cols?: number;
   widthStyle?: string;
   info: Record<string, any>;

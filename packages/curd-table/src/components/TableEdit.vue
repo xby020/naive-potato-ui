@@ -42,7 +42,7 @@ import {
 
 interface Props {
   form: Record<string, any>;
-  headers: NCurdTableHeader[];
+  headers: NCurdTableHeader<any>[];
   mode: 'create' | 'edit';
   cols?: number;
   widthStyle?: string;
