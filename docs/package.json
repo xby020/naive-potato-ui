@@ -1,0 +1,34 @@
+{
+  "description": "A Naive UI component library for Vue 3.",
+  "keywords": [
+    "vue",
+    "vue3",
+    "naive-ui"
+  ],
+  "author": "xby020",
+  "license": "MIT",
+  "homepage": "https://www.xby020.cn",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/xby020/naive-potato-ui.git"
+  },
+  "sideEffects": [
+    "**/*.css"
+  ],
+  "name": "@naive-potato-ui/docs",
+  "private": true,
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "vitepress dev . --host",
+    "build": "vitepress build .",
+    "preview": "vitepress preview . --host"
+  },
+  "peerDependencies": {
+    "naive-ui": ">=2.34.0",
+    "vue": ">=3.0.0"
+  },
+  "style": "./dist/style.css",
+  "devDependencies": {
+    "vitepress": "1.0.0-rc.36"
+  }
+}
