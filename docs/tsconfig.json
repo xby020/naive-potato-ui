@@ -1,0 +1,29 @@
+{
+  // 集成基础配置
+  "extends": "../tsconfig.base.json",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "lib": [
+      "ESNext",
+      "DOM",
+      "DOM.Iterable"
+    ],
+    "types": [],
+    "paths": {
+      "@naive-potato-ui/*": [
+        "../packages/*/src"
+      ]
+    }
+  },
+  "include": [
+    "../packages/*/src",
+    ".vitepress/**/*",
+    ".vitepress/**/*.md",
+    "demo/**/*",
+    // 脚本目录，之后会涉及
+  ],
+  "exclude": [
+    "**/dist",
+    "**/cache"
+  ]
+}

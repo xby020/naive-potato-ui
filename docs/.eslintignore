@@ -1,0 +1,6 @@
+# vitepress
+!.vitepress
+
+# vitepress output
+.vitepress/dist
+.vitepress/cache

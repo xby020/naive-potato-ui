@@ -18,6 +18,7 @@
   "name": "@naive-potato-ui/docs",
   "private": true,
   "version": "1.0.0",
+  "type": "module",
   "scripts": {
     "dev": "vitepress dev . --host",
     "build": "vitepress build .",
@@ -29,6 +30,15 @@
   },
   "style": "./dist/style.css",
   "devDependencies": {
+    "@iconify-json/mdi": "^1.1.64",
+    "@naive-potato-ui/ui": "workspace:^",
+    "@types/markdown-it": "^13.0.7",
+    "postcss": "^8.4.33",
+    "unplugin-icons": "^0.18.2",
     "vitepress": "1.0.0-rc.36"
+  },
+  "dependencies": {
+    "markdown-it": "^14.0.0",
+    "markdown-it-container": "^4.0.0"
   }
 }

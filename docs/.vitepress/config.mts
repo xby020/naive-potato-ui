@@ -29,4 +29,12 @@ export default defineConfig({
       ],
     },
   },
+
+  /* Markdown */
+  markdown: {
+    theme: {
+      light: 'catppuccin-frappe',
+      dark: 'catppuccin-macchiato',
+    },
+  },
 });
