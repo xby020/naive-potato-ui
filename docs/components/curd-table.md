@@ -3,23 +3,30 @@ layout: doc
 layoutClass: m-nav-layout
 ---
 
-<script setup>
-import CurdTable1 from "../demo/curdTable/CurdTable1.vue";
-</script>
-
 # Curd表格 Curd Table
 
 ## 演示
 
-::: raw
-<potato-demo title="基础表格" class="vp-raw">
-  <CurdTable1 />
+:::demo
 
-  <template #code>
+[基础表格](../demo/curdTable/CurdTable1.vue)
 
-<<< ../demo/curdTable/CurdTable1.vue
+```markdown
+> 包含增删查改,即`curd`所有功能的表格
+```
 
-  </template>
-</potato-demo>
 :::
 
+## API
+
+### Props
+
+:::api
+
+- *props[string](undefined):这是`props`的描述
+- name[string](undefined):这是`name`的描述
+- type[string](undefined):`String`
+- default[string](undefined):`'default'`
+- description[string](undefined): `这是name的描述`
+
+:::

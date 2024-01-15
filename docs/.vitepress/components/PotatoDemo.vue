@@ -21,7 +21,7 @@
       <!-- content -->
       <div class="overflow-auto">
         <div class="w-full min-w-1024px h-768px">
-          <slot name="default"></slot>
+          <slot name="demo"></slot>
         </div>
       </div>
 

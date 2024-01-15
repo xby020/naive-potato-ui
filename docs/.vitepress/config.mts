@@ -1,4 +1,5 @@
 import { defineConfig } from 'vitepress';
+import { mdPlugin } from './plugins/mdPlugins';
 
 export default defineConfig({
   lang: 'zh-CN',
@@ -35,6 +36,9 @@ export default defineConfig({
     theme: {
       light: 'catppuccin-frappe',
       dark: 'catppuccin-macchiato',
+    },
+    config: (md) => {
+      md.use(mdPlugin);
     },
   },
 });

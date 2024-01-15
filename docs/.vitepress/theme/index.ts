@@ -1,6 +1,6 @@
 import DefaultTheme from 'vitepress/theme';
 import { EnhanceAppContext, useData } from 'vitepress';
-import { PotatoDemo } from '../components';
+import { PotatoDemo, PotatoApi, PotatoApiItem } from '../components';
 import { h } from 'vue';
 
 import 'virtual:windi.css';
@@ -14,6 +14,8 @@ export default {
     const { app } = ctx;
 
     app.component('PotatoDemo', PotatoDemo);
+    app.component('PotatoApi', PotatoApi);
+    app.component('PotatoApiItem', PotatoApiItem);
   },
   Layout: () => {
     const props: Record<string, any> = {};
