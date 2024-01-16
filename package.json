@@ -11,7 +11,8 @@
     "mv-type": "tsx ./scripts/dts-mv.ts",
     "build:ui": "pnpm run type:src && pnpm --filter \"./packages/**\" run build",
     "publish:ui": "pnpm publish -r --access public --registry https://registry.npmjs.org",
-    "doc": "pnpm --filter @naive-potato-ui/docs dev"
+    "doc": "pnpm --filter @naive-potato-ui/docs dev",
+    "build:doc": "pnpm --filter @naive-potato-ui/docs build"
   },
   "devDependencies": {
     "@changesets/changelog-github": "^0.4.8",
