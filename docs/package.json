@@ -30,9 +30,11 @@
   },
   "style": "./dist/style.css",
   "devDependencies": {
+    "@css-render/vue3-ssr": "^0.15.12",
     "@iconify-json/mdi": "^1.1.64",
     "@naive-potato-ui/ui": "workspace:^",
     "@types/markdown-it": "^13.0.7",
+    "@vue/server-renderer": "^3.4.14",
     "postcss": "^8.4.33",
     "unplugin-icons": "^0.18.2",
     "vitepress": "1.0.0-rc.36"

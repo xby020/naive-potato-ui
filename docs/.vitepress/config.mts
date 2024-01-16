@@ -44,4 +44,10 @@ export default defineConfig({
 
   /* build */
   ignoreDeadLinks: true,
+
+  vite: {
+    ssr: {
+      noExternal: ['naive-ui', 'lodash'],
+    },
+  },
 });
