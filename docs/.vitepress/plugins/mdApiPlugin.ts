@@ -42,8 +42,6 @@ export function mdApiPlugin(md: MarkdownIt) {
         // 获取到 :::api 内部的路径
         const source = getContent(tokens, idx);
 
-        console.log(source);
-
         // 拼接 <api> 组件的使用代码
         const txtStart = `
           <potato-api>
@@ -56,9 +54,9 @@ export function mdApiPlugin(md: MarkdownIt) {
           const descHtml = mdParser.render(item.description || '', env);
           txtBody += `
             <potato-api-item :need='${item.need ? true : false}'>
-              <template #name>${item.name}</template>
-              <template #type>${item.type}</template>
-              <template #defaultValue>${item.defaultValue}</template>
+              <template #name>${item.name?.toString()}</template>
+              <template #type>${item.type?.toString()}</template>
+              <template #defaultValue>${item.defaultValue?.toString()}</template>
               <template #desc>${descHtml}</template>
             </potato-api-item>
           `;
@@ -76,7 +74,6 @@ export function mdApiPlugin(md: MarkdownIt) {
 
 /** 当读取到 :::api 开启的 Token 时，解析出内部的用例组件文件路径 */
 export function getContent(tokens: Token[], idx: number): MdApiContent[] {
-  // console.log(tokens);
   // find all list item
   let contentList: MdApiContent[] = [];
   for (let i = idx; i < tokens.length; i++) {
@@ -86,6 +83,7 @@ export function getContent(tokens: Token[], idx: number): MdApiContent[] {
       // example:`props[string]:这是`props`的描述`
       let name = content.split(':')[0].split('[')[0];
       const type = content.match(/\[(.+)\]/)?.[1];
+      const escapedTypeCode = type?.replace(/</g, '&lt;').replace(/>/g, '&gt;');
 
       let need = false;
       if (name.includes('*')) {
@@ -93,17 +91,15 @@ export function getContent(tokens: Token[], idx: number): MdApiContent[] {
         need = true;
       }
 
-      const defaultValue = content.match(/\((.+)\)/)?.[1];
-      const description = content.split(':')[1].trim();
-      if (name && type && description) {
-        contentList.push({
-          name,
-          type,
-          need,
-          defaultValue,
-          description,
-        });
-      }
+      const defaultValue = content.split('](')[1].split('):')[0].trim();
+      const description = content.split('):')[1].trim();
+      contentList.push({
+        name,
+        type: escapedTypeCode,
+        need,
+        defaultValue,
+        description,
+      });
     }
 
     if (token.type === 'container_api_close') {

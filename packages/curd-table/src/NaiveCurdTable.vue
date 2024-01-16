@@ -72,7 +72,7 @@
       remote
       class="w-full flex-auto"
       ref="tableRef"
-      :row-key="rowKey ? rowKey : (row) => row.uuid"
+      :row-key="rowKey ? rowKey : (row) => row[rowKeyField || 'uuid']"
       :loading="tableLoading"
       :columns="finalHeader"
       :pagination="pagination"
@@ -990,6 +990,12 @@ async function deleteData(uuid: string | number) {
     deleteDataLoading.value[uuid] = false;
   }
 }
+
+// defineExpose
+defineExpose({
+  resetQuery,
+  queryData,
+});
 </script>
 
 <style scoped>

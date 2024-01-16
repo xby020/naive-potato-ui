@@ -11,11 +11,9 @@
     </td>
 
     <td>
-      <n-tag size="small">
-        <code>
-          <slot name="type"></slot>
-        </code>
-      </n-tag>
+      <code class="">
+        <slot name="type"></slot>
+      </code>
     </td>
 
     <td>
