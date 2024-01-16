@@ -2,6 +2,7 @@ import { defineConfig } from 'vitepress';
 import { mdPlugin } from './plugins/mdPlugins';
 
 export default defineConfig({
+  base: '/naive-potato-ui/',
   lang: 'zh-CN',
   title: 'Naive Potato UI',
   themeConfig: {
