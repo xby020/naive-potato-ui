@@ -6,6 +6,10 @@ export default defineConfig({
   lang: 'zh-CN',
   title: 'Naive Potato UI',
   themeConfig: {
+    outline: {
+      level: [2, 6],
+      label: '页面导航',
+    },
     nav: [
       { text: '指南', link: '/guide/' },
       { text: '组件', link: '/components/curd-table' },
