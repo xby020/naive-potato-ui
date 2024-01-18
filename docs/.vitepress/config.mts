@@ -26,6 +26,7 @@ export default defineConfig({
           text: '组件',
           items: [
             { text: 'Curd Table Curd表格', link: '/components/curd-table' },
+            { text: 'Async Select 异步选择', link: '/components/async-select' },
           ],
         },
       ],

@@ -1,25 +1,27 @@
 <template>
-  <np-curd-table
-    :headers="headers"
-    v-model:choosen="choosen"
-    :query="handleQuery"
-    :query-detail="handleQueryDetail"
-    :create="handleCreate"
-    :edit="handleEditError"
-    :delete="handleDelete"
-    :cols="2"
-    :prefix-action="prefixAction"
-    :suffix-action="suffixAction"
-    :action-width="400"
-    serial-number
-  >
-    <template #prefixAction>
-      <n-button type="error" quaternary>Prefix</n-button>
-    </template>
-    <template #suffixAction>
-      <n-button type="info" quaternary>Suffix</n-button>
-    </template>
-  </np-curd-table>
+  <div class="h-600px">
+    <np-curd-table
+      :headers="headers"
+      v-model:choosen="choosen"
+      :query="handleQuery"
+      :query-detail="handleQueryDetail"
+      :create="handleCreate"
+      :edit="handleEditError"
+      :delete="handleDelete"
+      :cols="2"
+      :prefix-action="prefixAction"
+      :suffix-action="suffixAction"
+      :action-width="400"
+      serial-number
+    >
+      <template #prefixAction>
+        <n-button type="error" quaternary>Prefix</n-button>
+      </template>
+      <template #suffixAction>
+        <n-button type="info" quaternary>Suffix</n-button>
+      </template>
+    </np-curd-table>
+  </div>
 </template>
 
 <script setup lang="ts">

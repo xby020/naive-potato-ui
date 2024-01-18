@@ -83,7 +83,9 @@ export function getContent(tokens: Token[], idx: number): MdApiContent[] {
       // example:`props[string]:这是`props`的描述`
       let name = content.split(':')[0].split('[')[0];
       const type = content.match(/\[(.+)\]/)?.[1];
-      const escapedTypeCode = type?.replace(/</g, '&lt;').replace(/>/g, '&gt;');
+      const escapedTypeCode = type
+        ?.replaceAll(/</g, '&lt;')
+        .replaceAll(/>/g, '&gt;');
 
       let need = false;
       if (name.includes('*')) {

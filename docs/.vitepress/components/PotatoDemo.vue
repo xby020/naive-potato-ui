@@ -20,7 +20,7 @@
 
       <!-- content -->
       <div class="overflow-auto">
-        <div class="w-full min-w-1024px h-768px">
+        <div class="w-full min-w-1024px">
           <slot name="demo"></slot>
         </div>
       </div>
