@@ -14,7 +14,7 @@
 </template>
 
 <script setup lang="ts">
-import { NUpload } from 'naive-ui';
+import { NUpload, NButton } from 'naive-ui';
 import type { UploadFileInfo } from 'naive-ui';
 import { computed } from 'vue';
 

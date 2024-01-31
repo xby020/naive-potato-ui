@@ -31,6 +31,10 @@ export default defineConfig({
           items: [
             { text: 'Curd Table Curd表格', link: '/components/curd-table' },
             { text: 'Async Select 异步选择', link: '/components/async-select' },
+            {
+              text: 'Custom Upload 自定义上传',
+              link: '/components/custom-upload',
+            },
           ],
         },
       ],
