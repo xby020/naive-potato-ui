@@ -33,7 +33,10 @@ export type NCurdTableFormRules = {
 /**
  * @description Curd 表格字段通用渲染配置
  */
-export type NCurdTableHeaderBaseRenderConfig<TForm, TInfo> = {
+export type NCurdTableHeaderBaseRenderConfig<
+  TForm = Record<string, any>,
+  TInfo = TForm,
+> = {
   /**
    * @description 字段标题
    *
@@ -88,7 +91,10 @@ export type NCurdTableHeaderBaseRenderConfig<TForm, TInfo> = {
 /**
  * @description 类型为 'text' | 'textarea' | 'password' | 'number'
  */
-type NCurdTableHeaderTextRenderConfig<TForm, TInfo> = {
+type NCurdTableHeaderTextRenderConfig<
+  TForm = Record<string, any>,
+  TInfo = TForm,
+> = {
   type?: 'text' | 'textarea' | 'password' | 'number';
   config?: {
     prefix?: () => VNode;
@@ -99,7 +105,10 @@ type NCurdTableHeaderTextRenderConfig<TForm, TInfo> = {
 /**
  * @description 类型为 'select' | 'multSelect'
  */
-type NCurdTableHeaderSelectRenderConfig<TForm, TInfo> = {
+type NCurdTableHeaderSelectRenderConfig<
+  TForm = Record<string, any>,
+  TInfo = TForm,
+> = {
   type?: 'select' | 'multSelect';
   config?: {
     /**
@@ -128,7 +137,10 @@ type NCurdTableHeaderSelectRenderConfig<TForm, TInfo> = {
 /**
  * @description 类型为 'asyncSelect'
  */
-type NCurdTableHeaderAsyncSelectRenderConfig<TForm, TInfo> = {
+type NCurdTableHeaderAsyncSelectRenderConfig<
+  TForm = Record<string, any>,
+  TInfo = TForm,
+> = {
   type?: 'asyncSelect';
   config?: {
     /**
@@ -169,7 +181,10 @@ type NCurdTableHeaderAsyncSelectRenderConfig<TForm, TInfo> = {
 /**
  * @description 类型为 'radio'
  */
-type NCurdTableHeaderRadioRenderConfig<TForm, TInfo> = {
+type NCurdTableHeaderRadioRenderConfig<
+  TForm = Record<string, any>,
+  TInfo = TForm,
+> = {
   type?: 'radio';
   config?: {
     /**
@@ -198,7 +213,10 @@ type NCurdTableHeaderRadioRenderConfig<TForm, TInfo> = {
 /**
  * @description 类型为 'date'  | 'datetime'
  */
-type NCurdTableHeaderDateRenderConfig<TForm, TInfo> = {
+type NCurdTableHeaderDateRenderConfig<
+  TForm = Record<string, any>,
+  TInfo = TForm,
+> = {
   type?: 'date' | 'datetime';
   config?: {
     /**
@@ -232,7 +250,10 @@ type NCurdTableHeaderDateRenderConfig<TForm, TInfo> = {
 /**
  * @description 类型为 'time'
  */
-type NCurdTableHeaderTimeRenderConfig<TForm, TInfo> = {
+type NCurdTableHeaderTimeRenderConfig<
+  TForm = Record<string, any>,
+  TInfo = TForm,
+> = {
   type?: 'time';
   config?: {
     /**
@@ -250,7 +271,10 @@ type NCurdTableHeaderTimeRenderConfig<TForm, TInfo> = {
   };
 };
 
-type NCurdTableHeaderUploadRenderConfig<TForm, TInfo> = {
+type NCurdTableHeaderUploadRenderConfig<
+  TForm = Record<string, any>,
+  TInfo = TForm,
+> = {
   type?: 'upload';
   config?: {
     /**
@@ -320,65 +344,63 @@ type NCurdTableHeaderUploadRenderConfig<TForm, TInfo> = {
 /**
  * @description Curd 表格字段渲染配置
  */
-export type NCurdTableHeaderRenderOptions<TForm, TInfo> =
-  NCurdTableHeaderBaseRenderConfig<TForm, TInfo> &
-    (
-      | NCurdTableHeaderTextRenderConfig<TForm, TInfo>
-      | NCurdTableHeaderSelectRenderConfig<TForm, TInfo>
-      | NCurdTableHeaderAsyncSelectRenderConfig<TForm, TInfo>
-      | NCurdTableHeaderDateRenderConfig<TForm, TInfo>
-      | NCurdTableHeaderTimeRenderConfig<TForm, TInfo>
-      | NCurdTableHeaderUploadRenderConfig<TForm, TInfo>
-    );
+export type NCurdTableHeaderRenderOptions<
+  TForm = Record<string, any>,
+  TInfo = TForm,
+> = NCurdTableHeaderBaseRenderConfig<TForm, TInfo> &
+  (
+    | NCurdTableHeaderTextRenderConfig<TForm, TInfo>
+    | NCurdTableHeaderSelectRenderConfig<TForm, TInfo>
+    | NCurdTableHeaderAsyncSelectRenderConfig<TForm, TInfo>
+    | NCurdTableHeaderDateRenderConfig<TForm, TInfo>
+    | NCurdTableHeaderTimeRenderConfig<TForm, TInfo>
+    | NCurdTableHeaderUploadRenderConfig<TForm, TInfo>
+  );
 
 /**
  * @description Curd 表格字段表格渲染配置
  */
-type NCurdTableHeaderColumn<TForm, TInfo> = NCurdTableHeaderRenderOptions<
-  TForm,
-  TInfo
-> &
-  DataTableColumn<TForm>;
+type NCurdTableHeaderColumn<
+  TForm = Record<string, any>,
+  TInfo = TForm,
+> = NCurdTableHeaderRenderOptions<TForm, TInfo> & DataTableColumn<TForm>;
 
 /**
  * @description Curd 表格查询配置
  */
-type NCurdTableHeaderQuery<TForm, TInfo> = NCurdTableHeaderRenderOptions<
-  TForm,
-  TInfo
->;
+type NCurdTableHeaderQuery<
+  TForm = Record<string, any>,
+  TInfo = TForm,
+> = NCurdTableHeaderRenderOptions<TForm, TInfo>;
 
 /**
  * @description Curd 表格创建配置
  */
-type NCurdTableHeaderCreate<TForm, TInfo> = NCurdTableHeaderRenderOptions<
-  TForm,
-  TInfo
->;
+type NCurdTableHeaderCreate<
+  TForm = Record<string, any>,
+  TInfo = TForm,
+> = NCurdTableHeaderRenderOptions<TForm, TInfo>;
 
 /**
  * @description Curd 表格编辑配置
  */
-type NCurdTableHeaderEdit<TForm, TInfo> = NCurdTableHeaderRenderOptions<
-  TForm,
-  TInfo
->;
+type NCurdTableHeaderEdit<
+  TForm = Record<string, any>,
+  TInfo = TForm,
+> = NCurdTableHeaderRenderOptions<TForm, TInfo>;
 
 /**
  * @description Curd 表格详情配置
  */
-type NCurdTableHeaderInfo<TForm, TInfo> = NCurdTableHeaderRenderOptions<
-  TForm,
-  TInfo
->;
+type NCurdTableHeaderInfo<
+  TForm = Record<string, any>,
+  TInfo = TForm,
+> = NCurdTableHeaderRenderOptions<TForm, TInfo>;
 
 /**
  * @description Curd 表格字段配置
  */
-export type NCurdTableHeader<
-  TForm = Record<string, any>,
-  TInfo = Record<string, any>,
-> = {
+export type NCurdTableHeader<TForm = Record<string, any>, TInfo = TForm> = {
   title: string;
   key: keyof TForm | string;
   type?: NCurdTableHeaderType;

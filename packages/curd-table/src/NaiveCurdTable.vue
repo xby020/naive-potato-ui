@@ -250,7 +250,11 @@
   </div>
 </template>
 
-<script setup lang="ts" generic="TInfo extends Record<string,unknown>">
+<script
+  setup
+  lang="ts"
+  generic="TForm extends Record<string,any>,TInfo extends TForm"
+>
 import {
   DataTableColumn,
   DataTableColumns,
@@ -280,9 +284,10 @@ import {
 } from './components/NaiveCurdTableTools';
 import TableEdit from './components/TableEdit.vue';
 import TableInfo from './components/TableInfo.vue';
+import { RowData } from 'naive-ui/es/data-table/src/interface';
 
 interface Props {
-  headers: NCurdTableHeader<TInfo>[];
+  headers: NCurdTableHeader<TForm, TInfo>[];
   query: (queryParams: Record<string, any>) => Promise<Record<string, any>>;
   message?: Record<string, any>;
   countField?: string;
@@ -295,8 +300,8 @@ interface Props {
   checked?: string[] | number[];
   rowKey?: (row: TInfo) => string | number;
   rowKeyField?: string;
-  prefixAction?: (row: TInfo | Record<string, any>) => VNode;
-  suffixAction?: (row: TInfo | Record<string, any>) => VNode;
+  prefixAction?: (row: TInfo) => VNode;
+  suffixAction?: (row: TInfo) => VNode;
   actionWidth?: number;
   choosen: string | number;
   cols?: number;
@@ -321,7 +326,9 @@ const queryList = computed(() => {
   return props.headers.filter((header) => header.query);
 });
 
-function getQueryType(header: NCurdTableHeader<TInfo>): NCurdTableHeaderType {
+function getQueryType(
+  header: NCurdTableHeader<TForm, TInfo>,
+): NCurdTableHeaderType {
   if (typeof header.query === 'boolean' && header.query) {
     // query设置为true，从header.type中获取
     if (header.type) {
@@ -349,7 +356,7 @@ function getQueryType(header: NCurdTableHeader<TInfo>): NCurdTableHeaderType {
   }
 }
 
-function getQueryDefault(header: NCurdTableHeader<TInfo>) {
+function getQueryDefault(header: NCurdTableHeader<TForm, TInfo>) {
   if (typeof header.query !== 'boolean' && header.query) {
     return header.query.default || null;
   } else {
@@ -365,7 +372,7 @@ const queryForm = ref(
   }, {} as Record<string, any>),
 );
 
-function getQueryOption(header: NCurdTableHeader<TInfo>) {
+function getQueryOption(header: NCurdTableHeader<TForm, TInfo>) {
   const config = getOptionWithBoolean(header, 'query');
   return config;
 }
@@ -400,7 +407,7 @@ const pagination = ref({
   },
 });
 
-const tableValue = ref<TInfo[]>([]) as Ref<TInfo[]>;
+const tableValue = ref<TInfo[]>([]) as Ref<RowData[]>;
 const tableLoading = ref(false);
 
 // table header
@@ -500,7 +507,7 @@ const actionHeader = computed((): DataTableColumn<TInfo> => {
     key: 'action',
     align: 'center',
     width: props.actionWidth || 300,
-    render(row) {
+    render(row: TInfo) {
       return h(
         'div',
         { class: 'flex gap-2 flex-nowarp justify-center items-center' },

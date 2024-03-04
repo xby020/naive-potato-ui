@@ -1,5 +1,11 @@
 # @naive-potato-ui/curd-table
 
+## 1.0.19
+
+### Patch Changes
+
+- reset curdTable type system
+
 ## 1.0.18
 
 ### Patch Changes

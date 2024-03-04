@@ -37,7 +37,7 @@ type ResInfo = {
   phone: string;
 };
 
-const headers = ref<NpCurdTableHeader<ResInfo>[]>([
+const headers: NpCurdTableHeader<ResInfo>[] = [
   {
     title: '姓名',
     key: 'name',
@@ -133,7 +133,7 @@ const headers = ref<NpCurdTableHeader<ResInfo>[]>([
     edit: true,
     info: true,
   },
-]);
+];
 
 interface Employee {
   uuid: string;
@@ -183,7 +183,7 @@ async function handleQuery(params: any): Promise<Record<string, any>> {
 
 async function handleQueryDetail(
   params: Record<string, any>,
-): Promise<Record<string, any>> {
+): Promise<ResInfo> {
   const departments = ['技术部', '市场部', '财务部', '行政部'];
 
   const uid = Math.floor(Math.random() * 15) + 22;
@@ -200,7 +200,7 @@ async function handleQueryDetail(
   return new Promise((resolve, reject) => {
     setTimeout(() => {
       resolve({
-        uuid: uid,
+        uuid: uid.toString(),
         name,
         age,
         department: [department],
@@ -277,14 +277,21 @@ async function handleDelete(data: any) {
 const choosen = ref('');
 
 // Prefix and suffix action btn
-const prefixAction = (row: any) => {
+const prefixAction = (row: ResInfo) => {
   return h(
     NButton,
-    { type: 'primary', size: 'small', secondary: true },
+    {
+      type: 'primary',
+      size: 'small',
+      secondary: true,
+      onClick: () => {
+        console.log(row);
+      },
+    },
     { default: () => 'Prefix' },
   );
 };
-const suffixAction = (row: any) => {
+const suffixAction = (row: ResInfo) => {
   return h('div', { class: 'flex items-center gap-2' }, [
     h(
       NButton,
