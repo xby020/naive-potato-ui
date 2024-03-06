@@ -29,8 +29,8 @@
             :label="query.title"
             :type="getQueryType(query)"
             :form="queryForm"
-            v-model:value="queryForm[query.key as keyof typeof queryForm]"
-            :field="query.key"
+            v-model:value="queryForm[getQuerykey(query) as keyof typeof queryForm]"
+            :field="getQuerykey(query)"
             :option="getQueryOption(query)"
           ></table-edit-item>
         </n-form-item>
@@ -325,6 +325,14 @@ const props = defineProps<Props>();
 const queryList = computed(() => {
   return props.headers.filter((header) => header.query);
 });
+
+function getQuerykey(header: NCurdTableHeader<TForm, TInfo>) {
+  if (typeof header.query === 'boolean' && header.query) {
+    return header.key;
+  } else if (typeof header.query === 'object') {
+    return header.query.config?.key || header.key;
+  }
+}
 
 function getQueryType(
   header: NCurdTableHeader<TForm, TInfo>,

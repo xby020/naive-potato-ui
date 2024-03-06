@@ -1,5 +1,14 @@
 # @naive-potato-ui/ui
 
+## 1.0.23
+
+### Patch Changes
+
+- reset curdTable query config
+
+- Updated dependencies []:
+  - @naive-potato-ui/curd-table@1.0.20
+
 ## 1.0.22
 
 ### Patch Changes

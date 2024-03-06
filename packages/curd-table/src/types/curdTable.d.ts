@@ -341,6 +341,17 @@ type NCurdTableHeaderUploadRenderConfig<
   };
 };
 
+type NCurdTableHeaderCustomRenderConfig<
+  TForm = Record<string, any>,
+  TInfo = TForm,
+> = {
+  type?: 'custom';
+  config?: {
+    key?: keyof TForm | keyof TInfo | string;
+    render: (form: TForm, info: TInfo) => VNode | string | number;
+  };
+};
+
 /**
  * @description Curd 表格字段渲染配置
  */
@@ -355,7 +366,13 @@ export type NCurdTableHeaderRenderOptions<
     | NCurdTableHeaderDateRenderConfig<TForm, TInfo>
     | NCurdTableHeaderTimeRenderConfig<TForm, TInfo>
     | NCurdTableHeaderUploadRenderConfig<TForm, TInfo>
+    | NCurdTableHeaderCustomRenderConfig<TForm, TInfo>
   );
+
+type Column<T> = Omit<
+  DataTableColumn<T>,
+  keyof NCurdTableHeaderRenderOptions<T>
+>;
 
 /**
  * @description Curd 表格字段表格渲染配置
@@ -363,7 +380,8 @@ export type NCurdTableHeaderRenderOptions<
 type NCurdTableHeaderColumn<
   TForm = Record<string, any>,
   TInfo = TForm,
-> = NCurdTableHeaderRenderOptions<TForm, TInfo> & DataTableColumn<TForm>;
+> = NCurdTableHeaderRenderOptions<TForm, TInfo> &
+  Column<TForm> & { key?: string };
 
 /**
  * @description Curd 表格查询配置

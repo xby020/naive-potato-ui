@@ -9,8 +9,6 @@
       :edit="handleEditError"
       :delete="handleDelete"
       :cols="2"
-      :prefix-action="prefixAction"
-      :suffix-action="suffixAction"
       :action-width="400"
       serial-number
     >
@@ -35,6 +33,10 @@ type ResInfo = {
   age: number;
   department: string[];
   phone: string;
+  create_department: {
+    name: string;
+    id: string;
+  };
 };
 
 const headers: NpCurdTableHeader<ResInfo>[] = [
@@ -57,6 +59,19 @@ const headers: NpCurdTableHeader<ResInfo>[] = [
     create: true,
     edit: true,
     info: true,
+  },
+  {
+    title: '部门',
+    key: 'create_department',
+    infoRender: (row) => row.create_department?.name,
+    column: {
+      show: true,
+      key: 'create_department',
+      title: '部门',
+      type: 'custom',
+    },
+    query: true,
+    type: 'text',
   },
   {
     title: '年龄',
@@ -205,6 +220,10 @@ async function handleQueryDetail(
         age,
         department: [department],
         phone,
+        create_department: {
+          name: department,
+          id: 'id' + Math.floor(Math.random() * 1000000000),
+        },
       });
     }, 1000);
   });
