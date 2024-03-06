@@ -70,8 +70,8 @@ const headers = ref<NpCurdTableHeader<ResInfo>[]>([
       type: 'custom',
       render(row, info) {
         return h('div', {}, '附件文件');
-      }
-    }
+      },
+    },
   },
   {
     title: '年龄',

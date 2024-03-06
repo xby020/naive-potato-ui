@@ -77,7 +77,7 @@ import type {
   NCurdTableHeaderType,
 } from '../types/curdTable';
 import { NText, NTag, NImageGroup, NImage } from 'naive-ui';
-import { computed, onMounted, ref } from 'vue';
+import { computed, onMounted, ref, h } from 'vue';
 
 interface Props {
   label: string;
@@ -109,10 +109,9 @@ const dateRangeValue = computed(() => {
 });
 
 const optionRender = computed(() => {
-  console.log(props.option, props.field);
   return props.option?.render
-    ? props.option.render(props.info, props.info)
-    : '';
+    ? props.option.render(infoValue.value, props.info)
+    : h('div', {}, infoValue.value);
 });
 
 const optionConfig = computed(() => {

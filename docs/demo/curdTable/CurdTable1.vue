@@ -58,7 +58,11 @@ const headers: NpCurdTableHeader<ResInfo>[] = [
     },
     create: true,
     edit: true,
-    info: true,
+    info: {
+      show: true,
+      type: 'custom',
+      render: null,
+    },
   },
   {
     title: '部门',
