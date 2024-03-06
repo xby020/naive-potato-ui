@@ -177,6 +177,7 @@
               ></slot>
             </n-scrollbar>
           </div>
+
           <!-- Edit -->
           <div class="w-full h-full" v-if="drawerMode === 'edit'">
             <!-- If Tab -->
@@ -213,6 +214,7 @@
               <slot name="extraEditForm" :form="editForm" :info="info"></slot>
             </n-scrollbar>
           </div>
+
           <!-- Info -->
           <div class="w-full h-full" v-if="drawerMode === 'info'">
             <!-- If Tab -->

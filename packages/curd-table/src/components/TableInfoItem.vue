@@ -6,13 +6,13 @@
       v-if="['text', 'textarea', 'password', 'number'].includes(type)"
     >
       <component
-        v-if="option?.config?.prefix"
-        :is="option.config.prefix()"
+        v-if="optionConfig?.prefix"
+        :is="optionConfig?.prefix()"
       ></component>
       <n-text>{{ infoValue }}</n-text>
       <component
-        v-if="option?.config?.suffix"
-        :is="option.config.suffix()"
+        v-if="optionConfig?.suffix"
+        :is="optionConfig?.suffix()"
       ></component>
     </div>
 
@@ -33,12 +33,10 @@
     <n-text v-if="type === 'radio'"> </n-text>
 
     <!-- 'date' | 'datetime' -->
-    <n-text v-if="['date', 'datetime'].includes(type) && option?.config?.range">
+    <n-text v-if="['date', 'datetime'].includes(type) && optionConfig?.range">
       {{ `${dateRangeValue[0]} ~ ${dateRangeValue[1]}` }}
     </n-text>
-    <n-text
-      v-if="['date', 'datetime'].includes(type) && !option?.config?.range"
-    >
+    <n-text v-if="['date', 'datetime'].includes(type) && !optionConfig?.range">
       {{ infoValue }}
     </n-text>
 
@@ -67,8 +65,8 @@
     <component
       v-if="type === 'custom'"
       v-model:value="infoValue"
-      :is="option?.render ? option?.render(info) : ''"
-      :config="option?.config"
+      :is="optionRender"
+      :config="optionConfig"
     ></component>
   </div>
 </template>
@@ -108,6 +106,16 @@ const dateRangeValue = computed(() => {
     infoValue.value[props.option?.config?.startField || 'start'],
     infoValue.value[props.option?.config?.endField || 'start'],
   ] as [string, string];
+});
+
+const optionRender = computed(() => {
+  return props.option?.render
+    ? props.option.render(props.info, props.info)
+    : '';
+});
+
+const optionConfig = computed(() => {
+  return props.option?.config || {};
 });
 
 // async select info

@@ -23,7 +23,11 @@
 </template>
 
 <script setup lang="ts">
-import { NCurdTableHeader, NCurdTableHeaderType } from '../types/curdTable';
+import {
+  NCurdTableHeader,
+  NCurdTableHeaderRenderOptions,
+  NCurdTableHeaderType,
+} from '../types/curdTable';
 import { NDescriptions, NDescriptionsItem } from 'naive-ui';
 import { computed } from 'vue';
 import { getConfigWithBoolean } from './NaiveCurdTableTools';
@@ -60,7 +64,9 @@ function getType(header: NCurdTableHeader) {
 function getField(header: NCurdTableHeader) {
   return getConfigWithBoolean(header, 'info', 'key') as string;
 }
-function getOption(header: NCurdTableHeader) {
+function getOption(
+  header: NCurdTableHeader,
+): NCurdTableHeaderRenderOptions<any, any> {
   const config = getConfigWithBoolean(header, 'info', 'defaultConfig') as any;
   return config;
 }

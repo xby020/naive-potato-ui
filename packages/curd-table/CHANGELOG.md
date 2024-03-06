@@ -1,5 +1,11 @@
 # @naive-potato-ui/curd-table
 
+## 1.0.22
+
+### Patch Changes
+
+- table info custom render
+
 ## 1.0.21
 
 ### Patch Changes
