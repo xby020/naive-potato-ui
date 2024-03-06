@@ -65,7 +65,13 @@ const headers = ref<NpCurdTableHeader<ResInfo>[]>([
     },
     create: true,
     edit: true,
-    info: true,
+    info: {
+      show: true,
+      type: 'custom',
+      render(row, info) {
+        return h('div', {}, '附件文件');
+      }
+    }
   },
   {
     title: '年龄',

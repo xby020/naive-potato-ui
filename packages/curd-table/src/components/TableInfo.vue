@@ -30,7 +30,10 @@ import {
 } from '../types/curdTable';
 import { NDescriptions, NDescriptionsItem } from 'naive-ui';
 import { computed } from 'vue';
-import { getConfigWithBoolean } from './NaiveCurdTableTools';
+import {
+  getConfigWithBoolean,
+  getOptionWithBoolean,
+} from './NaiveCurdTableTools';
 import TableInfoItem from './TableInfoItem.vue';
 
 interface Props {
@@ -67,7 +70,7 @@ function getField(header: NCurdTableHeader) {
 function getOption(
   header: NCurdTableHeader,
 ): NCurdTableHeaderRenderOptions<any, any> {
-  const config = getConfigWithBoolean(header, 'info', 'defaultConfig') as any;
+  const config = getOptionWithBoolean(header, 'info') as any;
   return config;
 }
 </script>
