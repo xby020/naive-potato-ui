@@ -1,5 +1,11 @@
 # @naive-potato-ui/curd-table
 
+## 1.0.21
+
+### Patch Changes
+
+- query key
+
 ## 1.0.20
 
 ### Patch Changes

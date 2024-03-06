@@ -347,8 +347,7 @@ type NCurdTableHeaderCustomRenderConfig<
 > = {
   type?: 'custom';
   config?: {
-    key?: keyof TForm | keyof TInfo | string;
-    render: (form: TForm, info: TInfo) => VNode | string | number;
+    key?: string;
   };
 };
 
