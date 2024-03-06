@@ -1,5 +1,14 @@
 # @naive-potato-ui/examples
 
+## 1.0.29
+
+### Patch Changes
+
+- table info custom render
+
+- Updated dependencies []:
+  - @naive-potato-ui/ui@1.0.28
+
 ## 1.0.28
 
 ### Patch Changes
