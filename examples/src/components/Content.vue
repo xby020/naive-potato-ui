@@ -49,7 +49,18 @@ const headers = ref<NpCurdTableHeader<ResInfo>[]>([
     key: 'name',
     type: 'text',
     column: true,
-    query: true,
+    query: {
+      show: true,
+      type: 'select',
+      key: 'status',
+      config: {
+        options: [
+          { label: '正常', value: '正常' },
+          { label: '已过期', value: '已过期' },
+          { label: '下架', value: '下架' },
+        ],
+      },
+    },
     defaultConfig: {
       show: true,
       type: 'text',

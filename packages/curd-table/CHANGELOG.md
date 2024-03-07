@@ -1,5 +1,11 @@
 # @naive-potato-ui/curd-table
 
+## 1.0.29
+
+### Patch Changes
+
+- add render key
+
 ## 1.0.28
 
 ### Patch Changes

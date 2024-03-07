@@ -328,11 +328,11 @@ const queryList = computed(() => {
   return props.headers.filter((header) => header.query);
 });
 
-function getQueryKey(header: NCurdTableHeader<TForm, TInfo>) {
+function getQueryKey(header: NCurdTableHeader<TForm, TInfo>): string {
   if (typeof header.query === 'boolean' && header.query) {
-    return header.key;
+    return header.key as string;
   } else if (typeof header.query === 'object') {
-    return header.query.config?.key || header.key;
+    return header.query.key || (header.key as string);
   }
 }
 

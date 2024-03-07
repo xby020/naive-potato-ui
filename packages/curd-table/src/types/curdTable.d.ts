@@ -51,6 +51,12 @@ export type NCurdTableHeaderBaseRenderConfig<
    */
   show?: boolean;
   /**
+   * @description 渲染时使用的key，未设置会使用根目录的key
+   *
+   * @type {string}
+   */
+  key?: string;
+  /**
    * @description 根据数据判断是否在表单中展示该字段，为false时，不会渲染，在最终提交表单时，也不会提交该字段
    * @default true
    */
@@ -346,9 +352,6 @@ type NCurdTableHeaderCustomRenderConfig<
   TInfo = TForm,
 > = {
   type?: 'custom';
-  config?: {
-    key?: string;
-  };
 };
 
 /**

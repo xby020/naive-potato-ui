@@ -1,5 +1,11 @@
 # @naive-potato-ui/docs
 
+## 1.0.3
+
+### Patch Changes
+
+- add render key
+
 ## 1.0.2
 
 ### Patch Changes
