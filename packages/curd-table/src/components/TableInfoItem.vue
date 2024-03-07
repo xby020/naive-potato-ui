@@ -109,6 +109,7 @@ const dateRangeValue = computed(() => {
 });
 
 const optionRender = computed(() => {
+  console.log(props.option, infoValue.value, props.info);
   return props.option?.render
     ? props.option.render(infoValue.value, props.info)
     : h('div', {}, infoValue.value);
