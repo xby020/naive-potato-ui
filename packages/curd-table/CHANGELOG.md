@@ -1,5 +1,11 @@
 # @naive-potato-ui/curd-table
 
+## 1.0.38
+
+### Patch Changes
+
+- fixed disabled fn
+
 ## 1.0.37
 
 ### Patch Changes

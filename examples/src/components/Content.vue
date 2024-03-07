@@ -103,11 +103,16 @@ const headers = ref<NpCurdTableHeader<ResInfo>[]>([
     },
     create: {
       show: true,
-      type: 'text',
-      active: (row) => {
+      type: 'date',
+      disabled: (row) => {
         return row.name === '110';
       },
-      required: true,
+      config: {
+        format: 'yyyy-MM-dd',
+        range: true,
+        startField: 'start_date',
+        endField: 'end_date',
+      },
     },
     edit: true,
     info: true,

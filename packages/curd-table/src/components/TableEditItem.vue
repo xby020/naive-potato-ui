@@ -6,7 +6,7 @@
       v-model:value="formValue"
       :placeholder="`请输入${label}`"
       clearable
-      :disabled="isDisabled()"
+      :disabled="isDisabled"
     >
       <template #prefix>
         <component
@@ -28,7 +28,7 @@
       v-model:value="formValue"
       :placeholder="`请输入${label}`"
       clearable
-      :disabled="isDisabled()"
+      :disabled="isDisabled"
     >
     </n-input>
 
@@ -39,7 +39,7 @@
       v-model:value="formValue"
       :placeholder="`请输入${label}`"
       clearable
-      :disabled="isDisabled()"
+      :disabled="isDisabled"
     >
       <template #prefix>
         <component
@@ -62,7 +62,7 @@
       :placeholder="`请输入${label}`"
       :show-button="optionConfig?.showButton || false"
       clearable
-      :disabled="isDisabled()"
+      :disabled="isDisabled"
     >
       <template #prefix>
         <component
@@ -84,7 +84,7 @@
       v-model:value="formValue"
       :placeholder="`请选择${label}`"
       clearable
-      :disabled="isDisabled()"
+      :disabled="isDisabled"
       :options="optionConfig?.options"
       :label-field="optionConfig?.labelField || 'label'"
       :value-field="optionConfig?.valueField || 'value'"
@@ -96,7 +96,7 @@
       v-if="type === 'asyncSelect'"
       v-model:value="formValue"
       :placeholder="`请选择${label}或输入查询`"
-      :disabled="isDisabled()"
+      :disabled="isDisabled"
       :label-field="optionConfig?.labelField || 'label'"
       :value-field="optionConfig?.valueField || 'value'"
       :query-field="optionConfig?.queryField"
@@ -109,7 +109,7 @@
       v-if="type === 'radio'"
       v-model:value="formValue"
       :name="label"
-      :disabled="isDisabled()"
+      :disabled="isDisabled"
     >
       <n-radio
         v-for="(item, index) in optionConfig?.options"
@@ -123,14 +123,14 @@
     <!-- 'date' | 'datetime' -->
     <n-date-picker
       v-if="['date', 'datetime'].includes(type) && !optionConfig?.range"
-      :disabled="isDisabled()"
+      :disabled="isDisabled"
       v-model:formatted-value="formValue"
       :value-format="optionConfig?.format"
       :type="type === 'date' ? 'date' : 'datetime'"
     />
     <n-date-picker
       v-if="['date', 'datetime'].includes(type) && optionConfig?.range"
-      :disabled="isDisabled()"
+      :disabled="isDisabled"
       v-model:formatted-value="dateRangeValue"
       :value-format="optionConfig?.format"
       :type="type === 'date' ? 'daterange' : 'datetimerange'"
@@ -139,7 +139,7 @@
     <!-- time -->
     <n-time-picker
       v-if="type === 'time'"
-      :disabled="isDisabled()"
+      :disabled="isDisabled"
       v-model:formatted-value="formValue"
       :value-format="optionConfig?.format"
     />
@@ -154,7 +154,7 @@
       :action="optionConfig?.action"
       :headers="optionConfig?.headers"
       :extra-data="optionConfig?.extraData"
-      :disabled="isDisabled()"
+      :disabled="isDisabled"
       :type="optionConfig?.type"
       :max="optionConfig?.max"
       :multiple="optionConfig?.multiple"
@@ -226,11 +226,14 @@ const optionRender = computed(() => {
 });
 
 // Disabled
-function isDisabled() {
-  return props.option?.disabled
-    ? props.option?.disabled(formValue, props.info)
-    : false;
-}
+const isDisabled = computed(() => {
+  const isDisabledFn = props.option?.disabled;
+  if (isDisabledFn) {
+    return isDisabledFn(props.form, props.info);
+  } else {
+    return false;
+  }
+});
 
 // Date Range
 const dateRangeValue = computed<[string, string] | null>({
