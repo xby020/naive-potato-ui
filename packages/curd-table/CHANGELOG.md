@@ -1,5 +1,11 @@
 # @naive-potato-ui/curd-table
 
+## 1.0.32
+
+### Patch Changes
+
+- fixed header key filter
+
 ## 1.0.31
 
 ### Patch Changes

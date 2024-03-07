@@ -1,5 +1,11 @@
 # @naive-potato-ui/build
 
+## 1.0.8
+
+### Patch Changes
+
+- fixed header key filter
+
 ## 1.0.7
 
 ### Patch Changes

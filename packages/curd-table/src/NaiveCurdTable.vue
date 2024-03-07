@@ -426,13 +426,17 @@ const tableLoading = ref(false);
 
 // 传入的header
 const propsHeader = computed((): DataTableColumns<TInfo> => {
-  return props.headers.map((header) => {
-    return {
-      title: getConfigWithBoolean(header, 'column', 'title') as string,
-      key: getConfigWithBoolean(header, 'column', 'key') as string,
-      render: getConfigWithBoolean(header, 'column', 'render', 'infoRender'),
-    };
-  });
+  return props.headers
+    .filter((header) => {
+      return header.column;
+    })
+    .map((header) => {
+      return {
+        title: getConfigWithBoolean(header, 'column', 'title') as string,
+        key: getConfigWithBoolean(header, 'column', 'key') as string,
+        render: getConfigWithBoolean(header, 'column', 'render', 'infoRender'),
+      };
+    });
 });
 
 // 序号header
