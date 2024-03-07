@@ -1,5 +1,11 @@
 # @naive-potato-ui/curd-table
 
+## 1.0.28
+
+### Patch Changes
+
+- remove vue dep
+
 ## 1.0.27
 
 ### Patch Changes

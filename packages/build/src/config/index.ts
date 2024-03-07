@@ -18,10 +18,15 @@ export async function generateViteConfig(
   // 获取build
   const build = getViteBuild(pkgJson, customOptions);
 
+  const resolve = {
+    dedupe: ['vue'],
+  };
+
   const finalViteConfig: UserConfig = {
     plugins,
     build,
     ...viteConfig,
+    resolve,
   };
 
   console.log('FINAL BUILD CONFIG');

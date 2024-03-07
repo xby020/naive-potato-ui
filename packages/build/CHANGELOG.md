@@ -1,5 +1,11 @@
 # @naive-potato-ui/build
 
+## 1.0.4
+
+### Patch Changes
+
+- remove vue dep
+
 ## 1.0.3
 
 ### Patch Changes
