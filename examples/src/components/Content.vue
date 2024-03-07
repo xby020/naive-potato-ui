@@ -105,6 +105,9 @@ const headers = ref<NpCurdTableHeader<ResInfo>[]>([
     create: {
       show: true,
       type: 'text',
+      active: (form, info) => {
+        return form.phone === 2;
+      },
       required: true,
     },
     edit: true,
@@ -152,6 +155,7 @@ const headers = ref<NpCurdTableHeader<ResInfo>[]>([
     type: 'text',
     column: true,
     query: true,
+    default: 1,
     create: {
       show: true,
       type: 'radio',

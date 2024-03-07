@@ -1,5 +1,14 @@
 # @naive-potato-ui/examples
 
+## 1.0.39
+
+### Patch Changes
+
+- fixed form rules
+
+- Updated dependencies []:
+  - @naive-potato-ui/ui@1.0.38
+
 ## 1.0.38
 
 ### Patch Changes

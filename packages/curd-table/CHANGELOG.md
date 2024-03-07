@@ -1,5 +1,11 @@
 # @naive-potato-ui/curd-table
 
+## 1.0.35
+
+### Patch Changes
+
+- fixed form rules
+
 ## 1.0.34
 
 ### Patch Changes

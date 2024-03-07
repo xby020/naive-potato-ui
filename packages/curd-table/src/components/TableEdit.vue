@@ -18,7 +18,6 @@
       >
         <table-edit-item
           v-model:value="props.form[getField(header)]"
-          :v-show="getActive(header)"
           :label="getTitle(header)"
           :type="getType(header)"
           :form="props.form"
@@ -63,7 +62,11 @@ const tableHeaders = computed(() => {
     if (typeof item.create === 'boolean') {
       return item;
     } else {
-      return item.create?.show;
+      const isShow = item.create?.show;
+      const isActive = item.create?.active
+        ? item.create.active(props.form, props.info)
+        : true;
+      return isShow && isActive;
     }
   });
 });
@@ -84,11 +87,6 @@ function getField(header: NCurdTableHeader) {
 function getOption(header: NCurdTableHeader) {
   const config = getOptionWithBoolean(header, props.mode);
   return config;
-}
-function getActive(header: NCurdTableHeader) {
-  const config = getOptionWithBoolean(header, props.mode);
-  const active = config?.active ? config.active(props.form, props.info) : true;
-  return active;
 }
 
 function validate() {

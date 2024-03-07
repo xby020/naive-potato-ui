@@ -1,5 +1,11 @@
 # @naive-potato-ui/build
 
+## 1.0.11
+
+### Patch Changes
+
+- fixed form rules
+
 ## 1.0.10
 
 ### Patch Changes
