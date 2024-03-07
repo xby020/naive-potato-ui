@@ -1,5 +1,11 @@
 # @naive-potato-ui/build
 
+## 1.0.12
+
+### Patch Changes
+
+- fixed date and time disabled fn
+
 ## 1.0.11
 
 ### Patch Changes

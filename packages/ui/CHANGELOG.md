@@ -1,5 +1,14 @@
 # @naive-potato-ui/ui
 
+## 1.0.39
+
+### Patch Changes
+
+- fixed date and time disabled fn
+
+- Updated dependencies []:
+  - @naive-potato-ui/curd-table@1.0.36
+
 ## 1.0.38
 
 ### Patch Changes

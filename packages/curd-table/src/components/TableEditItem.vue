@@ -123,12 +123,14 @@
     <!-- 'date' | 'datetime' -->
     <n-date-picker
       v-if="['date', 'datetime'].includes(type) && !optionConfig?.range"
+      :disabled="isDisabled()"
       v-model:formatted-value="formValue"
       :value-format="optionConfig?.format"
       :type="type === 'date' ? 'date' : 'datetime'"
     />
     <n-date-picker
       v-if="['date', 'datetime'].includes(type) && optionConfig?.range"
+      :disabled="isDisabled()"
       v-model:formatted-value="dateRangeValue"
       :value-format="optionConfig?.format"
       :type="type === 'date' ? 'daterange' : 'datetimerange'"
@@ -137,6 +139,7 @@
     <!-- time -->
     <n-time-picker
       v-if="type === 'time'"
+      :disabled="isDisabled()"
       v-model:formatted-value="formValue"
       :value-format="optionConfig?.format"
     />
