@@ -1,5 +1,14 @@
 # @naive-potato-ui/ui
 
+## 1.0.42
+
+### Patch Changes
+
+- fixed create header filter
+
+- Updated dependencies []:
+  - @naive-potato-ui/curd-table@1.0.39
+
 ## 1.0.41
 
 ### Patch Changes

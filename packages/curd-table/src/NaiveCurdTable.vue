@@ -769,12 +769,16 @@ async function handleDrawerOff() {
 
 // Add
 const defaultCreateForm = () => {
-  return props.headers.reduce((form, header) => {
-    const key = getConfigWithBoolean(header, 'create', 'key');
-    const defaultVal = getConfigWithBoolean(header, 'create', 'default');
-    form[key] = defaultVal;
-    return form;
-  }, {} as Record<string, any>);
+  return props.headers
+    .filter((header) => {
+      return header.create;
+    })
+    .reduce((form, header) => {
+      const key = getConfigWithBoolean(header, 'create', 'key');
+      const defaultVal = getConfigWithBoolean(header, 'create', 'default');
+      form[key] = defaultVal;
+      return form;
+    }, {} as Record<string, any>);
 };
 const createForm = ref(defaultCreateForm());
 
