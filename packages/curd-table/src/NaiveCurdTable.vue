@@ -333,6 +333,8 @@ function getQueryKey(header: NCurdTableHeader<TForm, TInfo>): string {
     return header.key as string;
   } else if (typeof header.query === 'object') {
     return header.query.key || (header.key as string);
+  } else {
+    throw new Error('query设置为对象时，必须设置header.query.key或header.key');
   }
 }
 
