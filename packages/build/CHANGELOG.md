@@ -1,5 +1,11 @@
 # @naive-potato-ui/build
 
+## 1.0.6
+
+### Patch Changes
+
+- fixed query key fn
+
 ## 1.0.5
 
 ### Patch Changes

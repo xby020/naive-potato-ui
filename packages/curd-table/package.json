@@ -16,7 +16,7 @@
     "**/*.css"
   ],
   "name": "@naive-potato-ui/curd-table",
-  "version": "1.0.29",
+  "version": "1.0.30",
   "scripts": {
     "build": "vite build",
     "test": "echo test"

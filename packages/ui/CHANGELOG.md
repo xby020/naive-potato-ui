@@ -1,5 +1,14 @@
 # @naive-potato-ui/ui
 
+## 1.0.33
+
+### Patch Changes
+
+- fixed query key fn
+
+- Updated dependencies []:
+  - @naive-potato-ui/curd-table@1.0.30
+
 ## 1.0.32
 
 ### Patch Changes
