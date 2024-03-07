@@ -1,5 +1,14 @@
 # @naive-potato-ui/examples
 
+## 1.0.41
+
+### Patch Changes
+
+- fixed active and disabled fn
+
+- Updated dependencies []:
+  - @naive-potato-ui/ui@1.0.40
+
 ## 1.0.40
 
 ### Patch Changes

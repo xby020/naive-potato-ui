@@ -1,5 +1,14 @@
 # @naive-potato-ui/ui
 
+## 1.0.40
+
+### Patch Changes
+
+- fixed active and disabled fn
+
+- Updated dependencies []:
+  - @naive-potato-ui/curd-table@1.0.37
+
 ## 1.0.39
 
 ### Patch Changes

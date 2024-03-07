@@ -227,8 +227,8 @@ const optionRender = computed(() => {
 
 // Disabled
 function isDisabled() {
-  return props.option?.config?.disabled
-    ? props.option?.config?.disabled(formValue, props.info)
+  return props.option?.disabled
+    ? props.option?.disabled(formValue, props.info)
     : false;
 }
 

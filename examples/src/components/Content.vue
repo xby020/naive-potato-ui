@@ -65,9 +65,8 @@ const headers = ref<NpCurdTableHeader<ResInfo>[]>([
       show: true,
       type: 'text',
       default: '人社局',
-      config: {
-        disabled: () => true,
-      },
+      disabled: () => false,
+      active: () => false,
       rule: {
         trigger: 'blur',
         required: true,
@@ -105,8 +104,8 @@ const headers = ref<NpCurdTableHeader<ResInfo>[]>([
     create: {
       show: true,
       type: 'text',
-      active: (form, info) => {
-        return form.phone === 2;
+      active: (row) => {
+        return row.name === '110';
       },
       required: true,
     },
@@ -155,17 +154,7 @@ const headers = ref<NpCurdTableHeader<ResInfo>[]>([
     type: 'text',
     column: true,
     query: true,
-    default: 1,
-    create: {
-      show: true,
-      type: 'radio',
-      config: {
-        options: [
-          { label: '永久有效', value: 1 },
-          { label: '自定义有效期', value: 2 },
-        ],
-      },
-    },
+    create: true,
     edit: true,
     info: true,
   },

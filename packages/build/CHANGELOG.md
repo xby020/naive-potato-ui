@@ -1,5 +1,11 @@
 # @naive-potato-ui/build
 
+## 1.0.13
+
+### Patch Changes
+
+- fixed active and disabled fn
+
 ## 1.0.12
 
 ### Patch Changes

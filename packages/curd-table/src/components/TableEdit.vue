@@ -32,7 +32,7 @@
 
 <script setup lang="ts">
 import { NCurdTableHeader, NCurdTableHeaderType } from '../types/curdTable';
-import { NForm, NGrid, NFormItemGi } from 'naive-ui';
+import { NForm, NGrid, NFormItemGi, FormRules } from 'naive-ui';
 import TableEditItem from './TableEditItem.vue';
 import { computed, ref } from 'vue';
 import {
@@ -47,7 +47,7 @@ interface Props {
   cols?: number;
   widthStyle?: string;
   info?: Record<string, any>;
-  rules?: Record<string, any>;
+  rules?: FormRules;
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -59,13 +59,13 @@ const props = withDefaults(defineProps<Props>(), {
 const tableFormRef = ref();
 const tableHeaders = computed(() => {
   return props.headers.filter((item) => {
-    if (typeof item.create === 'boolean') {
+    const itemMode = item[props.mode];
+    if (typeof itemMode === 'boolean') {
       return item;
-    } else {
-      const isShow = item.create?.show;
-      const isActive = item.create?.active
-        ? item.create.active(props.form, props.info)
-        : true;
+    } else if (typeof itemMode === 'object') {
+      const isShow = itemMode?.show;
+      // active
+      const isActive = getActive(item);
       return isShow && isActive;
     }
   });
@@ -87,6 +87,11 @@ function getField(header: NCurdTableHeader) {
 function getOption(header: NCurdTableHeader) {
   const config = getOptionWithBoolean(header, props.mode);
   return config;
+}
+function getActive(header: NCurdTableHeader) {
+  const options = getOptionWithBoolean(header, props.mode);
+  const activeFn = options?.active || header.defaultConfig?.active;
+  return activeFn ? activeFn(props.form, props.info) : true;
 }
 
 function validate() {
