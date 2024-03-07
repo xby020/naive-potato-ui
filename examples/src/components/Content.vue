@@ -154,7 +154,13 @@ const headers = ref<NpCurdTableHeader<ResInfo>[]>([
     query: true,
     create: {
       show: true,
-      required: true,
+      type: 'radio',
+      config: {
+        options: [
+          { label: '永久有效', value: 1 },
+          { label: '自定义有效期', value: 2 },
+        ],
+      },
     },
     edit: true,
     info: true,

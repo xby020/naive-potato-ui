@@ -1,5 +1,11 @@
 # @naive-potato-ui/build
 
+## 1.0.10
+
+### Patch Changes
+
+- fixed active config
+
 ## 1.0.9
 
 ### Patch Changes

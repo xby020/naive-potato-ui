@@ -18,6 +18,7 @@
       >
         <table-edit-item
           v-model:value="props.form[getField(header)]"
+          :v-show="getActive(header)"
           :label="getTitle(header)"
           :type="getType(header)"
           :form="props.form"
@@ -83,6 +84,11 @@ function getField(header: NCurdTableHeader) {
 function getOption(header: NCurdTableHeader) {
   const config = getOptionWithBoolean(header, props.mode);
   return config;
+}
+function getActive(header: NCurdTableHeader) {
+  const config = getOptionWithBoolean(header, props.mode);
+  const active = config?.active ? config.active(props.form, props.info) : true;
+  return active;
 }
 
 function validate() {

@@ -10,14 +10,14 @@
     >
       <template #prefix>
         <component
-          v-if="option?.config?.prefix"
-          :is="option.config.prefix()"
+          v-if="optionConfig?.prefix"
+          :is="optionConfig.prefix()"
         ></component>
       </template>
       <template #suffix>
         <component
-          v-if="option?.config?.suffix"
-          :is="option.config.suffix()"
+          v-if="optionConfig?.suffix"
+          :is="optionConfig.suffix()"
         ></component>
       </template>
     </n-input>
@@ -43,14 +43,14 @@
     >
       <template #prefix>
         <component
-          v-if="option?.config?.prefix"
-          :is="option.config.prefix()"
+          v-if="optionConfig?.prefix"
+          :is="optionConfig.prefix()"
         ></component>
       </template>
       <template #suffix>
         <component
-          v-if="option?.config?.prefix"
-          :is="option.config.prefix()"
+          v-if="optionConfig?.prefix"
+          :is="optionConfig.prefix()"
         ></component>
       </template>
     </n-input>
@@ -60,20 +60,20 @@
       v-if="type === 'number'"
       v-model:value="formValue"
       :placeholder="`请输入${label}`"
-      :show-button="option?.config?.showButton || false"
+      :show-button="optionConfig?.showButton || false"
       clearable
       :disabled="isDisabled()"
     >
       <template #prefix>
         <component
-          v-if="option?.config?.prefix"
-          :is="option.config.prefix()"
+          v-if="optionConfig?.prefix"
+          :is="optionConfig.prefix()"
         ></component>
       </template>
       <template #suffix>
         <component
-          v-if="option?.config?.suffix"
-          :is="option.config.suffix()"
+          v-if="optionConfig?.suffix"
+          :is="optionConfig.suffix()"
         ></component>
       </template>
     </n-input-number>
@@ -85,9 +85,9 @@
       :placeholder="`请选择${label}`"
       clearable
       :disabled="isDisabled()"
-      :options="option?.config?.options"
-      :label-field="option?.config?.labelField || 'label'"
-      :value-field="option?.config?.valueField || 'value'"
+      :options="optionConfig?.options"
+      :label-field="optionConfig?.labelField || 'label'"
+      :value-field="optionConfig?.valueField || 'value'"
       :multiple="type === 'multSelect'"
     />
 
@@ -97,11 +97,11 @@
       v-model:value="formValue"
       :placeholder="`请选择${label}或输入查询`"
       :disabled="isDisabled()"
-      :label-field="option?.config?.labelField || 'label'"
-      :value-field="option?.config?.valueField || 'value'"
-      :query-field="option?.config?.queryField"
-      :query="option?.config?.query"
-      :multiple="option?.config?.multiple || false"
+      :label-field="optionConfig?.labelField || 'label'"
+      :value-field="optionConfig?.valueField || 'value'"
+      :query-field="optionConfig?.queryField"
+      :query="optionConfig?.query"
+      :multiple="optionConfig?.multiple || false"
     ></np-async-select>
 
     <!-- radio -->
@@ -112,25 +112,25 @@
       :disabled="isDisabled()"
     >
       <n-radio
-        v-for="(item, index) in option?.config?.options"
+        v-for="(item, index) in optionConfig?.options"
         :key="index"
-        :value="item[option?.config?.valueField || 'value']"
+        :value="item[optionConfig?.valueField || 'value']"
       >
-        {{ item[option?.config?.labelField || 'label'] }}
+        {{ item[optionConfig?.labelField || 'label'] }}
       </n-radio>
     </n-radio-group>
 
     <!-- 'date' | 'datetime' -->
     <n-date-picker
-      v-if="['date', 'datetime'].includes(type) && !option?.config?.range"
+      v-if="['date', 'datetime'].includes(type) && !optionConfig?.range"
       v-model:formatted-value="formValue"
-      :value-format="option?.config?.format"
+      :value-format="optionConfig?.format"
       :type="type === 'date' ? 'date' : 'datetime'"
     />
     <n-date-picker
-      v-if="['date', 'datetime'].includes(type) && option?.config?.range"
+      v-if="['date', 'datetime'].includes(type) && optionConfig?.range"
       v-model:formatted-value="dateRangeValue"
-      :value-format="option?.config?.format"
+      :value-format="optionConfig?.format"
       :type="type === 'date' ? 'daterange' : 'datetimerange'"
     />
 
@@ -138,37 +138,40 @@
     <n-time-picker
       v-if="type === 'time'"
       v-model:formatted-value="formValue"
-      :value-format="option?.config?.format"
+      :value-format="optionConfig?.format"
     />
 
     <!-- upload -->
     <np-custom-upload
       v-if="type === 'upload'"
       v-model:value="formValue"
-      :label="option?.config?.label"
-      :accept="option?.config?.accept"
+      :label="optionConfig?.label"
+      :accept="optionConfig?.accept"
       :info="info"
-      :action="option?.config?.action"
-      :headers="option?.config?.headers"
-      :extra-data="option?.config?.extraData"
+      :action="optionConfig?.action"
+      :headers="optionConfig?.headers"
+      :extra-data="optionConfig?.extraData"
       :disabled="isDisabled()"
-      :type="option?.config?.type"
-      :max="option?.config?.max"
-      :multiple="option?.config?.multiple"
+      :type="optionConfig?.type"
+      :max="optionConfig?.max"
+      :multiple="optionConfig?.multiple"
     ></np-custom-upload>
 
     <!-- custom -->
     <component
       v-if="type === 'custom'"
       v-model:value="formValue"
-      :is="option?.render ? option?.render(form, info) : ''"
-      :config="option?.config"
+      :is="optionRender(form, info)"
+      :config="optionConfig"
     ></component>
   </div>
 </template>
 
 <script setup lang="ts">
-import type { NCurdTableHeaderType } from '../types/curdTable';
+import type {
+  NCurdTableHeaderRenderOptions,
+  NCurdTableHeaderType,
+} from '../types/curdTable';
 import {
   NInput,
   NInputNumber,
@@ -181,6 +184,7 @@ import {
 import { computed } from 'vue';
 import { NpAsyncSelect } from '@naive-potato-ui/async-select';
 import { NpCustomUpload } from '@naive-potato-ui/custom-upload';
+import { h } from 'vue';
 
 interface Props {
   label: string;
@@ -189,7 +193,7 @@ interface Props {
   field: string | number | symbol;
   value: any;
   info?: Record<string, any>;
-  option?: Record<any, any>;
+  option?: NCurdTableHeaderRenderOptions<any, any>;
 }
 
 const props = defineProps<Props>();
@@ -206,6 +210,16 @@ const formValue = computed({
   set(value) {
     emits('update:value', value);
   },
+});
+
+// option render
+const optionConfig = computed(() => {
+  return props.option?.config;
+});
+const optionRender = computed(() => {
+  return props.option?.render
+    ? props.option?.render
+    : (TForm: any, TInfo: any) => h('div', {}, props.value);
 });
 
 // Disabled

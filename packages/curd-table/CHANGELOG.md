@@ -1,5 +1,11 @@
 # @naive-potato-ui/curd-table
 
+## 1.0.34
+
+### Patch Changes
+
+- fixed active config
+
 ## 1.0.33
 
 ### Patch Changes
