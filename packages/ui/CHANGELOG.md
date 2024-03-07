@@ -1,5 +1,14 @@
 # @naive-potato-ui/ui
 
+## 1.0.36
+
+### Patch Changes
+
+- fixed wrong redio type
+
+- Updated dependencies []:
+  - @naive-potato-ui/curd-table@1.0.33
+
 ## 1.0.35
 
 ### Patch Changes

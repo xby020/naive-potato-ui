@@ -106,7 +106,7 @@
 
     <!-- radio -->
     <n-radio-group
-      v-if="type === 'asyncSelect'"
+      v-if="type === 'radio'"
       v-model:value="formValue"
       :name="label"
       :disabled="isDisabled()"

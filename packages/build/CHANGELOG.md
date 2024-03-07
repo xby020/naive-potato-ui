@@ -1,5 +1,11 @@
 # @naive-potato-ui/build
 
+## 1.0.9
+
+### Patch Changes
+
+- fixed wrong redio type
+
 ## 1.0.8
 
 ### Patch Changes
