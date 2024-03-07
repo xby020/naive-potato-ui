@@ -1,5 +1,14 @@
 # @naive-potato-ui/ui
 
+## 1.0.34
+
+### Patch Changes
+
+- fixed missing radio type
+
+- Updated dependencies []:
+  - @naive-potato-ui/curd-table@1.0.31
+
 ## 1.0.33
 
 ### Patch Changes

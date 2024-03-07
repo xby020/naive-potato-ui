@@ -365,6 +365,7 @@ export type NCurdTableHeaderRenderOptions<
     | NCurdTableHeaderTextRenderConfig<TForm, TInfo>
     | NCurdTableHeaderSelectRenderConfig<TForm, TInfo>
     | NCurdTableHeaderAsyncSelectRenderConfig<TForm, TInfo>
+    | NCurdTableHeaderRadioRenderConfig<TForm, TInfo>
     | NCurdTableHeaderDateRenderConfig<TForm, TInfo>
     | NCurdTableHeaderTimeRenderConfig<TForm, TInfo>
     | NCurdTableHeaderUploadRenderConfig<TForm, TInfo>

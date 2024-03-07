@@ -1,5 +1,11 @@
 # @naive-potato-ui/build
 
+## 1.0.7
+
+### Patch Changes
+
+- fixed missing radio type
+
 ## 1.0.6
 
 ### Patch Changes
