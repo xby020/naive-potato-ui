@@ -31,5 +31,5 @@ export function getVitePlugins(
 
   console.log(JSON.stringify(finalPlugins));
 
-  return finalPlugins;
+  return finalPlugins as PluginOption[];
 }

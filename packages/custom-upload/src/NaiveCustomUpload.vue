@@ -7,21 +7,27 @@
     :list-type="type || 'text'"
     :max="max"
     :multiple="multiple"
-    v-model:file-list="uploadFileList"
+    v-model:file-list="fileList"
+    @finish="handleFinish"
+    @remove="handleRemove"
   >
-    <n-button>{{ props.label || '上传文件' }}</n-button>
+    <n-button>{{ label || '上传文件' }}</n-button>
+    <n-text v-if="tips">
+      {{ tips }}
+    </n-text>
   </n-upload>
 </template>
 
 <script setup lang="ts">
-import { NUpload, NButton } from 'naive-ui';
+import { NUpload, NButton, NText } from 'naive-ui';
 import type { UploadFileInfo } from 'naive-ui';
-import { computed } from 'vue';
+import { ref, onMounted, watch, Ref } from 'vue';
 
 interface Props {
-  value: UploadFileInfo[];
+  value?: Record<string, any>[];
   label?: string;
   info?: Record<string, any>;
+  tips?: string;
   accept?: string;
   action?: string;
   headers?: Record<string, string>;
@@ -30,22 +36,63 @@ interface Props {
   type?: 'text' | 'image' | 'image-card';
   max?: number;
   multiple?: boolean;
+  infoSet?: (infoList: Record<string, any>) => UploadFileInfo;
 }
 
 const props = defineProps<Props>();
 
 const emits = defineEmits<{
-  'update:value': [value: UploadFileInfo[]];
+  'update:value': [value: Record<string, any>[]];
 }>();
 
-const uploadFileList = computed({
-  get() {
-    return props.value;
-  },
-  set(val: UploadFileInfo[]) {
-    emits('update:value', val);
-  },
+const fileList: Ref<UploadFileInfo[]> = ref([]);
+
+// for edit
+onMounted(() => {
+  fileList.value =
+    props.value?.map((item) => {
+      return props.infoSet
+        ? props.infoSet(item)
+        : {
+            id: item.id || item.uuid,
+            name: item.name,
+            status: 'finished',
+            url: item.url || item.path,
+          };
+    }) || [];
 });
+
+const fileInfos = new Map<string, Record<string, any>>();
+watch(fileList, () => {
+  // all response
+  const fileInfoList = Array.from(fileInfos.values());
+
+  emits('update:value', fileInfoList);
+});
+
+// handle upload finished
+function handleFinish(options: {
+  file: UploadFileInfo;
+  event?: ProgressEvent;
+}) {
+  const result = options.event?.target as XMLHttpRequest;
+  const res = JSON.parse(result.response) as Record<string, any>;
+
+  fileInfos.set(options.file.id, res);
+
+  const newFile = { ...options.file, url: res.url };
+
+  return newFile;
+}
+
+// handle remove
+function handleRemove(options: {
+  file: UploadFileInfo;
+  fileList: Array<UploadFileInfo>;
+}) {
+  fileInfos.delete(options.file.id);
+  fileList.value = options.fileList;
+}
 </script>
 
 <style scoped></style>

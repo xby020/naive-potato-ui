@@ -1,5 +1,11 @@
 # @naive-potato-ui/custom-upload
 
+## 1.0.9
+
+### Patch Changes
+
+- change custom upload action
+
 ## 1.0.8
 
 ### Patch Changes

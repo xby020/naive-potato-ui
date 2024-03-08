@@ -1,5 +1,11 @@
 # @naive-potato-ui/build
 
+## 1.0.16
+
+### Patch Changes
+
+- change custom upload action
+
 ## 1.0.15
 
 ### Patch Changes
