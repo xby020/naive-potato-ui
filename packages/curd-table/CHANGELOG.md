@@ -1,5 +1,14 @@
 # @naive-potato-ui/curd-table
 
+## 1.0.41
+
+### Patch Changes
+
+- add parse for custom upload
+
+- Updated dependencies []:
+  - @naive-potato-ui/custom-upload@1.0.10
+
 ## 1.0.40
 
 ### Patch Changes
