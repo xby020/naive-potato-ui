@@ -295,6 +295,7 @@ interface Props {
   countField?: string;
   dataField?: string;
   idField?: string;
+  pageSizeField?: string;
   extraQuery?: Record<string, any>;
   serialNumber?: boolean;
   checkable?: boolean;
@@ -672,6 +673,10 @@ const idField = computed(() => {
   return props.idField || 'uuid';
 });
 
+const pageSizeField = computed(() => {
+  return props.pageSizeField || 'pageSize';
+});
+
 /**
  * @description: 查询数据方法
  */
@@ -682,7 +687,7 @@ async function queryData() {
     // 组建queryParams
     const queryParams: Record<string, any> = {
       page: pagination.value.page,
-      pageSize: pagination.value.pageSize,
+      [pageSizeField.value]: pagination.value.pageSize,
       ...queryForm.value,
       ...props.extraQuery,
     };

@@ -1,5 +1,11 @@
 # @naive-potato-ui/custom-upload
 
+## 1.0.12
+
+### Patch Changes
+
+- add page size field props
+
 ## 1.0.11
 
 ### Patch Changes

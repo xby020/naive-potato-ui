@@ -1,5 +1,14 @@
 # @naive-potato-ui/curd-table
 
+## 1.0.43
+
+### Patch Changes
+
+- add page size field props
+
+- Updated dependencies []:
+  - @naive-potato-ui/custom-upload@1.0.12
+
 ## 1.0.42
 
 ### Patch Changes
