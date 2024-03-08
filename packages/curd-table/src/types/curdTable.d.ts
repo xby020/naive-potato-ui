@@ -288,13 +288,19 @@ type NCurdTableHeaderUploadRenderConfig<
      *
      * @type {string}
      */
-    label?: string;
+    label?: string | VNode;
     /**
      * @description 额外的form信息
      *
      * @type {Record<string, any>}
      */
     info?: Record<string, any>;
+    /**
+     * @description 显示在上传按钮下方的提示
+     *
+     * @type {string}
+     */
+    tips?: string;
     /**
      * @description 接受的文件类型，参考 [accept](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/file#accept)
      *

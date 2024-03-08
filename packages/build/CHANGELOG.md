@@ -1,5 +1,11 @@
 # @naive-potato-ui/build
 
+## 1.0.18
+
+### Patch Changes
+
+- add parse fn
+
 ## 1.0.17
 
 ### Patch Changes

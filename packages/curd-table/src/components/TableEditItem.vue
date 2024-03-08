@@ -150,6 +150,7 @@
       v-model:value="customFileList"
       :label="optionConfig?.label"
       :accept="optionConfig?.accept"
+      :tips="optionConfig?.tips"
       :info="info"
       :action="optionConfig?.action"
       :headers="optionConfig?.headers"

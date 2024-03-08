@@ -11,7 +11,8 @@
     @finish="handleFinish"
     @remove="handleRemove"
   >
-    <n-button>{{ label || '上传文件' }}</n-button>
+    <component v-if="isVNode(props.label)" :is="props.label"></component>
+    <n-button v-else>{{ label || '上传文件' }}</n-button>
     <n-text v-if="tips">
       {{ tips }}
     </n-text>
@@ -21,11 +22,12 @@
 <script setup lang="ts">
 import { NUpload, NButton, NText } from 'naive-ui';
 import type { UploadFileInfo } from 'naive-ui';
-import { ref, onMounted, watch, Ref } from 'vue';
+import { isVNode } from 'vue';
+import { ref, onMounted, watch, Ref, VNode } from 'vue';
 
 interface Props {
   value?: Record<string, any>[];
-  label?: string;
+  label?: string | VNode;
   info?: Record<string, any>;
   tips?: string;
   accept?: string;

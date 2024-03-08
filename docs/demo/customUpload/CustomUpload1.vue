@@ -9,6 +9,10 @@
       type="text"
       multiple
     ></np-custom-upload>
+
+    <div class="mt-4">
+      <n-text>{{ files }}</n-text>
+    </div>
   </div>
 </template>
 
