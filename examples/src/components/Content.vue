@@ -4,7 +4,7 @@
       :headers="headers"
       v-model:choosen="choosen"
       :query="handleQuery"
-      :query-detail="handleQueryDetail"
+      :no-detail="true"
       :create="handleCreate"
       :edit="handleEditError"
       :delete="handleDelete"

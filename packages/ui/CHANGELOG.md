@@ -1,5 +1,14 @@
 # @naive-potato-ui/ui
 
+## 1.0.48
+
+### Patch Changes
+
+- fixed no detail props
+
+- Updated dependencies []:
+  - @naive-potato-ui/curd-table@1.0.45
+
 ## 1.0.47
 
 ### Patch Changes

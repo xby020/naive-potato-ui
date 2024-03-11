@@ -705,9 +705,9 @@ async function queryData() {
     const res = await props.query(queryParams);
 
     // 设置tableValue
-    tableValue.value = res[dataField.value];
+    tableValue.value = res[dataField.value] || res;
     // 设置pagination
-    pagination.value.itemCount = res[countField.value];
+    pagination.value.itemCount = res[countField.value] || 0;
   } catch (error) {
     console.error(error);
   } finally {
@@ -947,7 +947,7 @@ async function handleEdit(uuid: string | number) {
     if (props.noDetail) {
       /* 详情从数据列表返回 */
       const res = tableValue.value.find((item) => {
-        return item[idField.value] === uuid;
+        return item[idField.value] === choosen.value;
       });
       info.value = res;
     } else {
@@ -1005,7 +1005,7 @@ async function handleInfo(uuid: string | number) {
     if (props.noDetail) {
       /* 详情从数据列表返回 */
       const res = tableValue.value.find((item) => {
-        return item[idField.value] === uuid;
+        return item[idField.value] === choosen.value;
       });
       info.value = res;
     } else {
