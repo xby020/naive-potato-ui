@@ -320,6 +320,8 @@ interface Props {
   hideColumnDelete?: boolean;
   deleteable?: (row: TInfo) => boolean;
   hideAction?: boolean;
+  /* 没有详情接口，数据从列表返回 */
+  noDetail?: boolean;
 }
 
 const props = defineProps<Props>();
@@ -942,12 +944,21 @@ async function handleEdit(uuid: string | number) {
   drawerShow.value = true;
   try {
     drawerContentLoading.value = true;
-    const res = props.queryDetail
-      ? await props.queryDetail({
-          [idField.value]: uuid,
-        })
-      : {};
-    info.value = res;
+    if (props.noDetail) {
+      /* 详情从数据列表返回 */
+      const res = tableValue.value.find((item) => {
+        return item[idField.value] === uuid;
+      });
+      info.value = res;
+    } else {
+      /* 详情从接口返回 */
+      const res = props.queryDetail
+        ? await props.queryDetail({
+            [idField.value]: uuid,
+          })
+        : {};
+      info.value = res;
+    }
 
     editForm.value = defaultEditForm.value;
   } finally {
@@ -991,12 +1002,21 @@ async function handleInfo(uuid: string | number) {
   drawerShow.value = true;
   try {
     drawerContentLoading.value = true;
-    const res = props.queryDetail
-      ? await props.queryDetail({
-          [idField.value]: uuid,
-        })
-      : {};
-    info.value = res;
+    if (props.noDetail) {
+      /* 详情从数据列表返回 */
+      const res = tableValue.value.find((item) => {
+        return item[idField.value] === uuid;
+      });
+      info.value = res;
+    } else {
+      /* 详情从接口返回 */
+      const res = props.queryDetail
+        ? await props.queryDetail({
+            [idField.value]: uuid,
+          })
+        : {};
+      info.value = res;
+    }
   } finally {
     drawerContentLoading.value = false;
   }

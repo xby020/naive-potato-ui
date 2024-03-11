@@ -1,5 +1,11 @@
 # @naive-potato-ui/build
 
+## 1.0.20
+
+### Patch Changes
+
+- add noDetail props for data which using list
+
 ## 1.0.19
 
 ### Patch Changes

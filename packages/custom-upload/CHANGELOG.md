@@ -1,5 +1,11 @@
 # @naive-potato-ui/custom-upload
 
+## 1.0.13
+
+### Patch Changes
+
+- add noDetail props for data which using list
+
 ## 1.0.12
 
 ### Patch Changes

@@ -1,5 +1,14 @@
 # @naive-potato-ui/curd-table
 
+## 1.0.44
+
+### Patch Changes
+
+- add noDetail props for data which using list
+
+- Updated dependencies []:
+  - @naive-potato-ui/custom-upload@1.0.13
+
 ## 1.0.43
 
 ### Patch Changes
