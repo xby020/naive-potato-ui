@@ -151,6 +151,7 @@
                     :headers="headers"
                     :cols="cols"
                     :rules="createFormRules"
+                    :info="info"
                   ></table-edit>
                 </n-scrollbar>
               </n-tab-pane>
@@ -169,6 +170,7 @@
                 :headers="headers"
                 :cols="cols"
                 :rules="createFormRules"
+                :info="info"
               ></table-edit>
               <slot
                 name="extraCreateForm"
@@ -278,7 +280,7 @@ import type {
   NCurdTableHeader,
   NCurdTableHeaderType,
 } from './types/curdTable';
-import { Ref, VNode, computed, h, onMounted, ref, watch } from 'vue';
+import { Ref, VNode, computed, h, onMounted, ref, watch, nextTick } from 'vue';
 import TableEditItem from './components/TableEditItem.vue';
 import {
   getConfigWithBoolean,
@@ -946,6 +948,7 @@ async function handleEdit(uuid: string | number) {
     drawerContentLoading.value = true;
     if (props.noDetail) {
       /* 详情从数据列表返回 */
+      await nextTick();
       const res = tableValue.value.find((item) => {
         return item[idField.value] === choosen.value;
       });
@@ -1004,6 +1007,7 @@ async function handleInfo(uuid: string | number) {
     drawerContentLoading.value = true;
     if (props.noDetail) {
       /* 详情从数据列表返回 */
+      await nextTick();
       const res = tableValue.value.find((item) => {
         return item[idField.value] === choosen.value;
       });

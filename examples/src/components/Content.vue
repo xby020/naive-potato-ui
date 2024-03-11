@@ -65,8 +65,6 @@ const headers = ref<NpCurdTableHeader<ResInfo>[]>([
       show: true,
       type: 'text',
       default: '人社局',
-      disabled: () => false,
-      active: () => false,
       rule: {
         trigger: 'blur',
         required: true,
@@ -74,7 +72,14 @@ const headers = ref<NpCurdTableHeader<ResInfo>[]>([
       },
     },
     create: true,
-    edit: true,
+    edit: {
+      show: true,
+      type: 'custom',
+      render(row, info) {
+        console.log(row, info);
+        return h('span', row.name);
+      },
+    },
     info: {
       show: true,
       type: 'custom',
