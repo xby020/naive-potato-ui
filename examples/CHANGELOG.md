@@ -1,5 +1,14 @@
 # @naive-potato-ui/examples
 
+## 1.0.51
+
+### Patch Changes
+
+- add drawerTab
+
+- Updated dependencies []:
+  - @naive-potato-ui/ui@1.0.50
+
 ## 1.0.50
 
 ### Patch Changes

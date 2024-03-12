@@ -324,6 +324,7 @@ interface Props {
   hideAction?: boolean;
   /* 没有详情接口，数据从列表返回 */
   noDetail?: boolean;
+  drawerTab?: boolean;
 }
 
 const props = defineProps<Props>();
@@ -725,7 +726,9 @@ onMounted(async () => {
 const drawerShow = ref(false);
 const drawerTitle = ref('新增');
 const drawerBackConfirm = ref(false);
-const drawerTab = ref(false);
+const drawerTab = computed(() => {
+  return props.drawerTab;
+});
 
 // drawer mode
 type DrawerMode = 'create' | 'edit' | 'info';

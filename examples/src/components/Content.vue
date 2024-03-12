@@ -14,12 +14,19 @@
       :suffix-action="suffixAction"
       :action-width="400"
       serial-number
+      drawer-tab
     >
       <template #prefixAction>
         <n-button type="error" quaternary>Prefix</n-button>
       </template>
       <template #suffixAction>
         <n-button type="info" quaternary>Suffix</n-button>
+      </template>
+
+      <template #extraInfoTab="{ info }">
+        <n-tab-pane tab="数据" name="data">
+          {{ info }}
+        </n-tab-pane>
       </template>
     </np-curd-table>
   </div>

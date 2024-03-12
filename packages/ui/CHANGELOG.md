@@ -1,5 +1,14 @@
 # @naive-potato-ui/ui
 
+## 1.0.50
+
+### Patch Changes
+
+- add drawerTab
+
+- Updated dependencies []:
+  - @naive-potato-ui/curd-table@1.0.47
+
 ## 1.0.49
 
 ### Patch Changes

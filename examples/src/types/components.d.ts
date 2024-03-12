@@ -10,5 +10,7 @@ declare module 'vue' {
     Content: typeof import('./../components/Content.vue')['default']
     NButton: typeof import('naive-ui')['NButton']
     NSpin: typeof import('naive-ui')['NSpin']
+    NTab: typeof import('naive-ui')['NTab']
+    NTabPane: typeof import('naive-ui')['NTabPane']
   }
 }
