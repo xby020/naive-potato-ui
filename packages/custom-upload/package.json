@@ -1,1 +1,44 @@
-{"description":"A Naive UI component library for Vue 3.","keywords":["vue","vue3","naive-ui"],"author":"xby020","license":"MIT","homepage":"https://www.xby020.cn","repository":{"type":"git","url":"git+https://github.com/xby020/naive-potato-ui.git"},"sideEffects":["**/*.css"],"name":"@naive-potato-ui/custom-upload","version":"1.0.13","scripts":{"build":"vite build","test":"echo test"},"main":"./dist/np-custom-upload.umd.js","module":"./dist/np-custom-upload.es.js","types":"./dist/src/index.d.ts","exports":{".":{"require":"./dist/np-custom-upload.umd.js","module":"./dist/np-custom-upload.umd.js","import":"./dist/np-custom-upload.es.js","types":"./dist/src/index.d.ts"}},"files":["dist","README.md"],"peerDependencies":{"naive-ui":">=2.34.0","vue":">=3.0.0"},"style":"./dist/style.css"}
+{
+  "description": "A Naive UI component library for Vue 3.",
+  "keywords": [
+    "vue",
+    "vue3",
+    "naive-ui"
+  ],
+  "author": "xby020",
+  "license": "MIT",
+  "homepage": "https://www.xby020.cn",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/xby020/naive-potato-ui.git"
+  },
+  "sideEffects": [
+    "**/*.css"
+  ],
+  "name": "@naive-potato-ui/custom-upload",
+  "version": "1.0.14",
+  "scripts": {
+    "build": "vite build",
+    "test": "echo test"
+  },
+  "main": "./dist/np-custom-upload.umd.js",
+  "module": "./dist/np-custom-upload.es.js",
+  "types": "./dist/src/index.d.ts",
+  "exports": {
+    ".": {
+      "require": "./dist/np-custom-upload.umd.js",
+      "module": "./dist/np-custom-upload.umd.js",
+      "import": "./dist/np-custom-upload.es.js",
+      "types": "./dist/src/index.d.ts"
+    }
+  },
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "peerDependencies": {
+    "naive-ui": ">=2.34.0",
+    "vue": ">=3.0.0"
+  },
+  "style": "./dist/style.css"
+}

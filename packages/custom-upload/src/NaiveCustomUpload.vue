@@ -22,6 +22,7 @@
 <script setup lang="ts">
 import { NUpload, NButton, NText } from 'naive-ui';
 import type { UploadFileInfo } from 'naive-ui';
+import { FileInfo } from 'naive-ui/es/upload/src/interface';
 import { isVNode } from 'vue';
 import { ref, onMounted, watch, Ref, VNode } from 'vue';
 
@@ -53,14 +54,16 @@ const fileList: Ref<UploadFileInfo[]> = ref([]);
 onMounted(() => {
   fileList.value =
     props.value?.map((item) => {
-      return props.infoSet
+      const fileItem = props.infoSet
         ? props.infoSet(item)
-        : {
+        : ({
             id: item.id || item.uuid,
             name: item.name,
             status: 'finished',
             url: item.url || item.path,
-          };
+          } as FileInfo);
+      fileInfos.set(fileItem.id, item);
+      return fileItem;
     }) || [];
 });
 

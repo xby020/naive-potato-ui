@@ -259,9 +259,14 @@ const dateRangeValue = computed<[string, string] | null>({
 // Upload
 const customFileList = computed({
   get() {
-    return props.option?.config?.parse
-      ? props.option?.config?.parse.get(formValue.value)
-      : formValue.value;
+    if (formValue.value) {
+      return props.option?.config?.parse
+        ? props.option?.config?.parse.get(formValue.value)
+        : formValue.value;
+    } else {
+      // 未上传，值不存在
+      return formValue.value;
+    }
   },
   set(v) {
     formValue.value = props.option?.config?.parse
