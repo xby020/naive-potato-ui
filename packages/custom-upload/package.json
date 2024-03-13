@@ -16,7 +16,7 @@
     "**/*.css"
   ],
   "name": "@naive-potato-ui/custom-upload",
-  "version": "1.0.19",
+  "version": "1.0.20",
   "scripts": {
     "build": "vite build",
     "test": "echo test"

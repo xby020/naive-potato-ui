@@ -147,7 +147,7 @@
     <!-- upload -->
     <np-custom-upload
       v-if="type === 'upload'"
-      v-model:value="formValue"
+      v-model:value="uploadValue"
       :label="optionConfig?.label"
       :accept="optionConfig?.accept"
       :tips="optionConfig?.tips"
@@ -254,6 +254,24 @@ const dateRangeValue = computed<[string, string] | null>({
     if (v !== null && props.form) {
       props.form[props.option?.config?.startField || 'start'] = v[0];
       props.form[props.option?.config?.endField || 'end'] = v[1];
+    }
+  },
+});
+
+// Upload
+const uploadValue = computed({
+  get() {
+    if (props.option?.config?.multiple) {
+      return formValue.value;
+    } else {
+      return [formValue.value];
+    }
+  },
+  set(v) {
+    if (props.option?.config?.multiple) {
+      formValue.value = v;
+    } else {
+      formValue.value = v[0];
     }
   },
 });
