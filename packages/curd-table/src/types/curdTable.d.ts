@@ -354,7 +354,7 @@ type NCurdTableHeaderUploadRenderConfig<
      * @description 转换上传文件和返回所需数据
      *
      */
-    parse?: (res: Record<string, any>) => Record<string, any> | striing;
+    parse?: {};
   };
 };
 

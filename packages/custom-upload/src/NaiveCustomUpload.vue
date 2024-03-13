@@ -39,13 +39,16 @@ interface Props {
   type?: 'text' | 'image' | 'image-card';
   max?: number;
   multiple?: boolean;
-  infoSet?: (infoList: Record<string, any>) => UploadFileInfo;
+  infoSet?: (infoList: Record<string, any> | string | number) => UploadFileInfo;
+  infoGet?: (
+    infoRes: Record<string, any> | string | number,
+  ) => Record<string, any> | string;
 }
 
 const props = defineProps<Props>();
 
 const emits = defineEmits<{
-  'update:value': [value: Record<string, any>[]];
+  'update:value': [value: Record<string, any> | string | number[]];
 }>();
 
 const fileList: Ref<UploadFileInfo[]> = ref([]);
@@ -67,7 +70,7 @@ onMounted(() => {
     }) || [];
 });
 
-const fileInfos = new Map<string, Record<string, any>>();
+const fileInfos = new Map<string, Record<string, any> | string | number>();
 watch(fileList, () => {
   // all response
   const fileInfoList = Array.from(fileInfos.values());
@@ -83,7 +86,9 @@ function handleFinish(options: {
   const result = options.event?.target as XMLHttpRequest;
   const res = JSON.parse(result.response) as Record<string, any>;
 
-  fileInfos.set(options.file.id, res);
+  const results = props.infoGet ? props.infoGet(res) : res;
+
+  fileInfos.set(options.file.id, results);
 
   const newFile = { ...options.file, url: res.url };
 

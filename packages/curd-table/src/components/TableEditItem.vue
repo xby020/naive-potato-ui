@@ -159,7 +159,8 @@
       :type="optionConfig?.type"
       :max="optionConfig?.max"
       :multiple="optionConfig?.multiple"
-      :info-set="optionConfig?.parse"
+      :info-set="optionConfig?.parse?.set"
+      :info-get="optionConfig?.parse?.get"
     ></np-custom-upload>
 
     <!-- custom -->
