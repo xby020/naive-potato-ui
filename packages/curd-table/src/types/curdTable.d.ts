@@ -4,6 +4,7 @@ import {
   FormRules,
   SelectGroupOption,
   SelectOption,
+  UploadFileInfo,
 } from 'naive-ui';
 
 export type NCurdTableProps = {};
@@ -354,7 +355,20 @@ type NCurdTableHeaderUploadRenderConfig<
      * @description 转换上传文件和返回所需数据
      *
      */
-    parse?: {};
+    parse?: {
+      /**
+       * @description 从上传接口返回数据转换到所需数据
+       *
+       */
+      get?: (
+        info: Record<string, any> | string | number,
+      ) => Record<string, any> | string | number;
+      /**
+       * @description 从传入formValue转换到标准上传数据结构
+       *
+       */
+      set?: (info: Record<string, any> | string | number) => UploadFileInfo;
+    };
   };
 };
 

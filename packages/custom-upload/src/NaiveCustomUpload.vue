@@ -42,7 +42,7 @@ interface Props {
   infoSet?: (infoList: Record<string, any> | string | number) => UploadFileInfo;
   infoGet?: (
     infoRes: Record<string, any> | string | number,
-  ) => Record<string, any> | string;
+  ) => Record<string, any> | string | number;
 }
 
 const props = defineProps<Props>();
