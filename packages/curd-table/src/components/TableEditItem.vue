@@ -147,7 +147,7 @@
     <!-- upload -->
     <np-custom-upload
       v-if="type === 'upload'"
-      v-model:value="customFileList"
+      v-model:value="formValue"
       :label="optionConfig?.label"
       :accept="optionConfig?.accept"
       :tips="optionConfig?.tips"
@@ -159,6 +159,7 @@
       :type="optionConfig?.type"
       :max="optionConfig?.max"
       :multiple="optionConfig?.multiple"
+      :info-set="optionConfig?.parse"
     ></np-custom-upload>
 
     <!-- custom -->
@@ -253,25 +254,6 @@ const dateRangeValue = computed<[string, string] | null>({
       props.form[props.option?.config?.startField || 'start'] = v[0];
       props.form[props.option?.config?.endField || 'end'] = v[1];
     }
-  },
-});
-
-// Upload
-const customFileList = computed({
-  get() {
-    if (formValue.value) {
-      return props.option?.config?.parse
-        ? props.option?.config?.parse.get(formValue.value)
-        : formValue.value;
-    } else {
-      // 未上传，值不存在
-      return formValue.value;
-    }
-  },
-  set(v) {
-    formValue.value = props.option?.config?.parse
-      ? props.option?.config?.parse.set(v)
-      : v;
   },
 });
 </script>

@@ -460,8 +460,7 @@ const indexHeader: DataTableColumn<TInfo> = {
       h(
         'div',
         {
-          class:
-            'w-7 h-7 font-semibold text-sky-300 border-2 border-sky-300/50 rounded-full flex justify-center items-center',
+          class: 'w-7 h-7 font-semibold flex justify-center items-center',
         },
         `${index + 1}`,
       ),
@@ -1054,6 +1053,8 @@ async function deleteData(uuid: string | number) {
 defineExpose({
   resetQuery,
   queryData,
+  drawerShow,
+  drawerMode,
 });
 </script>
 

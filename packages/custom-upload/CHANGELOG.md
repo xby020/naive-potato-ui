@@ -1,5 +1,11 @@
 # @naive-potato-ui/custom-upload
 
+## 1.0.15
+
+### Patch Changes
+
+- change custom upload and curdTable
+
 ## 1.0.14
 
 ### Patch Changes

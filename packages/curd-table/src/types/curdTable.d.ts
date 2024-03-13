@@ -354,18 +354,7 @@ type NCurdTableHeaderUploadRenderConfig<
      * @description 转换上传文件和返回所需数据
      *
      */
-    parse?: {
-      /**
-       * @description 将上传之后的response转为所需的结构
-       *
-       */
-      get: (res: Record<string, any>) => string;
-      /**
-       * @description 将本地数据转为传入数据的方法，结构参考UploadFileInfo
-       *
-       */
-      set: (res: Record<string, any>) => Record<string, any>;
-    };
+    parse?: (res: Record<string, any>) => Record<string, any> | striing;
   };
 };
 
