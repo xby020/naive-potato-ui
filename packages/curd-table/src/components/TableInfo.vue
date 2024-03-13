@@ -45,7 +45,7 @@ interface Props {
 
 const props = withDefaults(defineProps<Props>(), {
   cols: 1,
-  widthStyle: '50%',
+  widthStyle: '100%',
 });
 
 const tableHeaders = computed(() => {

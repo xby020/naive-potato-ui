@@ -1,5 +1,11 @@
 # @naive-potato-ui/custom-upload
 
+## 1.0.16
+
+### Patch Changes
+
+- change info width
+
 ## 1.0.15
 
 ### Patch Changes
