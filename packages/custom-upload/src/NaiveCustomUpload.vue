@@ -55,6 +55,7 @@ const fileList: Ref<UploadFileInfo[]> = ref([]);
 
 // for edit
 onMounted(() => {
+  console.log(props.value);
   fileList.value = props.value?.length
     ? props.value.map((item) => {
         const fileItem = props.infoSet

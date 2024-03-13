@@ -4,7 +4,8 @@
       :headers="headers"
       v-model:choosen="choosen"
       :query="handleQuery"
-      :no-detail="true"
+      :query-detail="handleQueryDetail"
+      :no-detail="false"
       :create="handleCreate"
       :edit="handleEditError"
       :delete="handleDelete"
@@ -175,6 +176,35 @@ const headers = ref<NpCurdTableHeader<ResInfo>[]>([
     edit: true,
     info: true,
   },
+  {
+    title: '图片上传',
+    key: 'url',
+    edit: {
+      show: true,
+      type: 'upload',
+      config: {
+        action: '/api/v1/admin/base/upload',
+        accept: 'image/*,.pdf',
+        multiple: false,
+        tips: '只能上传图片和PDF文件',
+        type: 'image',
+        parse: {
+          get(v: any) {
+            return v ? v.data?.path : null;
+          },
+          set(v: any) {
+            return v
+              ? {
+                  id: v,
+                  name: v,
+                  url: v,
+                }
+              : null;
+          },
+        },
+      },
+    },
+  },
 ]);
 
 interface Employee {
@@ -239,6 +269,18 @@ async function handleQueryDetail(
   const phone =
     '138' + Math.floor(Math.random() * 10000000 + 10000000).toString();
 
+  const url =
+    'https://cdn.pixabay.com/photo/2023/09/30/17/13/coffee-beans-8286087_1280.jpg';
+
+  console.log('handleQueryDetail', params, {
+    uuid: uid,
+    name,
+    age,
+    department: [department],
+    phone,
+    url,
+  });
+
   return new Promise((resolve, reject) => {
     setTimeout(() => {
       resolve({
@@ -247,6 +289,7 @@ async function handleQueryDetail(
         age,
         department: [department],
         phone,
+        url,
       });
     }, 1000);
   });

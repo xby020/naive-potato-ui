@@ -1,5 +1,14 @@
 # @naive-potato-ui/curd-table
 
+## 1.0.56
+
+### Patch Changes
+
+- change upload edit
+
+- Updated dependencies []:
+  - @naive-potato-ui/custom-upload@1.0.22
+
 ## 1.0.55
 
 ### Patch Changes
