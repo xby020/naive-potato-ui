@@ -1,5 +1,15 @@
 # @naive-potato-ui/ui
 
+## 1.0.54
+
+### Patch Changes
+
+- add column config with header.column
+
+- Updated dependencies []:
+  - @naive-potato-ui/custom-upload@1.0.17
+  - @naive-potato-ui/curd-table@1.0.51
+
 ## 1.0.53
 
 ### Patch Changes

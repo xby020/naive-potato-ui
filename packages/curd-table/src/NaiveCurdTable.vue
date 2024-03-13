@@ -437,7 +437,10 @@ const propsHeader = computed((): DataTableColumns<TInfo> => {
       return header.column;
     })
     .map((header) => {
+      const headerColumnConfig =
+        typeof header.column === 'object' ? header.column : {};
       return {
+        ...(headerColumnConfig as any),
         title: getConfigWithBoolean(header, 'column', 'title') as string,
         key: getConfigWithBoolean(header, 'column', 'key') as string,
         render: getConfigWithBoolean(header, 'column', 'render', 'infoRender'),

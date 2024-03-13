@@ -1,5 +1,11 @@
 # @naive-potato-ui/custom-upload
 
+## 1.0.17
+
+### Patch Changes
+
+- add column config with header.column
+
 ## 1.0.16
 
 ### Patch Changes
