@@ -1,5 +1,11 @@
 # @naive-potato-ui/custom-upload
 
+## 1.0.21
+
+### Patch Changes
+
+- change upload components value
+
 ## 1.0.20
 
 ### Patch Changes

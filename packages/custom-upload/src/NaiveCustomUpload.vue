@@ -55,19 +55,21 @@ const fileList: Ref<UploadFileInfo[]> = ref([]);
 
 // for edit
 onMounted(() => {
-  fileList.value =
-    props.value?.map((item) => {
-      const fileItem = props.infoSet
-        ? props.infoSet(item)
-        : ({
-            id: item.id || item.uuid,
-            name: item.name,
-            status: 'finished',
-            url: item.url || item.path,
-          } as FileInfo);
-      fileInfos.set(fileItem.id, item);
-      return fileItem;
-    }) || [];
+  fileList.value = props.value?.length
+    ? props.value.map((item) => {
+        const fileItem = props.infoSet
+          ? props.infoSet(item)
+          : ({
+              id: item.id || item.uuid,
+              name: item.name,
+              status: 'finished',
+              url: item.url || item.path,
+            } as FileInfo);
+
+        fileInfos.set(fileItem.id, item);
+        return fileItem;
+      })
+    : [];
 });
 
 const fileInfos = new Map<string, Record<string, any> | string | number>();

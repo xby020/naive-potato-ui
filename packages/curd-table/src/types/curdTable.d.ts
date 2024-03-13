@@ -367,7 +367,9 @@ type NCurdTableHeaderUploadRenderConfig<
        * @description 从传入formValue转换到标准上传数据结构
        *
        */
-      set?: (info: Record<string, any> | string | number) => UploadFileInfo;
+      set?: (
+        info: Record<string, any> | string | number,
+      ) => UploadFileInfo | null;
     };
   };
 };

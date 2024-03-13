@@ -261,10 +261,21 @@ const dateRangeValue = computed<[string, string] | null>({
 // Upload
 const uploadValue = computed({
   get() {
-    if (props.option?.config?.multiple) {
+    const isArray = Array.isArray(formValue.value);
+    const isMultiple = props.option?.config?.multiple;
+
+    if (isArray && isMultiple) {
       return formValue.value;
-    } else {
-      return [formValue.value];
+    } else if (!isArray && isMultiple) {
+      if (formValue.value !== null && formValue.value !== undefined) {
+        return [formValue.value];
+      } else {
+        console.warn(
+          `不能将${formValue.value}转为标准上传文件结构`,
+          props.field,
+        );
+        return [];
+      }
     }
   },
   set(v) {
