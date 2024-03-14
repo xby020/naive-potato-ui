@@ -71,16 +71,19 @@ const defaultFileInfo =
             } as FileInfo);
 
         // fileInfos.set(fileItem.id, item);
-        if (fileItem?.id) {
-          fileInfos[fileItem.id] = item;
-        } else {
-          console.error('fileItem.id is undefined', fileItem);
+        if (fileItem) {
+          if (fileItem.id) {
+            fileInfos[fileItem.id] = item;
+          } else {
+            console.error('fileItem.id is undefined', fileItem);
+          }
         }
+
         return fileItem;
       })
-    : [];
+    : undefined;
 
-const fileList: Ref<UploadFileInfo[]> = ref(defaultFileInfo);
+const fileList: Ref<UploadFileInfo[] | undefined> = ref(defaultFileInfo);
 
 function handleChange(options: {
   file: UploadFileInfo;

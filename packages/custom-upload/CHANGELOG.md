@@ -1,5 +1,11 @@
 # @naive-potato-ui/custom-upload
 
+## 1.0.33
+
+### Patch Changes
+
+- set default value for upload value
+
 ## 1.0.32
 
 ### Patch Changes
