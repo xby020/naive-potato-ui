@@ -275,9 +275,9 @@ const uploadValue = computed({
         console.warn(
           `未设置 max 为 1 时，不能传递非数组结构: ${formValue.value}`,
         );
-        return [];
+        return undefined;
       }
-      return [];
+      return undefined;
     }
   },
   set(v) {
