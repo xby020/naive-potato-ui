@@ -296,11 +296,12 @@ async function handleQueryDetail(
   const phone =
     '138' + Math.floor(Math.random() * 10000000 + 10000000).toString();
 
-  const url = [
-    'https://cdn.pixabay.com/photo/2023/09/30/17/13/coffee-beans-8286087_1280.jpg',
-    'https://cdn.pixabay.com/photo/2024/02/21/15/09/road-8587889_640.jpg',
-    'https://cdn.pixabay.com/photo/2023/10/15/11/38/street-8316703_640.jpg',
-  ];
+  // const url = [
+  //   'https://cdn.pixabay.com/photo/2023/09/30/17/13/coffee-beans-8286087_1280.jpg',
+  //   'https://cdn.pixabay.com/photo/2024/02/21/15/09/road-8587889_640.jpg',
+  //   'https://cdn.pixabay.com/photo/2023/10/15/11/38/street-8316703_640.jpg',
+  // ];
+  const url = undefined;
 
   console.log('handleQueryDetail', params, {
     uuid: uid,

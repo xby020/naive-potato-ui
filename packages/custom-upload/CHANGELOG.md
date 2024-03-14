@@ -1,5 +1,11 @@
 # @naive-potato-ui/custom-upload
 
+## 1.0.35
+
+### Patch Changes
+
+- fixed wrong upload pass value
+
 ## 1.0.34
 
 ### Patch Changes

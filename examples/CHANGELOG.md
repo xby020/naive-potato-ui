@@ -1,5 +1,14 @@
 # @naive-potato-ui/examples
 
+## 1.0.73
+
+### Patch Changes
+
+- fixed wrong upload pass value
+
+- Updated dependencies []:
+  - @naive-potato-ui/ui@1.0.72
+
 ## 1.0.72
 
 ### Patch Changes

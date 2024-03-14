@@ -269,7 +269,9 @@ const uploadValue = computed({
     }
 
     if (isSingleFile) {
-      return [formValue.value];
+      return formValue.value !== undefined && formValue.value !== null
+        ? [formValue.value]
+        : undefined;
     } else {
       if (formValue.value) {
         console.warn(
