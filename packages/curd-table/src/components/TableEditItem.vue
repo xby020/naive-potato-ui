@@ -264,34 +264,17 @@ const uploadValue = computed({
     const isArray = Array.isArray(formValue.value);
     const isSingleFile = props.option?.config?.max === 1;
 
+    if (isArray) {
+      return formValue.value;
+    }
+
     if (isSingleFile) {
-      // 数组结构数据
-      if (isArray) {
-        // 返回原数组
-        return formValue.value;
-      } else {
-        // 不是数组，判断该值是否为null or undefined
-        if (formValue.value !== null && formValue.value !== undefined) {
-          // 返回数组结构
-          return [formValue.value];
-        } else {
-          return [];
-        }
-      }
+      return [formValue.value];
     } else {
-      // 单数据结构，判断该值是否为null or undefined
-      if (formValue.value !== null && formValue.value !== undefined) {
-        // console.log([formValue.value]);
-        // 返回数组结构
-        return [formValue.value];
-      } else {
-        // 警告
-        console.warn(
-          `不能将${formValue.value}转为标准上传文件结构`,
-          props.field,
-        );
-        return [];
-      }
+      console.warn(
+        `未设置 max 为 1 时，不能传递非数组结构: ${formValue.value}`,
+      );
+      return [];
     }
   },
   set(v) {

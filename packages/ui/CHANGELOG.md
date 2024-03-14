@@ -1,5 +1,15 @@
 # @naive-potato-ui/ui
 
+## 1.0.67
+
+### Patch Changes
+
+- fixed pass the upload value
+
+- Updated dependencies []:
+  - @naive-potato-ui/custom-upload@1.0.30
+  - @naive-potato-ui/curd-table@1.0.64
+
 ## 1.0.66
 
 ### Patch Changes

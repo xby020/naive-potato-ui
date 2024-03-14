@@ -10,6 +10,7 @@
     v-model:file-list="fileList"
     @finish="handleFinish"
     @remove="handleRemove"
+    @change="handleChange"
   >
     <component v-if="isVNode(props.label)" :is="props.label"></component>
     <div class="flex flex-col gap-2" v-else>
@@ -26,7 +27,7 @@ import { NUpload, NButton, NText } from 'naive-ui';
 import type { UploadFileInfo } from 'naive-ui';
 import { FileInfo } from 'naive-ui/es/upload/src/interface';
 import { isVNode } from 'vue';
-import { ref, watch, Ref, VNode, onMounted, reactive } from 'vue';
+import { ref, Ref, VNode, reactive } from 'vue';
 
 interface Props {
   value?: Record<string, any>[];
@@ -49,42 +50,41 @@ interface Props {
 
 const props = defineProps<Props>();
 
-const emits = defineEmits<{
-  'update:value': [value: Record<string, any> | string | number[]];
-}>();
-
-const fileList: Ref<UploadFileInfo[]> = ref([]);
 const fileInfos = reactive<{
   [key: string]: Record<string, any> | string | number;
 }>({});
 
-// for edit
-onMounted(() => {
-  console.log('change', props.value);
-  fileList.value = props.value?.length
-    ? props.value.map((item) => {
-        const fileItem = props.infoSet
-          ? props.infoSet(item)
-          : ({
-              id: item.id || item.uuid,
-              name: item.name,
-              status: 'finished',
-              url: item.url || item.path,
-            } as FileInfo);
+const emits = defineEmits<{
+  'update:value': [value: Record<string, any> | string | number[]];
+}>();
 
-        // fileInfos.set(fileItem.id, item);
-        fileInfos[fileItem.id] = item;
-        return fileItem;
-      })
-    : [];
-});
+const defaultFileInfo = props.value?.length
+  ? props.value.map((item) => {
+      const fileItem = props.infoSet
+        ? props.infoSet(item)
+        : ({
+            id: item.id || item.uuid,
+            name: item.name,
+            status: 'finished',
+            url: item.url || item.path,
+          } as FileInfo);
 
-watch(fileInfos, () => {
-  // all response
+      // fileInfos.set(fileItem.id, item);
+      fileInfos[fileItem.id] = item;
+      return fileItem;
+    })
+  : [];
+
+const fileList: Ref<UploadFileInfo[]> = ref(defaultFileInfo);
+
+function handleChange(options: {
+  file: UploadFileInfo;
+  fileList: Array<UploadFileInfo>;
+  event?: Event;
+}) {
   const fileInfoList = Object.values(fileInfos);
-
   emits('update:value', fileInfoList);
-});
+}
 
 // handle upload finished
 function handleFinish(options: {
