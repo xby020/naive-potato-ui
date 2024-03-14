@@ -54,6 +54,7 @@ const emits = defineEmits<{
 }>();
 
 const fileList: Ref<UploadFileInfo[]> = ref([]);
+const fileInfos = new Map<string, Record<string, any> | string | number>();
 
 const propsValue = computed(() => {
   return props.value;
@@ -83,7 +84,6 @@ watch(
   { immediate: true },
 );
 
-const fileInfos = new Map<string, Record<string, any> | string | number>();
 watch(fileList, () => {
   // all response
   const fileInfoList = Array.from(fileInfos.values());
