@@ -1,5 +1,15 @@
 # @naive-potato-ui/ui
 
+## 1.0.69
+
+### Patch Changes
+
+- fixed upload wrong id
+
+- Updated dependencies []:
+  - @naive-potato-ui/custom-upload@1.0.32
+  - @naive-potato-ui/curd-table@1.0.66
+
 ## 1.0.68
 
 ### Patch Changes

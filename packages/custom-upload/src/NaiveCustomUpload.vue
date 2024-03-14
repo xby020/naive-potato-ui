@@ -58,26 +58,27 @@ const emits = defineEmits<{
   'update:value': [value: Record<string, any> | string | number[]];
 }>();
 
-const defaultFileInfo = props.value?.length
-  ? props.value.map((item) => {
-      const fileItem = props.infoSet
-        ? props.infoSet(item)
-        : ({
-            id: item.id || item.uuid,
-            name: item.name,
-            status: 'finished',
-            url: item.url || item.path,
-          } as FileInfo);
+const defaultFileInfo =
+  props.value && props.value.length !== 0
+    ? props.value?.map((item) => {
+        const fileItem = props.infoSet
+          ? props.infoSet(item)
+          : ({
+              id: item.id || item.uuid,
+              name: item.name,
+              status: 'finished',
+              url: item.url || item.path,
+            } as FileInfo);
 
-      // fileInfos.set(fileItem.id, item);
-      if (fileItem.id) {
-        fileInfos[fileItem.id] = item;
-      } else {
-        console.error('fileItem.id is undefined', fileItem);
-      }
-      return fileItem;
-    })
-  : [];
+        // fileInfos.set(fileItem.id, item);
+        if (fileItem?.id) {
+          fileInfos[fileItem.id] = item;
+        } else {
+          console.error('fileItem.id is undefined', fileItem);
+        }
+        return fileItem;
+      })
+    : [];
 
 const fileList: Ref<UploadFileInfo[]> = ref(defaultFileInfo);
 

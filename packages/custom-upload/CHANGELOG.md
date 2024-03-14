@@ -1,5 +1,11 @@
 # @naive-potato-ui/custom-upload
 
+## 1.0.32
+
+### Patch Changes
+
+- fixed upload wrong id
+
 ## 1.0.31
 
 ### Patch Changes
