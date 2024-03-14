@@ -185,8 +185,7 @@ const headers = ref<NpCurdTableHeader<ResInfo>[]>([
       config: {
         action: '/api/v1/admin/base/upload',
         accept: 'image/*,.pdf',
-        multiple: false,
-        max: 2,
+        multiple: true,
         tips: '只能上传图片和PDF文件',
         type: 'image-card',
         parse: {

@@ -281,7 +281,7 @@ const uploadValue = computed({
     } else {
       // 单数据结构，判断该值是否为null or undefined
       if (formValue.value !== null && formValue.value !== undefined) {
-        console.log([formValue.value]);
+        // console.log([formValue.value]);
         // 返回数组结构
         return [formValue.value];
       } else {
@@ -295,7 +295,7 @@ const uploadValue = computed({
     }
   },
   set(v) {
-    console.log(v);
+    // console.log(v);
     if (props.option?.config?.multiple) {
       formValue.value = v;
     } else {

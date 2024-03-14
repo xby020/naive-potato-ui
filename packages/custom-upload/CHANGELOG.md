@@ -1,5 +1,11 @@
 # @naive-potato-ui/custom-upload
 
+## 1.0.27
+
+### Patch Changes
+
+- change content upload
+
 ## 1.0.26
 
 ### Patch Changes

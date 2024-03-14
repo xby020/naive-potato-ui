@@ -191,6 +191,7 @@
               <n-tab-pane tab="基本信息" name="info">
                 <n-scrollbar class="w-full h-full">
                   <table-edit
+                    v-if="!drawerContentLoading"
                     ref="editFormRef"
                     mode="edit"
                     v-model:form="editForm"
@@ -205,6 +206,7 @@
             <!-- Else Default Info -->
             <n-scrollbar v-else class="w-full h-full">
               <table-edit
+                v-if="!drawerContentLoading"
                 ref="editFormRef"
                 mode="edit"
                 v-model:form="editForm"
