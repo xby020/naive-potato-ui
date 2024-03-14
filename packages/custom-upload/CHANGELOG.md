@@ -1,5 +1,11 @@
 # @naive-potato-ui/custom-upload
 
+## 1.0.26
+
+### Patch Changes
+
+- fixed wrong condition with upload max
+
 ## 1.0.25
 
 ### Patch Changes

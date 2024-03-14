@@ -1,5 +1,14 @@
 # @naive-potato-ui/curd-table
 
+## 1.0.60
+
+### Patch Changes
+
+- fixed wrong condition with upload max
+
+- Updated dependencies []:
+  - @naive-potato-ui/custom-upload@1.0.26
+
 ## 1.0.59
 
 ### Patch Changes

@@ -262,7 +262,7 @@ const dateRangeValue = computed<[string, string] | null>({
 const uploadValue = computed({
   get() {
     const isArray = Array.isArray(formValue.value);
-    const isSingleFile = props.option?.config?.max;
+    const isSingleFile = props.option?.config?.max === 1;
 
     if (isSingleFile) {
       // 数组结构数据
