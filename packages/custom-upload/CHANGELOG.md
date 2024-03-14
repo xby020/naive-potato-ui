@@ -1,5 +1,11 @@
 # @naive-potato-ui/custom-upload
 
+## 1.0.24
+
+### Patch Changes
+
+- fixed upload components style
+
 ## 1.0.23
 
 ### Patch Changes

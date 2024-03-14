@@ -1,5 +1,14 @@
 # @naive-potato-ui/examples
 
+## 1.0.62
+
+### Patch Changes
+
+- fixed upload components style
+
+- Updated dependencies []:
+  - @naive-potato-ui/ui@1.0.61
+
 ## 1.0.61
 
 ### Patch Changes

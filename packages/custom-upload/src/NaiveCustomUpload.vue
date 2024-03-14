@@ -12,10 +12,12 @@
     @remove="handleRemove"
   >
     <component v-if="isVNode(props.label)" :is="props.label"></component>
-    <n-button v-else>{{ label || '上传文件' }}</n-button>
-    <n-text v-if="tips">
-      {{ tips }}
-    </n-text>
+    <div class="flex flex-col gap-2" v-else>
+      <n-button>{{ label || '上传文件' }}</n-button>
+      <n-text v-if="tips" class="text-12px text-opacity-80">
+        {{ tips }}
+      </n-text>
+    </div>
   </n-upload>
 </template>
 
