@@ -264,6 +264,8 @@ const uploadValue = computed({
     const isArray = Array.isArray(formValue.value);
     const isMultiple = props.option?.config?.multiple;
 
+    console.log(isArray, isMultiple, formValue.value);
+
     if (isMultiple) {
       // 数组结构数据
       if (isArray) {
@@ -275,17 +277,13 @@ const uploadValue = computed({
           // 返回数组结构
           return [formValue.value];
         } else {
-          // 警告
-          console.warn(
-            `不能将${formValue.value}转为标准上传文件结构`,
-            props.field,
-          );
           return [];
         }
       }
     } else {
       // 单数据结构，判断该值是否为null or undefined
       if (formValue.value !== null && formValue.value !== undefined) {
+        console.log([formValue.value]);
         // 返回数组结构
         return [formValue.value];
       } else {

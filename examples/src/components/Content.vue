@@ -198,6 +198,7 @@ const headers = ref<NpCurdTableHeader<ResInfo>[]>([
                   id: v,
                   name: v,
                   url: v,
+                  status: 'finished',
                 }
               : null;
           },

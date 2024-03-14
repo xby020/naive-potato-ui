@@ -24,7 +24,7 @@ import { NUpload, NButton, NText } from 'naive-ui';
 import type { UploadFileInfo } from 'naive-ui';
 import { FileInfo } from 'naive-ui/es/upload/src/interface';
 import { isVNode } from 'vue';
-import { ref, onMounted, watch, Ref, VNode } from 'vue';
+import { ref, watch, Ref, VNode, computed } from 'vue';
 
 interface Props {
   value?: Record<string, any>[];
@@ -53,25 +53,33 @@ const emits = defineEmits<{
 
 const fileList: Ref<UploadFileInfo[]> = ref([]);
 
-// for edit
-onMounted(() => {
-  console.log(props.value);
-  fileList.value = props.value?.length
-    ? props.value.map((item) => {
-        const fileItem = props.infoSet
-          ? props.infoSet(item)
-          : ({
-              id: item.id || item.uuid,
-              name: item.name,
-              status: 'finished',
-              url: item.url || item.path,
-            } as FileInfo);
-
-        fileInfos.set(fileItem.id, item);
-        return fileItem;
-      })
-    : [];
+const propsValue = computed(() => {
+  return props.value;
 });
+
+// for edit
+watch(
+  propsValue,
+  () => {
+    console.log('change', props.value);
+    fileList.value = props.value?.length
+      ? props.value.map((item) => {
+          const fileItem = props.infoSet
+            ? props.infoSet(item)
+            : ({
+                id: item.id || item.uuid,
+                name: item.name,
+                status: 'finished',
+                url: item.url || item.path,
+              } as FileInfo);
+
+          fileInfos.set(fileItem.id, item);
+          return fileItem;
+        })
+      : [];
+  },
+  { immediate: true },
+);
 
 const fileInfos = new Map<string, Record<string, any> | string | number>();
 watch(fileList, () => {
