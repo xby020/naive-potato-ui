@@ -295,11 +295,12 @@ const uploadValue = computed({
     }
   },
   set(v) {
+    const isSingleFile = props.option?.config?.max === 1;
     // console.log(v);
-    if (props.option?.config?.multiple) {
-      formValue.value = v;
-    } else {
+    if (isSingleFile) {
       formValue.value = v[0];
+    } else {
+      formValue.value = v;
     }
   },
 });

@@ -79,7 +79,7 @@ onMounted(() => {
     : [];
 });
 
-watch(fileList, () => {
+watch(fileInfos, () => {
   // all response
   const fileInfoList = Object.values(fileInfos);
 
