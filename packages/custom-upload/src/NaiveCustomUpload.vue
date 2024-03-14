@@ -26,7 +26,7 @@ import { NUpload, NButton, NText } from 'naive-ui';
 import type { UploadFileInfo } from 'naive-ui';
 import { FileInfo } from 'naive-ui/es/upload/src/interface';
 import { isVNode } from 'vue';
-import { ref, watch, Ref, VNode, onMounted } from 'vue';
+import { ref, watch, Ref, VNode, onMounted, reactive } from 'vue';
 
 interface Props {
   value?: Record<string, any>[];
@@ -54,7 +54,9 @@ const emits = defineEmits<{
 }>();
 
 const fileList: Ref<UploadFileInfo[]> = ref([]);
-const fileInfos = new Map<string, Record<string, any> | string | number>();
+const fileInfos = reactive<{
+  [key: string]: Record<string, any> | string | number;
+}>({});
 
 // for edit
 onMounted(() => {
@@ -70,7 +72,8 @@ onMounted(() => {
               url: item.url || item.path,
             } as FileInfo);
 
-        fileInfos.set(fileItem.id, item);
+        // fileInfos.set(fileItem.id, item);
+        fileInfos[fileItem.id] = item;
         return fileItem;
       })
     : [];
@@ -78,7 +81,7 @@ onMounted(() => {
 
 watch(fileList, () => {
   // all response
-  const fileInfoList = Array.from(fileInfos.values());
+  const fileInfoList = Object.values(fileInfos);
 
   emits('update:value', fileInfoList);
 });
@@ -93,7 +96,8 @@ function handleFinish(options: {
 
   const results = props.infoGet ? props.infoGet(res) : res;
 
-  fileInfos.set(options.file.id, results);
+  // fileInfos.set(options.file.id, results);
+  fileInfos[options.file.id] = results;
 
   const newFile = { ...options.file, url: res.url };
 
@@ -105,7 +109,8 @@ function handleRemove(options: {
   file: UploadFileInfo;
   fileList: Array<UploadFileInfo>;
 }) {
-  fileInfos.delete(options.file.id);
+  // fileInfos.delete(options.file.id);
+  delete fileInfos[options.file.id];
   fileList.value = options.fileList;
 }
 </script>
