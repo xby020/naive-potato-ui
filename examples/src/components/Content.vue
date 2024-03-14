@@ -179,6 +179,32 @@ const headers = ref<NpCurdTableHeader<ResInfo>[]>([
   {
     title: '图片上传',
     key: 'url',
+    create: {
+      show: true,
+      type: 'upload',
+      config: {
+        action: 'http://localhost:14514/api/v1/admin/base/upload',
+        accept: 'image/*,.pdf',
+        multiple: true,
+        tips: '只能上传图片和PDF文件',
+        type: 'image-card',
+        parse: {
+          get(v: any) {
+            return v ? v.data?.path : null;
+          },
+          set(v: any) {
+            return v
+              ? {
+                  id: v,
+                  name: v,
+                  url: v,
+                  status: 'finished',
+                }
+              : null;
+          },
+        },
+      },
+    },
     edit: {
       show: true,
       type: 'upload',

@@ -70,7 +70,11 @@ const defaultFileInfo = props.value?.length
           } as FileInfo);
 
       // fileInfos.set(fileItem.id, item);
-      fileInfos[fileItem.id] = item;
+      if (fileItem.id) {
+        fileInfos[fileItem.id] = item;
+      } else {
+        console.error('fileItem.id is undefined', fileItem);
+      }
       return fileItem;
     })
   : [];

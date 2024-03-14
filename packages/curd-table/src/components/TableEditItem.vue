@@ -271,9 +271,12 @@ const uploadValue = computed({
     if (isSingleFile) {
       return [formValue.value];
     } else {
-      console.warn(
-        `未设置 max 为 1 时，不能传递非数组结构: ${formValue.value}`,
-      );
+      if (formValue.value) {
+        console.warn(
+          `未设置 max 为 1 时，不能传递非数组结构: ${formValue.value}`,
+        );
+        return [];
+      }
       return [];
     }
   },
