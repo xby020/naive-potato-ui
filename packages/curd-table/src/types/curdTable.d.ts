@@ -251,6 +251,13 @@ type NCurdTableHeaderDateRenderConfig<
      * @type {string}
      */
     endField?: string;
+    /**
+     * @description 自定义快捷按钮
+     *
+     */
+    shortcuts?:
+      | Record<string, number | (() => number)>
+      | Record<string, [number, number] | (() => [number, number])>;
   };
 };
 

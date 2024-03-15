@@ -1,5 +1,11 @@
 # @naive-potato-ui/custom-upload
 
+## 1.0.36
+
+### Patch Changes
+
+- add shortcuts fro datetiem picker
+
 ## 1.0.35
 
 ### Patch Changes

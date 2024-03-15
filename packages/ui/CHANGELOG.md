@@ -1,5 +1,15 @@
 # @naive-potato-ui/ui
 
+## 1.0.73
+
+### Patch Changes
+
+- add shortcuts fro datetiem picker
+
+- Updated dependencies []:
+  - @naive-potato-ui/custom-upload@1.0.36
+  - @naive-potato-ui/curd-table@1.0.70
+
 ## 1.0.72
 
 ### Patch Changes

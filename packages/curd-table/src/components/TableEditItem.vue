@@ -127,6 +127,7 @@
       v-model:formatted-value="formValue"
       :value-format="optionConfig?.format"
       :type="type === 'date' ? 'date' : 'datetime'"
+      :shortcuts="optionConfig?.shortcuts"
     />
     <n-date-picker
       v-if="['date', 'datetime'].includes(type) && optionConfig?.range"
@@ -134,6 +135,7 @@
       v-model:formatted-value="dateRangeValue"
       :value-format="optionConfig?.format"
       :type="type === 'date' ? 'daterange' : 'datetimerange'"
+      :shortcuts="optionConfig?.shortcuts"
     />
 
     <!-- time -->
@@ -142,6 +144,7 @@
       :disabled="isDisabled"
       v-model:formatted-value="formValue"
       :value-format="optionConfig?.format"
+      :shortcuts="optionConfig?.shortcuts"
     />
 
     <!-- upload -->
