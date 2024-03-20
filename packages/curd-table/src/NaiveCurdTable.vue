@@ -268,7 +268,6 @@ import {
   NDataTable,
   NFormItem,
   NPopconfirm,
-  PaginationInfo,
   NDrawer,
   NDrawerContent,
   NText,
@@ -418,12 +417,13 @@ const queryShowMore = ref(false);
 
 /* Table */
 const tableRef = ref();
+const itemCount = ref(0);
 const pagination = ref({
   page: 1,
   pageSize: 10,
   itemCount: 0,
-  prefix: (info: PaginationInfo) => {
-    return `共 ${info.pageCount} 页`;
+  prefix: () => {
+    return `共 ${itemCount.value} 条`;
   },
 });
 
@@ -715,6 +715,7 @@ async function queryData() {
     tableValue.value = res[dataField.value] || res;
     // 设置pagination
     pagination.value.itemCount = res[countField.value] || 0;
+    itemCount.value = res[countField.value] || 0;
   } catch (error) {
     console.error(error);
   } finally {

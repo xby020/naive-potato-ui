@@ -1,5 +1,15 @@
 # @naive-potato-ui/ui
 
+## 1.0.74
+
+### Patch Changes
+
+- change page count to item count
+
+- Updated dependencies []:
+  - @naive-potato-ui/custom-upload@1.0.37
+  - @naive-potato-ui/curd-table@1.0.71
+
 ## 1.0.73
 
 ### Patch Changes

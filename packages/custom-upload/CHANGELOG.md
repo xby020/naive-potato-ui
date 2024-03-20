@@ -1,5 +1,11 @@
 # @naive-potato-ui/custom-upload
 
+## 1.0.37
+
+### Patch Changes
+
+- change page count to item count
+
 ## 1.0.36
 
 ### Patch Changes
