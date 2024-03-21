@@ -79,6 +79,7 @@
       :data="tableValue"
       flex-height
       @update-page="handleTablePaginate"
+      @update-page-size="handleTablePaginateSize"
     ></n-data-table>
 
     <!-- Drawer -->
@@ -669,6 +670,11 @@ const finalHeader = computed(() => {
 // table pagination
 async function handleTablePaginate(page: number) {
   pagination.value.page = page;
+  await queryData();
+}
+
+async function handleTablePaginateSize(pageSize: number) {
+  pagination.value.pageSize = pageSize;
   await queryData();
 }
 

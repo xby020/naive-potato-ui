@@ -1,5 +1,11 @@
 # @naive-potato-ui/custom-upload
 
+## 1.0.40
+
+### Patch Changes
+
+- fixed pagination size change
+
 ## 1.0.39
 
 ### Patch Changes
