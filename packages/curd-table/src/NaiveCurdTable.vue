@@ -291,6 +291,7 @@ import {
 import TableEdit from './components/TableEdit.vue';
 import TableInfo from './components/TableInfo.vue';
 import { RowData } from 'naive-ui/es/data-table/src/interface';
+import { PaginationInfo } from 'naive-ui';
 
 interface Props {
   headers: NCurdTableHeader<TForm, TInfo>[];
@@ -419,15 +420,15 @@ const queryShowMore = ref(false);
 
 /* Table */
 const tableRef = ref();
-const itemCount = ref(0);
 const pagination = ref({
   page: 1,
   pageSize: 10,
+  itemCount: 0,
   pageSizes: props.pageSizes || [10],
   showSizePicker: true,
   showQuickJumper: true,
-  prefix: () => {
-    return `共 ${itemCount.value} 条`;
+  prefix: (info: PaginationInfo) => {
+    return `共 ${info.itemCount} 条`;
   },
 });
 
@@ -723,7 +724,7 @@ async function queryData() {
     // 设置tableValue
     tableValue.value = res[dataField.value] || res;
     // 设置pagination
-    itemCount.value = res[countField.value] || 0;
+    pagination.value.itemCount = res[countField.value] || 0;
   } catch (error) {
     console.error(error);
   } finally {

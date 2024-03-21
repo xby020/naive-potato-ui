@@ -1,5 +1,15 @@
 # @naive-potato-ui/ui
 
+## 1.0.78
+
+### Patch Changes
+
+- fixed pagination
+
+- Updated dependencies []:
+  - @naive-potato-ui/custom-upload@1.0.41
+  - @naive-potato-ui/curd-table@1.0.75
+
 ## 1.0.77
 
 ### Patch Changes

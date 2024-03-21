@@ -16,7 +16,7 @@
     "**/*.css"
   ],
   "name": "@naive-potato-ui/ui",
-  "version": "1.0.77",
+  "version": "1.0.78",
   "scripts": {
     "build": "vite build",
     "test": "echo test"
