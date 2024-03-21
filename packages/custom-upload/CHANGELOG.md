@@ -1,5 +1,11 @@
 # @naive-potato-ui/custom-upload
 
+## 1.0.39
+
+### Patch Changes
+
+- add pageSizes
+
 ## 1.0.38
 
 ### Patch Changes

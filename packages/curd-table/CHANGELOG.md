@@ -1,5 +1,14 @@
 # @naive-potato-ui/curd-table
 
+## 1.0.73
+
+### Patch Changes
+
+- add pageSizes
+
+- Updated dependencies []:
+  - @naive-potato-ui/custom-upload@1.0.39
+
 ## 1.0.72
 
 ### Patch Changes

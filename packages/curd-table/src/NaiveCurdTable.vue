@@ -326,6 +326,7 @@ interface Props {
   /* 没有详情接口，数据从列表返回 */
   noDetail?: boolean;
   drawerTab?: boolean;
+  pageSizes?: number[];
 }
 
 const props = defineProps<Props>();
@@ -421,6 +422,7 @@ const itemCount = ref(0);
 const pagination = ref({
   page: 1,
   pageSize: 10,
+  pageSizes: props.pageSizes || [10],
   showSizePicker: true,
   showQuickJumper: true,
   prefix: () => {
