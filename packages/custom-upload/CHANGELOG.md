@@ -1,5 +1,11 @@
 # @naive-potato-ui/custom-upload
 
+## 1.0.38
+
+### Patch Changes
+
+- add features in pagination
+
 ## 1.0.37
 
 ### Patch Changes

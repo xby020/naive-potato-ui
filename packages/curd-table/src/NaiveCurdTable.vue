@@ -421,7 +421,8 @@ const itemCount = ref(0);
 const pagination = ref({
   page: 1,
   pageSize: 10,
-  itemCount: 0,
+  showSizePicker: true,
+  showQuickJumper: true,
   prefix: () => {
     return `共 ${itemCount.value} 条`;
   },
@@ -714,7 +715,6 @@ async function queryData() {
     // 设置tableValue
     tableValue.value = res[dataField.value] || res;
     // 设置pagination
-    pagination.value.itemCount = res[countField.value] || 0;
     itemCount.value = res[countField.value] || 0;
   } catch (error) {
     console.error(error);
