@@ -8,6 +8,8 @@
     :max="max"
     :multiple="multiple"
     v-model:file-list="fileList"
+    :is-error-state="isErrorState"
+    :custom-request="customRequest"
     @finish="handleFinish"
     @remove="handleRemove"
     @change="handleChange"
@@ -24,7 +26,7 @@
 
 <script setup lang="ts">
 import { NUpload, NButton, NText } from 'naive-ui';
-import type { UploadFileInfo } from 'naive-ui';
+import type { UploadFileInfo, UploadCustomRequestOptions } from 'naive-ui';
 import { FileInfo } from 'naive-ui/es/upload/src/interface';
 import { isVNode } from 'vue';
 import { ref, Ref, VNode, reactive } from 'vue';
@@ -46,6 +48,8 @@ interface Props {
   infoGet?: (
     infoRes: Record<string, any> | string | number,
   ) => Record<string, any> | string | number;
+  isErrorState?: (xhr: XMLHttpRequest) => boolean;
+  customRequest?: (options: UploadCustomRequestOptions) => void;
 }
 
 const props = defineProps<Props>();

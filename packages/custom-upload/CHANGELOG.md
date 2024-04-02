@@ -1,5 +1,11 @@
 # @naive-potato-ui/custom-upload
 
+## 1.0.42
+
+### Patch Changes
+
+- add custom upload function
+
 ## 1.0.41
 
 ### Patch Changes
