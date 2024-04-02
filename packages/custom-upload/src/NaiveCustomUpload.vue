@@ -8,7 +8,6 @@
     :max="max"
     :multiple="multiple"
     v-model:file-list="fileList"
-    :is-error-state="isErrorState"
     :custom-request="customRequest"
     @finish="handleFinish"
     @remove="handleRemove"
@@ -48,7 +47,7 @@ interface Props {
   infoGet?: (
     infoRes: Record<string, any> | string | number,
   ) => Record<string, any> | string | number;
-  isErrorState?: (xhr: XMLHttpRequest) => boolean;
+  isErrorState?: (res: any) => boolean;
   customRequest?: (options: UploadCustomRequestOptions) => void;
 }
 
@@ -106,12 +105,18 @@ function handleFinish(options: {
   const result = options.event?.target as XMLHttpRequest;
   const res = JSON.parse(result.response) as Record<string, any>;
 
+  const isError = props.isErrorState ? props.isErrorState(res) : false;
+
   const results = props.infoGet ? props.infoGet(res) : res;
 
   // fileInfos.set(options.file.id, results);
   fileInfos[options.file.id] = results;
 
   const newFile = { ...options.file, url: res.url };
+
+  if (isError) {
+    newFile.status = 'error';
+  }
 
   return newFile;
 }

@@ -5,6 +5,7 @@ import {
   SelectGroupOption,
   SelectOption,
   UploadFileInfo,
+  UploadCustomRequestOptions,
 } from 'naive-ui';
 
 export type NCurdTableProps = {};
@@ -358,6 +359,16 @@ type NCurdTableHeaderUploadRenderConfig<
      * @type {boolean}
      */
     multiple?: boolean;
+    /**
+     * @description 判断上传返回的数据是否为错误状态
+     *
+     */
+    isErrorState?: (res: any) => boolean;
+    /**
+     * @description 自定义上传
+     *
+     */
+    customUpload?: (options: UploadCustomRequestOptions) => void;
     /**
      * @description 转换上传文件和返回所需数据
      *

@@ -1,5 +1,14 @@
 # @naive-potato-ui/curd-table
 
+## 1.0.77
+
+### Patch Changes
+
+- add error upload state check
+
+- Updated dependencies []:
+  - @naive-potato-ui/custom-upload@1.0.43
+
 ## 1.0.76
 
 ### Patch Changes

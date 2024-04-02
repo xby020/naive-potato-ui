@@ -164,6 +164,8 @@
       :multiple="optionConfig?.multiple"
       :info-set="optionConfig?.parse?.set"
       :info-get="optionConfig?.parse?.get"
+      :is-error-state="optionConfig?.isErrorState"
+      :custom-request="optionConfig?.customRequest"
     ></np-custom-upload>
 
     <!-- custom -->

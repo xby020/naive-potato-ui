@@ -7,11 +7,21 @@
       action="http://localhost:14514/api/storage/file"
       v-model:value="files"
       type="text"
+      :is-error-state="
+        (res) => {
+          if (res.code !== 200) {
+            console.error(res);
+            return true;
+          } else {
+            return false;
+          }
+        }
+      "
       multiple
     ></np-custom-upload>
 
     <div class="mt-4">
-      <n-text>{{ files }}</n-text>
+      <p>{{ files }}</p>
     </div>
   </div>
 </template>

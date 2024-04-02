@@ -1,5 +1,11 @@
 # @naive-potato-ui/docs
 
+## 1.0.6
+
+### Patch Changes
+
+- add error upload state check
+
 ## 1.0.5
 
 ### Patch Changes
