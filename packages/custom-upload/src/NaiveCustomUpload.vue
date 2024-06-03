@@ -28,7 +28,7 @@ import { NUpload, NButton, NText } from 'naive-ui';
 import type { UploadFileInfo, UploadCustomRequestOptions } from 'naive-ui';
 import { FileInfo } from 'naive-ui/es/upload/src/interface';
 import { isVNode } from 'vue';
-import { ref, Ref, VNode, reactive } from 'vue';
+import { ref, Ref, VNode, reactive, watch } from 'vue';
 
 interface Props {
   value?: Record<string, any>[];
@@ -61,8 +61,8 @@ const emits = defineEmits<{
   'update:value': [value: Record<string, any> | string | number[]];
 }>();
 
-const defaultFileInfo =
-  props.value && props.value.length !== 0
+function getDefaultFileInfo() {
+  return props.value && props.value.length !== 0
     ? props.value?.map((item) => {
         const fileItem = props.infoSet
           ? props.infoSet(item)
@@ -85,8 +85,18 @@ const defaultFileInfo =
         return fileItem;
       })
     : undefined;
+}
 
-const fileList: Ref<UploadFileInfo[] | undefined> = ref(defaultFileInfo);
+const defaultFileInfo = ref(getDefaultFileInfo());
+watch(
+  () => props.value,
+  () => {
+    defaultFileInfo.value = getDefaultFileInfo();
+    fileList.value = defaultFileInfo.value;
+  },
+);
+
+const fileList: Ref<UploadFileInfo[] | undefined> = ref(defaultFileInfo.value);
 
 function handleChange(options: {
   file: UploadFileInfo;

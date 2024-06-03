@@ -1,5 +1,15 @@
 # @naive-potato-ui/ui
 
+## 1.0.81
+
+### Patch Changes
+
+- fix(CustomUpload): sync default value when props value changed
+
+- Updated dependencies []:
+  - @naive-potato-ui/custom-upload@1.0.44
+  - @naive-potato-ui/curd-table@1.0.78
+
 ## 1.0.80
 
 ### Patch Changes

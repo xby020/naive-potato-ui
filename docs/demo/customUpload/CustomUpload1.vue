@@ -2,9 +2,9 @@
   <div class="w-full h-full flex flex-col">
     <np-custom-upload
       :headers="{
-        Authorization: `eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxMDAwNCwidXNlcm5hbWUiOiJRRFNKWlgiLCJleHAiOjE3MTIzNzQ3ODF9.9X-Zb4_ZNUA5FYTbCMnrGAhzEBTfc8P8kadnrQojOtI`,
+        Authorization: `eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoiYTY4ZTUxYWU3MjE1NDQ2MWE1NWY3ZWEyZDgzNWIzMzAiLCJyb2xlIjoyMCwiZXhwIjoxNzE3NDcxMjc2fQ.RCSSuYteYZNBLRgY4yoPPu4VrsVGsVp4GIy23imaI58`,
       }"
-      action="http://localhost:14514/api/storage/file"
+      action="http://localhost:14514/api/v1/basic/upload-file"
       v-model:value="files"
       type="text"
       :is-error-state="

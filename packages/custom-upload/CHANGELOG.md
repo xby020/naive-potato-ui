@@ -1,5 +1,11 @@
 # @naive-potato-ui/custom-upload
 
+## 1.0.44
+
+### Patch Changes
+
+- fix(CustomUpload): sync default value when props value changed
+
 ## 1.0.43
 
 ### Patch Changes
